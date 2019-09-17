@@ -2,7 +2,6 @@
     <view class="content">
         <draggable group="people" @start="drag=true" @end="drag=false">
             <component :is="componentName">{{name}}</component>
-            <input type="text" value="22323"/>
         </draggable>
         <view class="title">
             {{name}}
@@ -12,8 +11,10 @@
 
 <script>
     import draggable from 'vuedraggable'
+    import basicsMixin from '@/common/importBasics'
 
     export default {
+        mixins: [basicsMixin],
         name: 'ComponentContainer',
         props:{
             componentName:{
@@ -30,7 +31,7 @@
             }
         },
         components:{
-            draggable,
+            draggable
         }
     }
 </script>
