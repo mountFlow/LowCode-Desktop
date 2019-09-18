@@ -1,8 +1,6 @@
 <template>
     <view class="content">
-        <draggable group="people" @start="drag=true" @end="drag=false">
-            <component :is="componentName">{{name}}</component>
-        </draggable>
+        <component :is="componentName">{{name}}</component>
         <view class="title">
             {{name}}
         </view>
@@ -10,7 +8,6 @@
 </template>
 
 <script>
-    import draggable from 'vuedraggable'
     import basicsMixin from '@/common/importBasics'
 
     export default {
@@ -31,7 +28,6 @@
             }
         },
         components:{
-            draggable
         }
     }
 </script>
