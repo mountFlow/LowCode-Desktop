@@ -59,6 +59,7 @@
 		width: 50%;
 		display: flex !important;
 		justify-content: center !important;
+		overflow: hidden;
 	}
 
 	body > .el-container {

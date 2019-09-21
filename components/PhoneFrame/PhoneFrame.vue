@@ -1,21 +1,22 @@
 <template>
-    <view class="phone">
-        <draggable group="people" :list="list"
+    <view class="phone" :style="phoneStyle">
+        <draggable group="layouts" :list="list"
                    @change="changeInfo"
+                   style="height: 100%;width: 100%"
         >
             <template v-for="(item,index) in list">
-                <component :key="index" :is="item.componentName">{{item.name}}</component>
+                <component :key="index" :is="item.componentName"
+                           v-bind="item"
+                ></component>
             </template>
         </draggable>
-        <view>
-            {{list}}
-        </view>
     </view>
 </template>
 
 <script>
     import draggable from 'vuedraggable'
-    import basicsMixin from '@/common/importBasics'
+    import basicsMixin from '@/common/js/importBasics'
+    import Iflex from '@/components/basics/Iflex'
 
     export default {
         mixins: [basicsMixin],
@@ -23,7 +24,10 @@
         data(){
           return {
               list:[],
-              dragging: false
+              dragging: false,
+              phoneStyle:{
+                  fontSize: '32px'
+              }
           }
         },
         methods:{
@@ -32,16 +36,23 @@
             }
         },
         components:{
-            draggable
+            draggable,
+            Iflex
         }
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+
+    $phoneWidth: 375upx;
+    $phoneHeight: 667upx;
+
     .phone{
-        width: 375px;
-        height: 667px;
+        width: $phoneWidth;
+        height: $phoneHeight;
         background-color: silver;
         position: relative;
+        transform: scale(.4,.4);
+        margin-top: -55%;
     }
 </style>

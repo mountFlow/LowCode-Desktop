@@ -1,0 +1,41 @@
+$windowWidth: 100vw;
+$windowHeight: 100vw;
+$zoom: 0.4;
+
+.phone{
+
+  uni-button {
+    padding-left: 14px/$zoom !important;
+    padding-right: 14px/$zoom !important;
+    font-size: 18px/$zoom !important;
+    border-radius: 5xp/$zoom !important;
+  }
+  uni-button:after {
+    border: 1px/$zoom solid rgba(0,0,0,.2);
+    border-radius: 10px/$zoom;
+  }
+
+  uni-radio {
+    zoom:2.5 !important;
+  }
+
+  uni-progress{
+    zoom: 2.5 !important;
+  }
+
+  uni-switch {
+    zoom: 2.5 !important;
+  }
+
+  uni-slider {
+    zoom: 2.5 !important;
+  }
+
+  uni-image{
+    zoom: 2.5 !important;
+  }
+
+  uni-textarea{
+    zoom: 2.5 !important;
+  }
+}

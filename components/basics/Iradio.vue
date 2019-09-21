@@ -50,5 +50,7 @@
 </script>
 
 <style scoped>
-
+    uni-radio::before, uni-checkbox::before{
+        font-size: 16px;
+    }
 </style>
