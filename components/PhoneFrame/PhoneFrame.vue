@@ -1,11 +1,16 @@
 <template>
     <view class="phone" :style="phoneStyle">
         <draggable group="layouts" :list="list"
-                   @change="changeInfo"
+                   :options="{
+                   }"
+                   @choose="choosLayouts"
                    style="height: 100%;width: 100%"
+                   handle=".flex-draggalbe-handle"
         >
             <template v-for="(item,index) in list">
                 <component :key="index" :is="item.componentName"
+                           :dataIIndex="index + ''"
+                           :data-i-index="index"
                            v-bind="item"
                 ></component>
             </template>
@@ -14,7 +19,7 @@
 </template>
 
 <script>
-    import draggable from 'vuedraggable'
+    import draggable from '@/common/js/vuedraggable'
     import basicsMixin from '@/common/js/importBasics'
     import Iflex from '@/components/basics/Iflex'
 
@@ -23,7 +28,6 @@
         name: 'PhoneFrame',
         data(){
           return {
-              list:[],
               dragging: false,
               phoneStyle:{
                   fontSize: '32px'
@@ -31,9 +35,24 @@
           }
         },
         methods:{
-            changeInfo(evt){
-                console.log(evt)
+            choosLayouts(evt){
+                console.log( evt)
+                console.log(evt.item.dataset['iIndex'])
+                let index = evt.item.dataset['iIndex']
+                this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
+                this.$store.commit('setDeleteGroupName',{deleteGroupName:'layouts'})
+                this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
             }
+        },
+        computed:{
+          list:{
+            get() {
+                return this.$store.state.list
+            },
+            set(value){
+                this.$store.commit('setGlobalList',{list:value})
+            }
+          }
         },
         components:{
             draggable,
@@ -54,5 +73,9 @@
         position: relative;
         transform: scale(.4,.4);
         margin-top: -55%;
+    }
+
+    .sortable-fallback{
+        display: none;
     }
 </style>

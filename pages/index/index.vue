@@ -1,15 +1,21 @@
 <template>
 	<div class="home">
 		<el-container>
-			<el-header>Header</el-header>
+			<el-header>
+				<eu-header>
+				</eu-header>
+			</el-header>
 			<el-container>
 				<el-aside width="25%">
 					<LeftComponents></LeftComponents>
 				</el-aside>
-				<el-main>
+				<el-main style="position: relative">
+					<eu-edit-tool></eu-edit-tool>
 					<PhoneFrame></PhoneFrame>
 				</el-main>
-				<el-aside width="25%">Aside</el-aside>
+				<el-aside width="25%">
+					<RightComponents></RightComponents>
+				</el-aside>
 			</el-container>
 		</el-container>
 	</div>
@@ -18,6 +24,9 @@
 <script>
     import PhoneFrame from '@/components/PhoneFrame/PhoneFrame'
     import LeftComponents from '@/components/LeftComponents/LeftComponents'
+	import EuHeader from '@/components/frameComponents/EuHeader'
+	import EuEditTool from '@/components/frameComponents/EuEditTool'
+	import RightComponents from '@/components/RightComponents/RightComponents'
 
     export default {
 		data() {
@@ -31,23 +40,32 @@
 		methods: {
 
 		},
+		computed:{
+            name(){
+                return this.$store.state.iflexGroup
+			},
+		},
 		components:{
             PhoneFrame,
-            LeftComponents
+            LeftComponents,
+            EuHeader,
+            EuEditTool,
+            RightComponents
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.el-header, .el-footer {
-		background-color: #B3C0D1;
+		background-color: white;
 		color: #333;
 		text-align: center;
 		line-height: 60px;
+		border-bottom: #c8c7cc solid 1px;
 	}
 
 	.el-aside {
-		background-color: #D3DCE6;
+		background-color: white;
 		color: #333;
 		text-align: center;
 	}
@@ -72,4 +90,5 @@
 
 	.el-container:nth-child(7) .el-aside {
 	}
+
 </style>

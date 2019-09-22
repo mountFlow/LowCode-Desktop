@@ -1,47 +1,60 @@
 <template>
     <el-row>
         <el-col :span="24">
-            <draggable :list="layout"
-                       :options="{sort:false,forceFallback:true,}"
-                       :group="{ name: 'layouts', pull: 'clone', put: false}"
-                       :clone="cloneLayout"
-
-                       style="position: relative;">
-                <ComponentContainer v-for="item in layout"
-                                    :key="item.id"
-                                    :name="item.name"
-                                    type="layout"
-                                    :componentName="item.componentName">
-                </ComponentContainer>
-            </draggable>
-            <draggable :list="list"
-
-                       :clone="cloneComponent"
-                       :options="{
+            <el-collapse value="2">
+                <el-collapse-item name="1">
+                    <template slot="title">
+                        <view style="width: 100%;text-align: center">
+                            布局组件
+                        </view>
+                    </template>
+                    <draggable :list="layout"
+                               :options="{sort:false}"
+                               :group="{ name: 'layouts', pull: 'clone', put: false}"
+                               :clone="cloneLayout"
+                               @choose="choosLayouts"
+                               style="position: relative;">
+                        <ComponentContainer v-for="item in layout"
+                                            :key="item.id"
+                                            :name="item.name"
+                                            type="layout"
+                                            :componentName="item.componentName">
+                        </ComponentContainer>
+                    </draggable>
+                </el-collapse-item>
+                <el-collapse-item name="2" disabled>
+                    <template slot="title">
+                        <view style="width: 100%;text-align: center">
+                            普通组件
+                        </view>
+                    </template>
+                    <draggable :list="list"
+                               :clone="cloneComponent"
+                               :options="{
                             sort:false
                             }"
-                       :group="{ name: 'components', pull: 'clone', put: false}"
-                       style="position: relative;display: flex;justify-content: center;flex-wrap: wrap">
-                    <ComponentContainer v-for="item in list"
-                                        :key="item.id"
-                                        :name="item.name"
-                                        :componentName="item.componentName">
-                    </ComponentContainer>
-            </draggable>
-            <draggable :group="{ name: 'people'}">
-                <div>
-                    删除
-                </div>
-            </draggable>
+                               :group="{ name: 'components', pull: 'clone', put: false}"
+                               @choose="choosComponents"
+                               style="position: relative;display: flex;justify-content: center;flex-wrap: wrap">
+                        <ComponentContainer v-for="item in list"
+                                            :key="item.id"
+                                            :name="item.name"
+                                            :componentName="item.componentName">
+                        </ComponentContainer>
+                    </draggable>
+                </el-collapse-item>
+            </el-collapse>
+
         </el-col>
     </el-row>
 </template>
 
 <script>
     import ComponentContainer from '@/components/LeftComponents/ComponentContainer/ComponentContainer'
-    import draggable from 'vuedraggable'
+    import draggable from '@/common/js/vuedraggable'
     let layoutGlobalId = 100;
     let compnentGlobalId = 100
+
     export default {
         name: 'LeftComponents',
         data(){
@@ -127,6 +140,14 @@
                 compnentGlobalId++
                 newObj.id = compnentGlobalId
                 return newObj
+            },
+            choosComponents(){
+                console.log('left-choosComponents')
+                this.$store.commit('setIflexGroup',{iflexGroup:'components'})
+            },
+            choosLayouts(){
+                console.log('left-choosLayouts')
+                this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
             }
         },
         components:{
@@ -136,7 +157,5 @@
     }
 </script>
 
-<style scoped>
-    .sortable-fallback{
-    }
+<style >
 </style>
