@@ -45,7 +45,7 @@
     .content{
         height: 75px;
         width: 75px;
-        background-color: silver;
+        background-color: #d4d4d4;
         position: relative;
         border: 2px solid #ccc;
     }

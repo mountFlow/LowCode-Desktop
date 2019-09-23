@@ -62,17 +62,21 @@
               dragging: false,
               layout: [
                   {name:'布局 1',id: 0, componentName: 'Iflex',
+                      iStyle:{
+                      },
                       num: [{
                               itemList: []
                           }]
                   },
                   {name:'布局 1:1',id: 1, componentName: 'Iflex',
+                      iStyle:{},
                       num: [{
                           itemList: []
                       },{
                           itemList: []
                       }]},
                   {name:'布局 1:1:1',id: 2, componentName: 'Iflex',
+                      iStyle:{},
                       num: [{
                           itemList: []
                       },{
@@ -81,6 +85,7 @@
                           itemList: []
                       }]},
                   {name:'布局 1:1:1:1',id: 3, componentName: 'Iflex',
+                      iStyle:{},
                       num: [{
                           itemList: []
                       },{
@@ -91,6 +96,7 @@
                           itemList: []
                       }]},
                   {name:'布局 1:1:1:1:1',id: 4, componentName: 'Iflex',
+                      iStyle:{},
                       num: [{
                           itemList: []
                       },{
@@ -104,16 +110,16 @@
                       }]},
               ],
               list: [
-                  {name:'按钮',id: 0, componentName: 'Ibutton'},
-                  {name:'输入框',id: 1, componentName: 'Iinput'},
-                  {name:'选项',id: 2, componentName: 'Iradio'},
-                  {name:'图标',id: 3, componentName: 'Iicon'},
-                  {name:'文本',id: 4, componentName: 'Itext'},
-                  {name:'进度条',id: 5, componentName: 'Iprogress'},
-                  {name:'滑动选择',id: 6, componentName: 'Islider'},
-                  {name:'开关选择',id: 7, componentName: 'Iswitch'},
-                  {name:'多行输入',id: 8, componentName: 'Itextarea'},
-                  {name:'图像',id: 9, componentName: 'Iimage'},
+                  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{}},
+                  {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{}},
+                  {name:'选项',id: 2, componentName: 'Iradio',iStyle:{}},
+                  {name:'图标',id: 3, componentName: 'Iicon',iStyle:{}},
+                  {name:'文本',id: 4, componentName: 'Itext',iStyle:{}},
+                  {name:'进度条',id: 5, componentName: 'Iprogress',iStyle:{}},
+                  {name:'滑动选择',id: 6, componentName: 'Islider',iStyle:{}},
+                  {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{}},
+                  {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{}},
+                  {name:'图像',id: 9, componentName: 'Iimage',iStyle:{}},
                   // {name:'webView',id: 3, componentName: 'IwebView'},
 
               ],
@@ -132,6 +138,7 @@
                 for (let i = 0; i < newObj.num.length; i++) {
                     nullNum.push({itemList:[]})
                 }
+                newObj.iStyle = {}
                 newObj.num = nullNum
                 return newObj
             },
@@ -139,14 +146,13 @@
                 let newObj = {...cloneObj}
                 compnentGlobalId++
                 newObj.id = compnentGlobalId
+                newObj.iStyle = {}
                 return newObj
             },
             choosComponents(){
-                console.log('left-choosComponents')
                 this.$store.commit('setIflexGroup',{iflexGroup:'components'})
             },
             choosLayouts(){
-                console.log('left-choosLayouts')
                 this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
             }
         },
@@ -157,5 +163,5 @@
     }
 </script>
 
-<style >
+<style>
 </style>

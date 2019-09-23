@@ -13,7 +13,7 @@
 					<eu-edit-tool></eu-edit-tool>
 					<PhoneFrame></PhoneFrame>
 				</el-main>
-				<el-aside width="25%">
+				<el-aside width="25%" style="padding-top: 10px">
 					<RightComponents></RightComponents>
 				</el-aside>
 			</el-container>

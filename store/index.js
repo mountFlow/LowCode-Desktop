@@ -10,10 +10,14 @@ const store = new Vuex.Store({
         list: [],
         deleteGroupName: 'layouts',
         iflexGroup: 'components',
-        showFlexDraggalbeHandle: true
+        showFlexDraggalbeHandle: true,
+        preview: true
     },
 
     mutations: {
+        setPreview(state,data){
+            state.preview = data.preview
+        },
         setGlobalList(state,data){
             state.list = data.list
         },

@@ -36,8 +36,6 @@
         },
         methods:{
             choosLayouts(evt){
-                console.log( evt)
-                console.log(evt.item.dataset['iIndex'])
                 let index = evt.item.dataset['iIndex']
                 this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
                 this.$store.commit('setDeleteGroupName',{deleteGroupName:'layouts'})
@@ -69,7 +67,7 @@
     .phone{
         width: $phoneWidth;
         height: $phoneHeight;
-        background-color: silver;
+        background-color: white;
         position: relative;
         transform: scale(.4,.4);
         margin-top: -55%;

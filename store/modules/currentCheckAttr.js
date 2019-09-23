@@ -6,6 +6,11 @@ const currentCheckAttr = {
         setCurrentCheckItem(state,obj){
             state.item = obj
         },
+        setCurrentCheckItemStyle(state,style){
+            if (state.item){
+                state.item.iStyle = style
+            }
+        },
         setCurrentCheckAttrName(state,{name}){
             state.name = name
         },

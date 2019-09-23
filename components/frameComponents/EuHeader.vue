@@ -18,10 +18,17 @@
             </view>
         </el-col>
         <el-col :span="6">
-            <view style="display: flex;align-items: center">
-                <span>布局锁定:</span>
+            <view style="display: flex;align-items: center;font-size: 14px;color: #5f5e5e">
+                <span style="margin-right: 5px">布局锁定</span>
                 <el-switch
                         v-model="layoutLock"
+                        active-color="#13ce66"
+                        inactive-color="#ff4949">
+                </el-switch>
+                <div style="width: 20px;"></div>
+                <span style="margin-right: 5px">预览</span>
+                <el-switch
+                        v-model="preview"
                         active-color="#13ce66"
                         inactive-color="#ff4949">
                 </el-switch>
@@ -43,6 +50,14 @@
             }
         },
         computed:{
+            preview: {
+                get(){
+                    return this.$store.state.preview
+                },
+                set(val){
+                    this.$store.commit('setPreview',{preview:val})
+                }
+            },
             layoutLock:{
                 get(){
                     return this.$store.state.showFlexDraggalbeHandle
@@ -56,5 +71,4 @@
 </script>
 
 <style scoped>
-
 </style>
