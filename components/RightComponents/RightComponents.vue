@@ -10,7 +10,7 @@
                             <div style="display: flex;flex-wrap: wrap" class="form-line">
                                 <template v-for="(item,index) in formList">
                                     <el-form-item :label="item.label" class="i-form-item" :key="index">
-                                        <el-input v-if="item.type !== 'color' && item.type !== 'select'"
+                                        <el-input v-if="item.type !== 'color' && item.type !== 'select' && item.type !== 'border'"
                                                   v-model="iStyle[item.key]"
                                                   :type="item.type"
                                                   size="mini"
@@ -21,6 +21,11 @@
                                         <div v-if="item.type === 'color'" style="display: inline-block;width: 120px;text-align: left;">
                                             <el-color-picker v-model="iStyle[item.key]" :show-alpha="true"></el-color-picker>
                                         </div>
+
+                                        <template v-if="item.type === 'border'">
+                                            <border :ikey="item.key" v-model="item.data" @choose="borderListShow = true"></border>
+                                        </template>
+
                                         <el-select v-if="item.type === 'select'" v-model="iStyle[item.key]" placeholder="请选择">
                                             <el-option
                                                     size="mini"
@@ -31,6 +36,15 @@
                                             </el-option>
                                         </el-select>
                                     </el-form-item>
+
+                                    <template v-if="item.type === 'border'">
+                                        <div style="display: flex; flex-wrap: wrap" class="form-line" v-show="borderListShow">
+                                            <el-form-item :label="item2.label" class="i-form-item" v-for="item2 in borderList">
+                                                <border :ikey="item2.key" v-model="item2.data" ></border>
+                                            </el-form-item>
+                                        </div>
+                                        <el-divider v-if="borderListShow"><div style="cursor: pointer;" @click="borderListShow=false" ><span style="font-size: 14px;color: #ccc">收起</span><i class="el-icon-arrow-up" style="color: #ccc" ></i></div></el-divider>
+                                    </template>
 
                                     <template v-if="item.haveDirection === true">
                                         <div style="display: flex; flex-wrap: wrap" class="form-line" v-show="item.showDirection">
@@ -49,7 +63,7 @@
                         </el-form>
                 </el-tab-pane>
                 <el-tab-pane label="自定义" name="second">
-
+                    <right-com-style-add></right-com-style-add>
                 </el-tab-pane>
             </el-tabs>
         </el-col>
@@ -57,27 +71,9 @@
 </template>
 
 <script>
-    let dIndex = {
-        'top': 0,
-        'right': 1,
-        'buttom': 2,
-        'left': 3
-    }
-    let arrIndex = [
-        {
-            name: 'top',
-            label: '上'
-        }, {
-            name: 'right',
-            label: '右'
-        }, {
-            name: 'buttom',
-            label: '下'
-        }, {
-            name: 'left',
-            label: '左'
-        }
-    ]
+    import border from './styleCompentens/border'
+    import {dIndex,arrIndex,borderList} from '@/common/js/styleExternalData'
+    import rightComStyleAdd from './rightComStyleAdd'
 
     export default {
         name: 'RightComponents',
@@ -87,6 +83,8 @@
                 paddingMarginDirection: false,
                 checkMOrP: '',
                 arrIndex:arrIndex,
+                borderList:borderList,
+                borderListShow: false,
                 formList: [
                     {
                         label: '长度',
@@ -104,7 +102,12 @@
                     },{
                         label: '边框',
                         key: 'border',
-                        type:'text'
+                        type:'border',
+                        data: {
+                            size: '',
+                            type: '',
+                            color: ''
+                        }
                     },{
                         label: '内边距',
                         key: 'padding',
@@ -224,7 +227,6 @@
                 }
                 val = val.toString().trim()
                 let arrVal = val.split(" ")
-                console.log(index)
                 if (arrVal.length === 1){
                     this.formList[index].padingOrMargin.top = arrVal[0]
                     this.formList[index].padingOrMargin.buttom = arrVal[0]
@@ -286,6 +288,10 @@
                 }
                 return {}
             }
+        },
+        components:{
+            border,
+            rightComStyleAdd
         }
     }
 </script>

@@ -1,0 +1,108 @@
+<template>
+    <el-popover
+            placement="left"
+            width="400"
+            trigger="focus">
+        <div style="display: flex;align-items: center;justify-content: space-around">
+            <div>大小</div>
+            <el-input slot="reference"
+                      v-model="value.size"
+                      type="text"
+                      size="mini"
+                      style="width: 75px"
+                      @input="borderSizeInput"
+            >
+            </el-input>
+            <div>类型</div>
+            <el-select placeholder="请选择"
+                       style="width: 100px"
+                       v-model="value.type"
+                       @change="borderTypeInput"
+            >
+                <el-option
+                        size="mini"
+                        v-for="item2 in borderSelect"
+                        :key="item2.value"
+                        :label="item2.label"
+                        :value="item2.value">
+                </el-option>
+            </el-select>
+            <div>颜色</div>
+            <el-color-picker :show-alpha="true" v-model="value.color" @change="borderColorInput"></el-color-picker>
+        </div>
+        <el-input slot="reference"
+                  v-model="iStyle[ikey]"
+                  type="text"
+                  size="mini"
+                  @focus="choose"
+        >
+        </el-input>
+    </el-popover>
+</template>
+
+<script>
+    import {borderSelect} from '@/common/js/styleExternalData'
+
+    export default {
+        name: 'border',
+        data(){
+            return {
+                borderSelect:borderSelect
+            }
+        },
+        props:{
+            ikey:{
+                type:String,
+                default: ''
+            },
+            value: {
+                type: Object,
+                default: ()=>{}
+            }
+        },
+        methods: {
+            choose(){
+              this.$emit('choose')
+            },
+            borderSizeInput (val) {
+                this.setBoderByIndex(0,val)
+            },
+            borderTypeInput(val){
+                this.setBoderByIndex(1,val)
+            },
+            borderColorInput(val){
+                this.setBoderByIndex(2,val)
+            },
+            setBoderByIndex(index,val){
+                if (this.iStyle && !this.iStyle[this.ikey]) {
+                    this.$set(this.iStyle, this.ikey, '')
+                }
+                let border = this.iStyle[this.ikey]
+                let addrBorder = []
+                if (border){
+                    addrBorder = border.split('  ')
+                }
+                addrBorder[index] = val
+                let res = addrBorder.join('  ')
+                this.iStyle[this.ikey] = res
+            }
+        },
+        computed:{
+            iStyle: {
+                get(){
+                    if (this.$store.state.currentCheckAttr.item){
+                        return this.$store.state.currentCheckAttr.item.iStyle
+                    }
+                    return {}
+                },
+                set(val){
+                    this.$store.commit('setCurrentCheckItemStyle',val)
+                }
+            },
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
