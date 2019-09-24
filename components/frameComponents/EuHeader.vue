@@ -1,13 +1,13 @@
 <template>
     <el-row>
         <el-col :span="6">
-            <view>
-                <h2>easy-ui</h2>
+            <view style="display: flex;justify-content: flex-start;align-items: center;color: #675e6f">
+                <h2>kill-9-ui</h2>
             </view>
         </el-col>
         <el-col :span="12">
             <view>
-                <el-select v-model="centerValue" placeholder="请选择">
+                <el-select v-model="centerValue" placeholder="请选择" size="mini"  style="width: 130px">
                     <el-option
                             v-for="item in options"
                             :key="item.value"
@@ -18,7 +18,7 @@
             </view>
         </el-col>
         <el-col :span="6">
-            <view style="display: flex;align-items: center;font-size: 14px;color: #5f5e5e">
+            <view style="display: flex;align-items: center;font-size: 14px;color: #5f5e5e;justify-content: flex-end">
                 <span style="margin-right: 5px">布局锁定</span>
                 <el-switch
                         v-model="layoutLock"
@@ -43,10 +43,13 @@
         data(){
             return {
                 options: [{
-                    value: 'uni-app',
-                    label: 'uni-app'
+                    value: 'page',
+                    label: '页面模式'
+                },{
+                    value: 'component',
+                    label: '组件模式'
                 }],
-                centerValue: 'uni-app',
+                centerValue: 'page',
             }
         },
         computed:{

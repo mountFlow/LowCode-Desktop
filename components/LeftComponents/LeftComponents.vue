@@ -8,7 +8,7 @@
                             布局组件
                         </view>
                     </template>
-                    <left-compoents-by-layouts :layout="layout" :clone="cloneComponent" :choose="choosComponents"></left-compoents-by-layouts>
+                    <left-compoents-by-layouts :layout="layout" :clone="cloneLayout" :choose="choosLayouts"></left-compoents-by-layouts>
                 </el-collapse-item>
                 <el-collapse-item name="2" disabled>
                     <template slot="title">
@@ -55,61 +55,76 @@
                       iStyle:{
                       },
                       num: [{
-                              itemList: [],
-                              layoutClass:'flex-sub',
+                          iStyle:{},
+                          itemList: [],
+                          layoutClass:'flex-sub',
                       }]
                   },
                   {name:'布局 2:2',id: 1, componentName: 'Iflex',
                       iStyle:{},
                       num: [{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       }]},
                   {name:'布局 3:3:3',id: 2, componentName: 'Iflex',
                       iStyle:{},
                       num: [{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       }]},
-                  {name:'布局 4:4:1:1',id: 3, componentName: 'Iflex',
+                  {name:'布局 1:1:1:1',id: 3, componentName: 'Iflex',
                       iStyle:{},
                       num: [{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       }]},
                   {name:'布局 1:1:1:1:1',id: 4, componentName: 'Iflex',
                       iStyle:{},
                       num: [{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       }]},
@@ -141,7 +156,8 @@
                 newObj.id = layoutGlobalId
                 let nullNum = []
                 for (let i = 0; i < newObj.num.length; i++) {
-                    nullNum.push({itemList:[]})
+                    let {layoutClass,iStyle} = newObj.num[i]
+                    nullNum.push({itemList:[],layoutClass,iStyle})
                 }
                 newObj.iStyle = {}
                 newObj.num = nullNum

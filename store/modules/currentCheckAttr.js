@@ -215,7 +215,13 @@ const currentCheckAttr = {
                 if (Object.prototype.toString.call(currentObj) === '[object Array]'){
                     currentObj = currentObj[index]
                 } else {
-                    currentObj = currentObj.num[index].itemList
+                    if (i === arrIndex.length - 1){
+                        let name = currentObj.name
+                        currentObj = currentObj.num[index]
+                        currentObj.name = name + ` 第${index+1}列`
+                    }else {
+                        currentObj = currentObj.num[index].itemList
+                    }
                 }
             }
             if (currentObj){

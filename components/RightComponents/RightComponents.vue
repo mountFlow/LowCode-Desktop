@@ -62,13 +62,17 @@
                                     </template>
                                 </template>
                             </div>
-                            <el-form-item label="样式配置" style="margin-top: 15px">
+                            <el-form-item label="样式配置" style="margin: 15px 0">
                                 <el-input class="style-json" type="textarea" v-model="iStyleJson" :autosize="{ minRows:6 }"></el-input>
                             </el-form-item>
                         </el-form>
                 </el-tab-pane>
-                <el-tab-pane label="自定义" name="second">
+                <el-tab-pane label="自定属性" name="second">
                     <right-com-style-add></right-com-style-add>
+                </el-tab-pane>
+                <el-tab-pane label="制定类" name="three">
+                </el-tab-pane>
+                <el-tab-pane label="目录" name="four">
                 </el-tab-pane>
             </el-tabs>
         </el-col>

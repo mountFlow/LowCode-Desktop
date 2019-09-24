@@ -17,6 +17,7 @@
     @import "colorui/icon.css";
 	/*每个页面公共css */
     @import "common/style/basicsComponentsStyle.scss";
+    @import "common/style/myStyle.scss";
 
     body,html{
         font-size: 16px;

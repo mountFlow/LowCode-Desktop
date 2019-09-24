@@ -1,22 +1,32 @@
 <template>
     <view>
-        <view class="flex-draggalbe-handle" v-show="showFlexDraggalbeHandle && preview"> </view>
+        <view class="flex-draggalbe-handle" v-show="showFlexDraggalbeHandle && preview">
+            <view class="flex-draggalbe-handle-top" @click="choosLayouts(dataIIndex)"></view>
+            <view class="flex-draggalbe-handle-bottom">
+                <view class="flex-draggalbe-handle-bottom-item"
+                      :class="handleItem.layoutClass"
+                      v-for="(handleItem,handleIndex) in num"
+                      :key="handleIndex"
+                      @click="choosLayouts(dataIIndex + '-' + handleIndex)"
+                ></view>
+            </view>
+        </view>
         <view class="flex i-flex-r" style="position: relative"
               :style="iStyle"
               @mouseover="flexDraggalbeHandle(true)"
               @mouseout="flexDraggalbeHandle(false)"
         >
-            <view class="flex-sub margin-0  i-flex"
-                  :class="{'i-flex-border': preview}"
+            <view class="margin-0  i-flex"
+                  :class="[{'i-flex-border': preview},item.layoutClass]"
                   v-for="(item,index0) in num"
                   :dataIIndex="dataIIndex + '-' +index0"
-                  :data-i-index="dataIIndex + '-' +index0"
             >
                 <draggable :group="iflexGroup" :list="item.itemList"
                            :options="{
                             }"
                            @choose="choosComponents"
                            style="height: 100%;width: 100%"
+                           :style="item.iStyle"
                 >
                     <template v-for="(item2,index) in item.itemList">
                         <component :key="index" :is="item2.componentName"
@@ -63,16 +73,16 @@
             }
         },
         methods:{
+            choosLayouts(index,evt){
+                this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
+                this.$store.commit('setDeleteGroupName',{deleteGroupName:'layouts'})
+                this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
+            },
             choosComponents(evt){
-                console.log( evt)
-                console.log(evt.item.dataset['iIndex'])
                 let index = evt.item.dataset['iIndex']
                 this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
 
-                if (evt.item.firstChild.className === 'flex-draggalbe-handle'){
-                    this.$store.commit('setDeleteGroupName',{deleteGroupName:'layouts'})
-                    this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
-                } else {
+                if (evt.item.firstChild.className !== 'flex-draggalbe-handle'){
                     this.$store.commit('setDeleteGroupName',{deleteGroupName:'components'})
                     this.$store.commit('setIflexGroup',{iflexGroup:'components'})
                 }
@@ -117,10 +127,36 @@
     }
 
     .flex-draggalbe-handle {
-        cursor: move;
+        $handleHeight: 20upx;
+
+        cursor: pointer;
         background-color: #675e6f;
         width: 100%;
-        height: 20upx;
+        height: $handleHeight;
+
+        &-top{
+            height: $handleHeight/2;
+            width: 100%;
+        }
+        &-top:hover{
+            background-color: #ad9eba;
+        }
+
+        &-bottom{
+            height: $handleHeight/2;
+            display: flex;
+            width: 100%;
+
+            &-item{
+                border-left: #ead2f7 solid 1px;
+                border-right: #ead2f7 solid 1px;
+                border-top: #ead2f7 solid 1px;
+                background-color: #897c94;
+            }
+            &-item:hover{
+                background-color: #ad9eba;
+            }
+        }
     }
 
     .sortable-fallback{
