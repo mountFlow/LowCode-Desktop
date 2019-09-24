@@ -6,8 +6,10 @@
                 {{name}}
             </view>
         </view>
-        <view  v-if="type === 'layout'" class="content-layout">
-            <Ibutton :name="name"></Ibutton>
+        <view  v-if="type === 'layout'" >
+            <view class="flex content-layout">
+                <view class="  margin-0 content-layout-item" v-for="(item,index) in num" :class="item.layoutClass">1</view>
+            </view>
         </view>
     </view>
 </template>
@@ -19,6 +21,10 @@
         mixins: [basicsMixin],
         name: 'ComponentContainer',
         props:{
+            num: {
+                type: Array,
+                default: ()=>[]
+            },
             type: {
                 type: String,
                 default: 'basics'
@@ -51,10 +57,21 @@
     }
 
     .content-layout{
-        width: 200px;
+        width: 100%;
+        height: 35px;
         background-color: silver;
         position: relative;
         border: 2px solid #ccc;
+    }
+
+    .content-layout-item{
+        cursor: move;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 2px;
+        background-color: #675e6f;
+        color: white;
     }
 
     .title{

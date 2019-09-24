@@ -7,9 +7,10 @@
                             <el-form-item label="组件名称">
                                 <el-input :value="currentCompentenName" disabled size="mini"></el-input>
                             </el-form-item>
+                            <el-divider><span style="color: #DCDFE6">属性</span></el-divider>
                             <div style="display: flex;flex-wrap: wrap" class="form-line">
                                 <template v-for="(item,index) in formList">
-                                    <el-form-item :label="item.label" class="i-form-item" :key="index">
+                                    <el-form-item v-show="haveMustCheck(item)" :label="item.label" class="i-form-item" :key="index">
                                         <el-input v-if="item.type !== 'color' && item.type !== 'select' && item.type !== 'border'"
                                                   v-model="iStyle[item.key]"
                                                   :type="item.type"
@@ -26,7 +27,11 @@
                                             <border :ikey="item.key" v-model="item.data" @choose="borderListShow = true"></border>
                                         </template>
 
-                                        <el-select v-if="item.type === 'select'" v-model="iStyle[item.key]" placeholder="请选择">
+                                        <el-select v-if="item.type === 'select'"
+                                                   v-model="iStyle[item.key]"
+                                                   placeholder="请选择"
+                                                   clearable
+                                        >
                                             <el-option
                                                     size="mini"
                                                     v-for="item2 in item.select"
@@ -57,7 +62,7 @@
                                     </template>
                                 </template>
                             </div>
-                            <el-form-item label="样式配置">
+                            <el-form-item label="样式配置" style="margin-top: 15px">
                                 <el-input class="style-json" type="textarea" v-model="iStyleJson" :autosize="{ minRows:6 }"></el-input>
                             </el-form-item>
                         </el-form>
@@ -84,93 +89,7 @@
                 checkMOrP: '',
                 arrIndex:arrIndex,
                 borderList:borderList,
-                borderListShow: false,
-                formList: [
-                    {
-                        label: '长度',
-                        key: 'height',
-                        type:'text'
-                    },
-                    {
-                        label: '宽度',
-                        key: 'width',
-                        type:'text'
-                    },{
-                        label: '边角',
-                        key: 'borderRadius',
-                        type:'text'
-                    },{
-                        label: '边框',
-                        key: 'border',
-                        type:'border',
-                        data: {
-                            size: '',
-                            type: '',
-                            color: ''
-                        }
-                    },{
-                        label: '内边距',
-                        key: 'padding',
-                        type:'text',
-                        haveDirection: true,
-                        showDirection: false,
-                        padingOrMargin: {
-                            left: '',
-                            right: '',
-                            top: '',
-                            buttom: ''
-                        }
-                    },{
-                        label: '外边距',
-                        key: 'margin',
-                        type:'text',
-                        haveDirection: true,
-                        showDirection: false,
-                        padingOrMargin: {
-                            left: '',
-                            right: '',
-                            top: '',
-                            buttom: ''
-                        }
-                    },{
-                        label: '字体大小',
-                        key: 'fontSize',
-                        type:'text'
-                    },{
-                        label: '字体宽度',
-                        key: 'fontWeight',
-                        type:'select',
-                        select: [{
-                            value: '500',
-                            label: '正常'
-                        }, {
-                            value: '600',
-                            label: '粗'
-                        }]
-                    },{
-                        label: '字体颜色',
-                        key: 'color',
-                        type:'color'
-                    },{
-                        label: '字体方向',
-                        key: 'textAlign',
-                        type:'select',
-                        select: [{
-                            value: 'left',
-                            label: '靠左'
-                        }, {
-                            value: 'center',
-                            label: '居中'
-                        }, {
-                            value: 'right',
-                            label: '靠右'
-                        }]
-                    },{
-                        label: '背景色',
-                        key: 'backgroundColor',
-                        type:'color'
-                    },
-                ]
+                borderListShow: false
             }
         },
         watch:{
@@ -178,6 +97,23 @@
         methods:{
             onmousewheel(){
                 console.log(11)
+            },
+            /**
+             * 校验样式依赖关系
+             * 控制是否显示
+             */
+            haveMustCheck(item){
+                let {must} = item
+                if (must){
+                    let {key,value} = must
+                    let parent = this.iStyle[key]
+                    if ( parent && parent===value ){
+                        return true
+                    }
+                    return false
+                }else {
+                    return true
+                }
             },
             arr2four(index,arr) {
                 let newArr = arr
@@ -251,6 +187,9 @@
             }
         },
         computed:{
+            formList(){
+                return this.$store.state.currentCheckAttr.formList
+            },
             list(){
                 return this.$store.state.list
             },
@@ -291,7 +230,7 @@
         },
         components:{
             border,
-            rightComStyleAdd
+            rightComStyleAdd,
         }
     }
 </script>

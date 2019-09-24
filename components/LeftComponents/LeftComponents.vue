@@ -8,19 +8,7 @@
                             布局组件
                         </view>
                     </template>
-                    <draggable :list="layout"
-                               :options="{sort:false}"
-                               :group="{ name: 'layouts', pull: 'clone', put: false}"
-                               :clone="cloneLayout"
-                               @choose="choosLayouts"
-                               style="position: relative;">
-                        <ComponentContainer v-for="item in layout"
-                                            :key="item.id"
-                                            :name="item.name"
-                                            type="layout"
-                                            :componentName="item.componentName">
-                        </ComponentContainer>
-                    </draggable>
+                    <left-compoents-by-layouts :layout="layout" :clone="cloneComponent" :choose="choosComponents"></left-compoents-by-layouts>
                 </el-collapse-item>
                 <el-collapse-item name="2" disabled>
                     <template slot="title">
@@ -52,6 +40,8 @@
 <script>
     import ComponentContainer from '@/components/LeftComponents/ComponentContainer/ComponentContainer'
     import draggable from '@/common/js/vuedraggable'
+    import LeftCompoentsByLayouts from './LeftCompoentsByLayouts'
+
     let layoutGlobalId = 100;
     let compnentGlobalId = 100
 
@@ -65,47 +55,62 @@
                       iStyle:{
                       },
                       num: [{
-                              itemList: []
-                          }]
+                              itemList: [],
+                              layoutClass:'flex-sub',
+                      }]
                   },
-                  {name:'布局 1:1',id: 1, componentName: 'Iflex',
+                  {name:'布局 2:2',id: 1, componentName: 'Iflex',
                       iStyle:{},
                       num: [{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       }]},
-                  {name:'布局 1:1:1',id: 2, componentName: 'Iflex',
+                  {name:'布局 3:3:3',id: 2, componentName: 'Iflex',
                       iStyle:{},
                       num: [{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       }]},
-                  {name:'布局 1:1:1:1',id: 3, componentName: 'Iflex',
+                  {name:'布局 4:4:1:1',id: 3, componentName: 'Iflex',
                       iStyle:{},
                       num: [{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       }]},
                   {name:'布局 1:1:1:1:1',id: 4, componentName: 'Iflex',
                       iStyle:{},
                       num: [{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          layoutClass:'flex-sub',
                           itemList: []
                       }]},
               ],
@@ -158,7 +163,8 @@
         },
         components:{
             ComponentContainer,
-            draggable
+            draggable,
+            LeftCompoentsByLayouts
         }
     }
 </script>
