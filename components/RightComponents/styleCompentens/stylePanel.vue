@@ -4,19 +4,20 @@
             <template v-for="(item,index) in formList">
                 <el-form-item v-show="haveMustCheck(item)" :label="item.label" class="i-form-item" :key="index">
                     <el-input v-if="item.type !== 'color' && item.type !== 'select' && item.type !== 'border'"
-                              v-model="value[item.key]"
+                              :value="computeValue(value,item.key,'/'+ item.unit +'/g')"
+                              @input="inputChange($event,item)"
                               :type="item.type"
                               size="mini"
-                              @input="item.haveDirection === true ? paddingChange($event,index) : null"
                               @focus="item.haveDirection === true ? paddingMarginDirectionFun(true,index) : null"
                     >
+                        <div slot="suffix" v-if="item.unit !== undefined">{{item.unit}}</div>
                     </el-input>
                     <div v-if="item.type === 'color'" style="display: inline-block;width: 120px;text-align: left;">
                         <el-color-picker v-model="value[item.key]" :show-alpha="true"></el-color-picker>
                     </div>
 
                     <template v-if="item.type === 'border'">
-                        <border :ikey="item.key" v-model="item.data" @choose="borderListShow = true"></border>
+                        <border :ikey="item.key" v-model="item.data" :unit="item.unit" @choose="borderListShow = true"></border>
                     </template>
 
                     <el-select v-if="item.type === 'select'"
@@ -46,7 +47,9 @@
                 <template v-if="item.haveDirection === true">
                     <div style="display: flex; flex-wrap: wrap" class="form-line" v-show="item.showDirection">
                         <el-form-item :label="item.key + item2.label" class="i-form-item" v-for="item2 in arrIndex">
-                            <el-input v-model="item.padingOrMargin[item2.name]" @input="directionFun(item2.name,$event,index)"  size="mini">
+                            <el-input :value="computeValue(item.padingOrMargin,item2.name,'/[('+ item.unit +') ]/g')"
+                                      @input="directionFun(item,item2.name,$event,index)"  size="mini">
+                                <div slot="suffix" v-if="item.unit !== undefined">{{item.unit}}</div>
                             </el-input>
                         </el-form-item>
                     </div>
@@ -82,6 +85,9 @@
             }
         },
         methods:{
+            computeValue(item,key,unit){
+                return item[key] ? item[key].replace(eval(unit),'') : ''
+            },
             /**
              * 校验样式依赖关系
              * 控制是否显示
@@ -112,18 +118,20 @@
                 }
                 return newArr
             },
-            directionFun(d,val,index){
+            directionFun(item,d,val,index){
+                this.$set(item.padingOrMargin,d,val)
+
                 let mp = this.formList[index].key
                 let style = this.value
                 let arrStyle = []
                 if (style[mp]){
-                    arrStyle = style[mp].split(" ")
+                    arrStyle = this.computeValue(style,mp,'/'+ item.unit +'/g').split(" ")
                 }
                 arrStyle = this.arr2four(arrStyle.length,arrStyle)
-                arrStyle[dIndex[d]] = val
-                style[mp] = arrStyle.join(" ")
-
-                this.$store.commit('setCurrentCheckItemStyle',style)
+                arrStyle[dIndex[d]] = val.replace(/ /g,'')
+                style[mp] = arrStyle.join(item.unit + ' ')
+                style[mp] += item.unit
+                this.$emit('input',{...style})
             },
             paddingMarginDirectionFun(flag,index){
                 this.checkMOrP = this.formList[index].key
@@ -132,6 +140,17 @@
             },
             paddingChange(val,index){
                 this.computedMarginOrPadding(val,index)
+            },
+            inputChange(e,{key,haveDirection,unit}){
+                this.value[key] = e
+                if (e !== ''){
+                    if (haveDirection === true){
+                        let arrE = e.split(' ')
+                        this.value[key] = arrE.join(unit + ' ')
+                    }
+                    this.value[key] += unit
+                }
+                this.$emit('input',{...this.value})
             },
             computedMarginOrPadding(val,index){
 

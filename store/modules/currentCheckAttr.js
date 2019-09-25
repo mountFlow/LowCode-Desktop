@@ -8,20 +8,24 @@ const currentCheckAttr = {
             {
                 label: '长度',
                 key: 'height',
-                type:'text'
+                type:'text',
+                unit: 'upx'
             },
             {
                 label: '宽度',
                 key: 'width',
-                type:'text'
+                type:'text',
+                unit: 'upx'
             },{
                 label: '边角',
                 key: 'borderRadius',
-                type:'text'
+                type:'text',
+                unit: 'upx'
             },{
                 label: '边框',
                 key: 'border',
                 type:'border',
+                unit: 'upx',
                 data: {
                     size: '',
                     type: '',
@@ -31,6 +35,7 @@ const currentCheckAttr = {
                 label: '内边距',
                 key: 'padding',
                 type:'text',
+                unit: 'upx',
                 haveDirection: true,
                 showDirection: false,
                 padingOrMargin: {
@@ -43,6 +48,7 @@ const currentCheckAttr = {
                 label: '外边距',
                 key: 'margin',
                 type:'text',
+                unit: 'upx',
                 haveDirection: true,
                 showDirection: false,
                 padingOrMargin: {
@@ -54,7 +60,8 @@ const currentCheckAttr = {
             },{
                 label: '字体大小',
                 key: 'fontSize',
-                type:'text'
+                type:'text',
+                unit: 'upx',
             },{
                 label: '字体宽度',
                 key: 'fontWeight',

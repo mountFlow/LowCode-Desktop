@@ -60,6 +60,9 @@
                 <el-option :label="item.label" :value="item.value" v-for="item in selectType"></el-option>
             </el-select>
         </el-form-item>
+        <el-form-item style="width:70%" v-if="typeIsHaveUnit" label="单位" prop="unit">
+            <el-input  v-model="form.unit" size="mini"></el-input>
+        </el-form-item>
         <el-card class="box-card" v-if="typeIsSelect" style="margin-bottom: 20px;">
             <div style="display: flex;flex-wrap: wrap;justify-content: center">
                 <div style="width: 100%;display: flex;margin-top: 10px;align-items: center" v-for="(item,index) in selectKeyValue">
@@ -111,6 +114,7 @@
                 showTipAdd: false,
                 showTipSave: false,
                 typeIsSelect: false,
+                typeIsHaveUnit: false,
                 openMustValue: true,
                 mustValueType: 'input',
                 mustValueValue: '',
@@ -129,7 +133,8 @@
                     key: '',
                     type: '',
                     select: '',
-                    must: ''
+                    must: '',
+                    unit: ''
                 },
                 rules: {
                     mustValue: [{
@@ -207,11 +212,15 @@
             editItemIndexSelect(){
                 let editItem = this.formList[this.editItemIndex]
                 this.form = {...editItem}
+
+                this.typeIsSelect = false
+                this.typeIsHaveUnit = false
+
                 if (editItem.type === 'select'){
                     this.selectKeyValue = editItem.select
                     this.typeIsSelect = true
-                }else {
-                    this.typeIsSelect = false
+                }else if (editItem.type === 'text' || editItem.type === 'number'){
+                    this.typeIsHaveUnit = true
                 }
                 this.editOrAdd = 'edit'
                 this.oldKey = editItem.key
@@ -257,10 +266,13 @@
                 }
             },
             selectCheck(val){
+                this.typeIsSelect = false
+                this.typeIsHaveUnit = false
+
                 if (val === 'select'){
                     this.typeIsSelect = true
-                } else {
-                    this.typeIsSelect = false
+                } else if (val === 'text' || val === 'number') {
+                    this.typeIsHaveUnit = true
                 }
             },
             openSussese(title = '成功',msg = '添加样式属性成功'){
@@ -301,6 +313,7 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
                 this.typeIsSelect = false
+                this.typeIsHaveUnit = false
                 this.selectKeyValue = [
                     {key:'',value:''}
                 ]

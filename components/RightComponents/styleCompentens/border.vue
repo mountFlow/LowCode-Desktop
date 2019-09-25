@@ -6,12 +6,13 @@
         <div style="display: flex;align-items: center;justify-content: space-around">
             <div>大小</div>
             <el-input slot="reference"
-                      v-model="value.size"
+                      :value="computeValue(value,'size')"
                       type="text"
                       size="mini"
                       style="width: 75px"
                       @input="borderSizeInput"
             >
+                <div slot="suffix" v-if="unit !== undefined">{{unit}}</div>
             </el-input>
             <div>类型</div>
             <el-select placeholder="请选择"
@@ -58,14 +59,26 @@
             value: {
                 type: Object,
                 default: ()=>{}
+            },
+            unit: {
+                type: String,
+                default: ''
             }
         },
         methods: {
+            computeValue(item,key){
+                return item[key] ? item[key].replace(eval('/'+ this.unit +'/g'),'') : ''
+            },
             choose(){
               this.$emit('choose')
             },
+            emitInput(value){
+                this.$emit('input',{...value})
+            },
             borderSizeInput (val) {
-                this.setBoderByIndex(0,val)
+                this.value.size = val + 'upx'
+                this.emitInput(this.value)
+                this.setBoderByIndex(0,this.value.size)
             },
             borderTypeInput(val){
                 this.setBoderByIndex(1,val)
