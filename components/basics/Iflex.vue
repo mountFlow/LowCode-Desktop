@@ -1,18 +1,19 @@
 <template>
     <view>
         <view class="flex-draggalbe-handle" v-show="showFlexDraggalbeHandle && preview">
-            <view class="flex-draggalbe-handle-top" @click="choosLayouts(dataIIndex)"></view>
+            <view class="flex-draggalbe-handle-top" @mousedown="choosLayouts(dataIIndex)"></view>
             <view class="flex-draggalbe-handle-bottom">
                 <view class="flex-draggalbe-handle-bottom-item"
                       :class="handleItem.layoutClass"
                       v-for="(handleItem,handleIndex) in num"
                       :key="handleIndex"
-                      @click="choosLayouts(dataIIndex + '-' + handleIndex)"
+                      @mousedown="choosLayouts(dataIIndex + '-' + handleIndex)"
                 ></view>
             </view>
         </view>
         <view class="flex i-flex-r" style="position: relative"
-              :style="iStyle"
+              :style="[computedClassToStyle(iClass),iStyle]"
+              :class="iClass"
               @mouseover="flexDraggalbeHandle(true)"
               @mouseout="flexDraggalbeHandle(false)"
         >
@@ -26,14 +27,14 @@
                             }"
                            @choose="choosComponents"
                            style="height: 100%;width: 100%"
-                           :style="item.iStyle"
+                           :style="[computedClassToStyle(item.iClass),item.iStyle]"
                 >
                     <template v-for="(item2,index) in item.itemList">
                         <component :key="index" :is="item2.componentName"
                                    :dataIIndex="dataIIndex + '-' + index0 + '-' +index"
                                    :data-i-index="dataIIndex + '-' + index0 + '-' +index"
                                    v-bind="item2"
-                                   :style="item2.iStyle"
+                                   :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),item2.iStyle]:''"
                         >
                         </component>
                     </template>
@@ -62,6 +63,10 @@
             iStyle: {
                 type: Object,
                 default: ()=>{}
+            },
+            iClass: {
+                type: Array,
+                default: ()=>[]
             }
         },
         data(){
@@ -73,7 +78,15 @@
             }
         },
         methods:{
+            computedClassToStyle(classNames){
+                let style = {}
+                classNames.forEach(e=>{
+                    style = {...style,...this.customClass[e]}
+                })
+                return style
+            },
             choosLayouts(index,evt){
+                console.log('layouts')
                 this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
                 this.$store.commit('setDeleteGroupName',{deleteGroupName:'layouts'})
                 this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
@@ -96,6 +109,9 @@
             }
         },
         computed:{
+            customClass(){
+                return  this.$store.state.currentCheckAttr.customClass
+            },
             preview(){
                 return this.$store.state.preview
             },

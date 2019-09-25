@@ -146,7 +146,8 @@
                             num.push({
                                 layoutClass: flexMap[index],
                                 itemList: [],
-                                iStyle:{}
+                                iStyle:{},
+                                iClass:[]
                             })
                         }
                         let name = arrValue.join(':')

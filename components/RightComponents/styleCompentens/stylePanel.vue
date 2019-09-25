@@ -4,7 +4,7 @@
             <template v-for="(item,index) in formList">
                 <el-form-item v-show="haveMustCheck(item)" :label="item.label" class="i-form-item" :key="index">
                     <el-input v-if="item.type !== 'color' && item.type !== 'select' && item.type !== 'border'"
-                              v-model="iStyle[item.key]"
+                              v-model="value[item.key]"
                               :type="item.type"
                               size="mini"
                               @input="item.haveDirection === true ? paddingChange($event,index) : null"
@@ -12,7 +12,7 @@
                     >
                     </el-input>
                     <div v-if="item.type === 'color'" style="display: inline-block;width: 120px;text-align: left;">
-                        <el-color-picker v-model="iStyle[item.key]" :show-alpha="true"></el-color-picker>
+                        <el-color-picker v-model="value[item.key]" :show-alpha="true"></el-color-picker>
                     </div>
 
                     <template v-if="item.type === 'border'">
@@ -20,7 +20,7 @@
                     </template>
 
                     <el-select v-if="item.type === 'select'"
-                               v-model="iStyle[item.key]"
+                               v-model="value[item.key]"
                                placeholder="请选择"
                                clearable
                     >
@@ -66,6 +66,12 @@
 
     export default {
         name: 'stylePanel',
+        props:{
+            value: {
+                type: Object,
+                default: ()=>{}
+            }
+        },
         data(){
             return {
                 paddingMarginDirection: false,
@@ -84,7 +90,7 @@
                 let {must} = item
                 if (must){
                     let {key,value} = must
-                    let parent = this.iStyle[key]
+                    let parent = this.value[key]
                     if ( parent && parent===value ){
                         return true
                     }
@@ -108,7 +114,7 @@
             },
             directionFun(d,val,index){
                 let mp = this.formList[index].key
-                let style = this.iStyle
+                let style = this.value
                 let arrStyle = []
                 if (style[mp]){
                     arrStyle = style[mp].split(" ")
@@ -122,7 +128,7 @@
             paddingMarginDirectionFun(flag,index){
                 this.checkMOrP = this.formList[index].key
                 this.formList[index].showDirection = flag
-                this.computedMarginOrPadding(this.iStyle[this.formList[index].key],index)
+                this.computedMarginOrPadding(this.value[this.formList[index].key],index)
             },
             paddingChange(val,index){
                 this.computedMarginOrPadding(val,index)
@@ -170,24 +176,10 @@
             },
             iStyleJson: {
                 get(){
-                    if (this.$store.state.currentCheckAttr.item){
-                        return JSON.stringify(this.$store.state.currentCheckAttr.item.iStyle,null,'    ')
-                    }
-                    return ''
+                    return JSON.stringify(this.value,null,'    ')
                 },
                 set(val){
-                    this.$store.commit('setCurrentCheckItemStyle',JSON.parse(val))
-                }
-            },
-            iStyle: {
-                get(){
-                    if (this.$store.state.currentCheckAttr.item){
-                        return this.$store.state.currentCheckAttr.item.iStyle
-                    }
-                    return {}
-                },
-                set(val){
-                    this.$store.commit('setCurrentCheckItemStyle',val)
+                    this.$emit('input', JSON.parse(val));
                 }
             },
         },

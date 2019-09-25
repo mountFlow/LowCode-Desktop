@@ -1,6 +1,9 @@
+import vue from 'vue'
+
 const currentCheckAttr = {
     state: {
         item: undefined,
+        customClass: {},
         formList: [
             {
                 label: '长度',
@@ -172,6 +175,14 @@ const currentCheckAttr = {
         ]
     },
     mutations: {
+        deleteCustomClass(state,{name}){
+            vue.set(state.customClass,name,undefined)
+            delete state.customClass[name]
+        },
+        setCustomClass(state,{name,value}){
+            vue.set(state.customClass,name,value)
+            // state.customClass[name] = value
+        },
         addFromStyleList(state,obj){
             state.formList.push(obj)
         },
@@ -187,6 +198,11 @@ const currentCheckAttr = {
         setCurrentCheckItemStyle(state,style){
             if (state.item){
                 state.item.iStyle = style
+            }
+        },
+        setCurrentCheckItemClass(state,iClass){
+            if (state.item){
+                state.item.iClass = iClass
             }
         },
         setCurrentCheckAttrName(state,{name}){

@@ -15,7 +15,7 @@
         </div>
         <div class="tool-item">
             <el-tooltip class="item" effect="dark" content="点击导出uni代码" placement="right">
-                <div class="tool-item-icon">
+                <div class="tool-item-icon" @click="outPort">
                     <i class="el-icon-upload" style="font-size: 23px;color: white;"></i>
                 </div>
             </el-tooltip>
@@ -28,6 +28,11 @@
 
     export default {
         name: 'EuEditTool',
+        methods:{
+            outPort(){
+
+            }
+        },
         computed:{
             deleteGroupName(){
                 return this.$store.state.deleteGroupName

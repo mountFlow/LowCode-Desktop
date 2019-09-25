@@ -6,7 +6,7 @@
 				"navigationBarTitleText": "uni-app"
 			}
 		}
-	],
+    ],
 	"globalStyle": {
 		"titleNView": false
 	}

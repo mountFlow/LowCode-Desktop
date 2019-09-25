@@ -52,94 +52,113 @@
               dragging: false,
               layout: [
                   {name:'布局 1',id: 0, componentName: 'Iflex',
-                      iStyle:{
-                      },
+                      iStyle:{},
+                      iClass: [],
                       num: [{
                           iStyle:{},
+                          iClass: [],
                           itemList: [],
                           layoutClass:'flex-sub',
                       }]
                   },
                   {name:'布局 2:2',id: 1, componentName: 'Iflex',
                       iStyle:{},
+                      iClass: [],
                       num: [{
                           iStyle:{},
+                          iClass: [],
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
                           iStyle:{},
+                          iClass: [],
                           layoutClass:'flex-sub',
                           itemList: []
                       }]},
                   {name:'布局 3:3:3',id: 2, componentName: 'Iflex',
                       iStyle:{},
+                      iClass: [],
                       num: [{
+                          iClass: [],
+                          iStyle:{},
+                          layoutClass:'flex-sub',
+                          itemList: []
+                      },{
+                          iClass: [],
                           iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
                           iStyle:{},
-                          layoutClass:'flex-sub',
-                          itemList: []
-                      },{
-                          iStyle:{},
+                          iClass: [],
                           layoutClass:'flex-sub',
                           itemList: []
                       }]},
                   {name:'布局 1:1:1:1',id: 3, componentName: 'Iflex',
                       iStyle:{},
+                      iClass: [],
                       num: [{
+                          iClass: [],
                           iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
                           iStyle:{},
+                          iClass: [],
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
                           iStyle:{},
+                          iClass: [],
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
                           iStyle:{},
+                          iClass: [],
                           layoutClass:'flex-sub',
                           itemList: []
                       }]},
                   {name:'布局 1:1:1:1:1',id: 4, componentName: 'Iflex',
                       iStyle:{},
+                      iClass: [],
                       num: [{
+                          iClass: [],
+                          iStyle:{},
+                          layoutClass:'flex-sub',
+                          itemList: []
+                      },{
+                          iClass: [],
                           iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
                           iStyle:{},
+                          iClass: [],
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
+                          iClass: [],
                           iStyle:{},
                           layoutClass:'flex-sub',
                           itemList: []
                       },{
                           iStyle:{},
-                          layoutClass:'flex-sub',
-                          itemList: []
-                      },{
-                          iStyle:{},
+                          iClass: [],
                           layoutClass:'flex-sub',
                           itemList: []
                       }]},
               ],
               list: [
-                  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{}},
-                  {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{}},
-                  {name:'选项',id: 2, componentName: 'Iradio',iStyle:{}},
-                  {name:'图标',id: 3, componentName: 'Iicon',iStyle:{}},
-                  {name:'文本',id: 4, componentName: 'Itext',iStyle:{}},
-                  {name:'进度条',id: 5, componentName: 'Iprogress',iStyle:{}},
-                  {name:'滑动选择',id: 6, componentName: 'Islider',iStyle:{}},
-                  {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{}},
-                  {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{}},
-                  {name:'图像',id: 9, componentName: 'Iimage',iStyle:{}},
+                  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: []},
+                  {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{},iClass: []},
+                  {name:'选项',id: 2, componentName: 'Iradio',iStyle:{},iClass: []},
+                  {name:'图标',id: 3, componentName: 'Iicon',iStyle:{},iClass: []},
+                  {name:'文本',id: 4, componentName: 'Itext',iStyle:{},iClass: []},
+                  {name:'进度条',id: 5, componentName: 'Iprogress',iStyle:{},iClass: []},
+                  {name:'滑动选择',id: 6, componentName: 'Islider',iStyle:{},iClass: []},
+                  {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{},iClass: []},
+                  {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: []},
+                  {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: []},
                   // {name:'webView',id: 3, componentName: 'IwebView'},
 
               ],
@@ -156,10 +175,11 @@
                 newObj.id = layoutGlobalId
                 let nullNum = []
                 for (let i = 0; i < newObj.num.length; i++) {
-                    let {layoutClass,iStyle} = newObj.num[i]
-                    nullNum.push({itemList:[],layoutClass,iStyle})
+                    let {layoutClass,} = newObj.num[i]
+                    nullNum.push({itemList:[],layoutClass,iStyle:{},iClass:[]})
                 }
                 newObj.iStyle = {}
+                newObj.iClass = []
                 newObj.num = nullNum
                 return newObj
             },
@@ -168,6 +188,7 @@
                 compnentGlobalId++
                 newObj.id = compnentGlobalId
                 newObj.iStyle = {}
+                newObj.iClass = []
                 return newObj
             },
             choosComponents(){
