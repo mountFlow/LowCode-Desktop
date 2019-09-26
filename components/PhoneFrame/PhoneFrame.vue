@@ -76,17 +76,25 @@
 
 <style lang="scss">
 
-    $phoneWidth: 375upx;
-    $phoneHeight: 667upx;
+    //$phoneWidth: 375upx;
+    //$phoneHeight: 667upx;
+    $rote: 0.2;
+
+    $phoneWidth: 750upx;
+    $phoneHeight: 1334upx;
+
+    $windowsWidth: $phoneWidth / 0.2;
+
+    $onePx: $windowsWidth / 750 * 0.2;
 
     .phone{
         width: $phoneWidth;
         height: $phoneHeight;
         background-color: white;
         position: relative;
-        transform: scale(.4,.4);
-        margin-top: -55%;
-        overflow: scroll;
+        transform: scale($rote,$rote);
+        margin-top: -145%;
+        margin-left: -50%;
     }
 
     .sortable-fallback{
@@ -94,15 +102,15 @@
     }
 
     .phone-top{
-        height: 44px;
+        height: 44 * $onePx;
         width: 100%;
         background-color: black;
         display: flex;
         align-items: center;
         color: #aeb1b7;
         justify-content: space-between;
-        font-size: calc(10px / 0.4);
-        padding: 0 calc(6px / 0.4);
+        font-size: 28 * $onePx;
+        padding: 0 16 * $onePx;
         position: absolute;
         top: 0;
         left: 0;
@@ -114,7 +122,7 @@
         }
     }
     .phone-top-blok{
-        height: 44px;
+        height: 44 * $onePx;
         width: 100%;
     }
 </style>

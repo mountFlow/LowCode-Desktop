@@ -23,7 +23,8 @@
                             }"
                                :group="{ name: 'components', pull: 'clone', put: false}"
                                @choose="choosComponents"
-                               style="position: relative;display: flex;justify-content: center;flex-wrap: wrap">
+                               class="components-class"
+                               style="position: relative;display: flex;justify-content: center;flex-wrap: wrap;">
                         <ComponentContainer v-for="item in list"
                                             :key="item.id"
                                             :name="item.name"

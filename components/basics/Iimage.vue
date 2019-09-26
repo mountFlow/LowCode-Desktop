@@ -1,5 +1,5 @@
 <template>
-    <image style="width: 75px; height: 55px; background-color: #eeeeee;" :mode="array[0].mode" :src="src"></image>
+    <image class="i-images-style" style="" :mode="array[0].mode" :src="src"></image>
 </template>
 
 <script>
@@ -50,6 +50,11 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
+    .i-images-style{
+        width: 150upx;
+        height: 100upx;
+        background-color: #eeeeee;
+    }
 </style>

@@ -143,7 +143,7 @@
     }
 
     .flex-draggalbe-handle {
-        $handleHeight: 20upx;
+        $handleHeight: 30upx;
 
         cursor: pointer;
         background-color: #675e6f;

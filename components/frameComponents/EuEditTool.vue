@@ -25,11 +25,33 @@
 
 <script>
     import draggable from '@/common/js/vuedraggable'
+    import ejs from 'ejs'
+    import FileSaver     from 'file-saver'
+    import JSZip from 'jszip'
+    import {outExportFile} from '@/common/js/outExportFile'
 
     export default {
         name: 'EuEditTool',
         methods:{
             outPort(){
+                // let x = ejs.render(xxx,{list:this.$store.state.list})
+                // console.log(x)
+                //
+                // const zip = new JSZip()
+                // let test = zip.folder("test");
+                // const fileName = 'test.vue'
+                // const fileName2 = 'test2.vue'
+                // test.file(fileName, x)
+                // zip.file(fileName2, x)
+                // zip.generateAsync({
+                //     type: "blob"
+                // }).then((blob) => {
+                //     FileSaver.saveAs(blob, `test.zip`)
+                // }, (err) => {
+                //     alert('导出失败')
+                // })
+
+                outExportFile('a.vue',this.$store.state.list)
 
             }
         },
