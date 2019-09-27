@@ -2,6 +2,9 @@
     <el-row>
         <el-col :span="22" :offset="1" style="">
             <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+                <el-tab-pane label="目录" name="four">
+                    <right-com-catalog></right-com-catalog>
+                </el-tab-pane>
                 <el-tab-pane label="属性" name="first">
                         <el-form ref="form" label-width="80px" label-position="right">
                             <el-form-item label="组件名称">
@@ -28,8 +31,6 @@
                 <el-tab-pane label="制定类" name="three">
                     <right-com-class-add></right-com-class-add>
                 </el-tab-pane>
-                <el-tab-pane label="目录" name="four">
-                </el-tab-pane>
             </el-tabs>
         </el-col>
     </el-row>
@@ -40,13 +41,14 @@
     import rightComStyleAdd from './rightComStyleAdd'
     import stylePanel from './styleCompentens/stylePanel'
     import rightComClassAdd from './rightComClassAdd'
+    import rightComCatalog from './rightComCatalog'
 
     export default {
         name: 'RightComponents',
         data(){
             return {
                 editItemClass: '',
-                activeName: 'first',
+                activeName: 'four',
             }
         },
         watch:{
@@ -100,7 +102,8 @@
         components:{
             rightComStyleAdd,
             stylePanel,
-            rightComClassAdd
+            rightComClassAdd,
+            rightComCatalog
         }
     }
 </script>

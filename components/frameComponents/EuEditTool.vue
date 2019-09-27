@@ -20,6 +20,22 @@
                 </div>
             </el-tooltip>
         </div>
+
+        <el-dialog title="代码演示" :visible.sync="dialogTableVisible">
+            <div>
+                <pre class="code">{{showDialogData}}</pre>
+                <el-form :inline="true" :model="form" :rules="rule" ref="ruleForm" class="demo-form-inline" style="margin-top: 25px;margin-bottom: 0">
+                    <el-form-item label="文件名" prop="fileName">
+                        <el-input v-model="form.fileName" placeholder="输入导出文件名">
+                            <span slot="suffix">.vue</span>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit('ruleForm')">导出</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -28,10 +44,22 @@
     import ejs from 'ejs'
     import FileSaver     from 'file-saver'
     import JSZip from 'jszip'
-    import {outExportFile} from '@/common/js/outExportFile'
+    import {outExportFileByStr,outExportFileByList,outExportFolder,outExportStr} from '@/common/js/outExportFile'
 
     export default {
         name: 'EuEditTool',
+        data(){
+            return {
+                form:{
+                  fileName: ''
+                },
+                rule:{
+                    fileName:[  { required: true, message: '请输入导出文件名称', trigger: 'blur' },]
+                },
+                dialogTableVisible: false,
+                showDialogData: ''
+            }
+        },
         methods:{
             outPort(){
                 // let x = ejs.render(xxx,{list:this.$store.state.list})
@@ -51,8 +79,19 @@
                 //     alert('导出失败')
                 // })
 
-                outExportFile('a.vue',this.$store.state.list)
+                this.showDialogData = outExportStr(this.$store.state.list,this.$store.state.currentCheckAttr.customClass)
+                this.dialogTableVisible = true
+                // outExportFile('a.vue',this.$store.state.list)
 
+            },
+            onSubmit(formName){
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        outExportFileByStr(this.form.fileName + '.vue',this.showDialogData)
+                    } else {
+                        return false;
+                    }
+                });
             }
         },
         computed:{
@@ -88,16 +127,29 @@
          align-items: center;
          cursor: pointer;
 
-    &-icon{
-         width: $toolWidth * 0.8;
-         height: $toolWidth * 0.8;
-         background-color: #ff5b3d;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         border-radius: $toolWidth;
-        box-shadow: 0 2px 11px 3px rgba(0, 0, 0, 0.15), 0 0 6px 0px rgba(0, 0, 0, 0.04)
-     }
+        &-icon{
+             width: $toolWidth * 0.8;
+             height: $toolWidth * 0.8;
+             background-color: #ff5b3d;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             border-radius: $toolWidth;
+            box-shadow: 0 2px 11px 3px rgba(0, 0, 0, 0.15), 0 0 6px 0px rgba(0, 0, 0, 0.04)
+         }
     }
     }
+
+    .code{
+        font-family: source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace;
+        color: #476582;
+        padding: .25rem .5rem;
+        margin: 0;
+        font-size: 13px;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        user-select: text;
+        text-align: left;
+    }
+
 </style>
