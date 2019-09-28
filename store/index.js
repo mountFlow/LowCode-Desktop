@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import currentCheckAttr from './modules/currentCheckAttr'
+import euEditTool from './modules/euEditTool'
+import project from './modules/project'
 
 Vue.use(Vuex)
 
@@ -39,7 +41,9 @@ const store = new Vuex.Store({
     },
 
     modules:{
-        currentCheckAttr
+        currentCheckAttr,
+        euEditTool,
+        project
     }
 })
 

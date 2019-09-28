@@ -31,6 +31,10 @@
     export default {
         mixins: [basicsMixin],
         name: 'PhoneFrame',
+        props:{
+        },
+        watch: {
+        },
         data(){
           return {
               dragging: false,
@@ -58,14 +62,23 @@
             }
         },
         computed:{
-          list:{
+          /*list:{
             get() {
                 return this.$store.state.list
             },
             set(value){
                 this.$store.commit('setGlobalList',{list:value})
             }
-          }
+          }*/
+            list:{
+                get() {
+                    console.log(this.$store.state.project.checkFile)
+                    return this.$store.state.project.checkFile.dragList
+                },
+                set(value){
+                    this.$store.commit('setCheckFileDragList',value)
+                }
+            }
         },
         components:{
             draggable,

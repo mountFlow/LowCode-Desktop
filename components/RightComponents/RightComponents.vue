@@ -32,6 +32,7 @@
                     <right-com-class-add></right-com-class-add>
                 </el-tab-pane>
             </el-tabs>
+
         </el-col>
     </el-row>
 </template>
@@ -56,7 +57,7 @@
         methods:{
             handleClick(){
 
-            },
+            }
         },
         computed:{
             customClassList(){

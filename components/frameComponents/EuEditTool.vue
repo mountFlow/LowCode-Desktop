@@ -21,6 +21,14 @@
             </el-tooltip>
         </div>
 
+        <div class="tool-item">
+            <el-tooltip class="item" effect="dark" content="创建新项目" placement="right">
+                <div class="tool-item-icon" @click="addProject">
+                    <i class="el-icon-circle-plus" style="font-size: 23px;color: white;"></i>
+                </div>
+            </el-tooltip>
+        </div>
+
         <el-dialog title="代码演示" :visible.sync="dialogTableVisible">
             <div>
                 <pre class="code">{{showDialogData}}</pre>
@@ -35,6 +43,26 @@
                     </el-form-item>
                 </el-form>
             </div>
+        </el-dialog>
+
+        <el-dialog
+                title="创建新项目"
+                :visible="addProjectModel"
+                width="30%"
+                @close="closeProjectModel"
+                center>
+            <el-form ref="form" :model="addProjcetFrom" :rules="addProjcetFromRule" label-width="80px">
+                <el-form-item label="项目名称" prop="projectName">
+                    <el-input v-model="addProjcetFrom.projectName"></el-input>
+                </el-form-item>
+                <el-form-item label="项目类型">
+                    <el-input v-model="addProjcetFrom.projectType" disabled></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button @click="closeProjectModel">取 消</el-button>
+                    <el-button type="primary" @click="yesAddProject">确 定</el-button>
+                </el-form-item>
+            </el-form>
         </el-dialog>
     </div>
 </template>
@@ -57,10 +85,21 @@
                     fileName:[  { required: true, message: '请输入导出文件名称', trigger: 'blur' },]
                 },
                 dialogTableVisible: false,
-                showDialogData: ''
+                showDialogData: '',
+
+                addProjcetFrom:{
+                    projectName: '',
+                    projectType: 'uni-app'
+                },
+                addProjcetFromRule:{
+                    projectName: [{required: true,message: '请输入项目名称'}],
+                }
             }
         },
         methods:{
+            addProject(){
+                this.$store.commit('setAddProjectModel',{addProjectModel: true})
+            },
             outPort(){
                 // let x = ejs.render(xxx,{list:this.$store.state.list})
                 // console.log(x)
@@ -92,11 +131,22 @@
                         return false;
                     }
                 });
+            },
+            closeProjectModel(){
+                this.$store.commit('setAddProjectModel',{addProjectModel: false})
+            },
+            yesAddProject(){
+                this.$store.commit('addNewProject',{projectName: this.addProjcetFrom.projectName,projectType: this.addProjcetFrom.projectType})
+                this.$store.commit('setCurrentProjcetIndex',{index:this.$store.state.project.list.length - 1})
+                this.closeProjectModel()
             }
         },
         computed:{
             deleteGroupName(){
                 return this.$store.state.deleteGroupName
+            },
+            addProjectModel(){
+                return this.$store.state.euEditTool.addProjectModel
             }
         },
         components:{

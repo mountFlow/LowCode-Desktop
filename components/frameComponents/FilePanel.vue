@@ -3,120 +3,45 @@
             :data="data"
             node-key="id"
             default-expand-all
-            @node-drag-start="handleDragStart"
-            @node-drag-enter="handleDragEnter"
-            @node-drag-leave="handleDragLeave"
-            @node-drag-over="handleDragOver"
-            @node-drag-end="handleDragEnd"
-            @node-drop="handleDrop"
             draggable
+            @node-click="nodeClick"
             :allow-drop="allowDrop"
             :allow-drag="allowDrag">
          <span class="custom-tree-node" slot-scope="{ node, data }">
               <template v-if="data.type === 'folder'">
                   <span><i class="el-icon-folder" style="margin-right: 5px"></i>{{ node.label }}</span>
-              </template>
-             <template v-else-if="data.type === 'vue-file'">
-                  <span><i class="el-icon-sunny" style="margin-right: 5px"></i>{{ node.label }}</span>
+
+                   <div>
+                     <i class="el-icon-upload" style="margin-right: 5px"></i>
+                    <i class="el-icon-plus" style="margin-right: 5px"></i>
+                    <i class="el-icon-delete" style="margin-right: 5px"></i>
+                </div>
               </template>
              <template v-else>
-                  <span><i class="el-icon-sunny" style="margin-right: 5px"></i>{{ node.label }}</span>
+                     <span><svg class="icon" aria-hidden="true">
+                          <use v-bind:xlink:href="'#icon' + data.type"></use>
+                        </svg>{{ node.label }}</span>
+
+                <div>
+                     <i class="el-icon-upload" style="margin-right: 5px"></i>
+                    <i class="el-icon-delete" style="margin-right: 5px"></i>
+                </div>
               </template>
          </span>
     </el-tree>
 </template>
 
 <script>
+    import iconFont from 'static/iconfont'
+
     export default {
         name: "FilePanel",
         data() {
-            return {
-                data: [{
-                    id: 31,
-                    label: 'components',
-                    type: 'folder',
-                    children: [{
-                        id: 43,
-                        label: '二级 1-1',
-                        children: [{
-                            id: 39,
-                            label: '三级 1-1-1'
-                        }, {
-                            id: 130,
-                            label: '三级 1-1-2'
-                        }]
-                    }]
-                },{
-                    id: 1,
-                    label: 'pages',
-                    type: 'folder',
-                    children: [{
-                        id: 4,
-                        label: '二级 1-1',
-                        children: [{
-                            id: 9,
-                            label: '三级 1-1-1'
-                        }, {
-                            id: 10,
-                            label: '三级 1-1-2'
-                        }]
-                    }]
-                }, {
-                    id: 2,
-                    label: 'static',
-                    type: 'folder',
-                    children: [{
-                        id: 5,
-                        label: '二级 2-1'
-                    }, {
-                        id: 6,
-                        label: '二级 2-2'
-                    }]
-                }, {
-                    id: 3,
-                    type: 'vue-file',
-                    label: 'App.vue'
-                },{
-                    id: 11,
-                    type: 'vue-file',
-                    label: 'main.js'
-                },{
-                    id: 12,
-                    type: 'vue-file',
-                    label: 'manifest.json'
-                },{
-                    id: 13,
-                    type: 'vue-file',
-                    label: 'pages.json'
-                },{
-                    id: 14,
-                    type: 'vue-file',
-                    label: 'uni.scss'
-                }],
-                defaultProps: {
-                    children: 'children',
-                    label: 'label'
-                }
-            }
+            return {}
         },
         methods: {
-            handleDragStart(node, ev) {
-                console.log('drag start', node);
-            },
-            handleDragEnter(draggingNode, dropNode, ev) {
-                console.log('tree drag enter: ', dropNode.label);
-            },
-            handleDragLeave(draggingNode, dropNode, ev) {
-                console.log('tree drag leave: ', dropNode.label);
-            },
-            handleDragOver(draggingNode, dropNode, ev) {
-                console.log('tree drag over: ', dropNode.label);
-            },
-            handleDragEnd(draggingNode, dropNode, dropType, ev) {
-                console.log('tree drag end: ', dropNode && dropNode.label, dropType);
-            },
-            handleDrop(draggingNode, dropNode, dropType, ev) {
-                console.log('tree drop: ', dropNode.label, dropType);
+            nodeClick(data, node, component){
+                this.$store.commit('setCheckFile',data)
             },
             allowDrop(draggingNode, dropNode, type) {
                 if (dropNode.data.label === '二级 3-1') {
@@ -128,11 +53,34 @@
             allowDrag(draggingNode) {
                 return draggingNode.data.label.indexOf('三级 3-2-2') === -1;
             }
+        },
+        computed:{
+            data(){
+                let {list,currentProjcetIndex } = this.$store.state.project
+                if (currentProjcetIndex !== ''){
+                    return list[currentProjcetIndex].listData
+                }
+                return []
+            }
         }
-
     }
 </script>
 
 <style scoped>
+    .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+        margin-right: 5px;
+    }
 
+    .custom-tree-node {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 8px;
+    }
 </style>

@@ -231,7 +231,8 @@ const currentCheckAttr = {
         setCurrentCheckAttrNameComputed({ state, commit, rootState },content){
             let {index} = content
             let arrIndex = index.split('-')
-            let list = rootState.list
+            console.log(rootState)
+            let list = rootState.project.checkFile.dragList
             let currentObj = list
             for (let i = 0; i < arrIndex.length; i++) {
                 let index = parseInt(arrIndex[i])

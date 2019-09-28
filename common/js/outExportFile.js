@@ -1,7 +1,7 @@
 import ejs from 'ejs'
 import FileSaver     from 'file-saver'
 import JSZip from 'jszip'
-import {fileTemplates,itemTemplates} from 'templates/index'
+import {fileTemplates,itemTemplates} from 'templates/components'
 import {humpToLine,iStyleToString,iClassToString,getArrClassToMap} from 'common/js/utils'
 
 const VUE_NAME = 'This#is#fileName'

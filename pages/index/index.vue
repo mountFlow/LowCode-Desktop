@@ -11,7 +11,12 @@
 				</el-aside>
 				<el-main style="position: relative">
 					<eu-edit-tool></eu-edit-tool>
-					<PhoneFrame></PhoneFrame>
+					<template v-if="checkFile.isCanDrag === true">
+						<PhoneFrame></PhoneFrame>
+					</template>
+					<template v-else>
+						hello
+					</template>
 				</el-main>
 				<el-aside width="25%" style="padding-top: 10px">
 					<RightComponents></RightComponents>
@@ -41,6 +46,12 @@
 
 		},
 		computed:{
+            checkFile(){
+                if (this.$store.state.project.checkFile){
+                    return this.$store.state.project.checkFile
+                }
+                return {}
+			},
             name(){
                 return this.$store.state.iflexGroup
 			},
