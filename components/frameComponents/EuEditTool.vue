@@ -253,7 +253,7 @@
                                     }
                                 }
                             }
-                            this.$store.state.project.checkFolder.children.push()
+                            this.$store.state.project.checkFolder.children.push(fileNode)
                         }
 
                         this.closeAddFileModel()
