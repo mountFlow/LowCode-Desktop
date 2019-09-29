@@ -1,5 +1,5 @@
 // manifest.json
-let manifestJson =
+let manifestjson =
 `{
 	"name" : "<%= projectName -%>",
 	"appid" : "",
@@ -85,7 +85,7 @@ let manifestJson =
 
 // pages.json
 
-let pagesJson =
+let pagesjson =
 `{
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
@@ -104,7 +104,7 @@ let pagesJson =
 }
 `
 
-let uniScss =
+let uniscss =
 `/**
  * 这里是uni-app内置的常用样式变量
  *
@@ -183,7 +183,7 @@ $uni-color-paragraph: #3F536E; // 文章段落颜色
 $uni-font-size-paragraph:30upx;`
 
 // main.js
-let mainJs =
+let mainjs =
 `import Vue from 'vue'
 import App from './App'
 
@@ -198,7 +198,7 @@ app.$mount()
 `
 
 // App.vue
-let appVue =
+let appvue =
 `<script>
 	export default {
 		onLaunch: function() {
@@ -218,4 +218,6 @@ let appVue =
 </style>
 `
 
-export {manifestJson,pagesJson,uniScss,mainJs,appVue}
+let data = {manifestjson,pagesjson,uniscss,mainjs,appvue}
+
+export default data

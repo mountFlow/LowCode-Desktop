@@ -107,7 +107,7 @@
         position: relative;
         transform: scale($rote,$rote);
         margin-top: -145%;
-        margin-left: -50%;
+        margin-left: -53.5%;
     }
 
     .sortable-fallback{

@@ -3,10 +3,14 @@ import projectDefaultData from 'common/js/projectDefaultData'
 const project = {
     state: {
         currentProjcetIndex: '',
-        list: [],
-        checkFile:undefined // 选中的文件
+        list: [], // 项目的总数据。
+        checkFile:undefined, // 选中的文件
+        checkFolder: undefined // 选中的文件夹
     },
     mutations: {
+        setCheckFolder(state,data){
+            state.checkFolder = data
+        },
         setCheckFile(state,file){
             state.checkFile = file
         },
@@ -20,13 +24,24 @@ const project = {
             state.list.push({
                 projectName: projectName,
                 projectType: projectType,
-                listData: projectDefaultData
+                listData: JSON.parse(JSON.stringify(projectDefaultData))
             })
         },
+        deleteProject(state){
+            state.list.splice(state.currentProjcetIndex,1)
+        },
+        addFileToProjectByList(state){
+
+        }
     },
     getters: {
     },
     actions: {
+        deleteProject({commit}){
+            commit('setCheckFile',undefined)
+            commit('deleteProject')
+            commit('setCurrentProjcetIndex',{index:''})
+        },
     }
 }
 

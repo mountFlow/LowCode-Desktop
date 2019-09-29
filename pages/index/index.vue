@@ -15,7 +15,7 @@
 						<PhoneFrame></PhoneFrame>
 					</template>
 					<template v-else>
-						hello
+						<common-file-frame></common-file-frame>
 					</template>
 				</el-main>
 				<el-aside width="25%" style="padding-top: 10px">
@@ -32,6 +32,7 @@
 	import EuHeader from '@/components/frameComponents/EuHeader'
 	import EuEditTool from '@/components/frameComponents/EuEditTool'
 	import RightComponents from '@/components/RightComponents/RightComponents'
+	import commonFileFrame from '@/components/PhoneFrame/commonFileFrame'
 
     export default {
 		data() {
@@ -61,7 +62,8 @@
             LeftComponents,
             EuHeader,
             EuEditTool,
-            RightComponents
+            RightComponents,
+			commonFileFrame
 		}
 	}
 </script>

@@ -1,10 +1,14 @@
 const euEditTool = {
     state: {
-        addProjectModel: false
+        addProjectModel: false,
+        addFileModel: false
     },
     mutations: {
         setAddProjectModel(state,data){
             state.addProjectModel = data.addProjectModel
+        },
+        setAddFileModel(state,data){
+            state.addFileModel = data.addFileModel
         }
     },
     getters: {

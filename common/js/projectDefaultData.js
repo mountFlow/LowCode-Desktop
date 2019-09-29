@@ -28,17 +28,20 @@ let data = [{
     id: 3,
     type: 'vue-file',
     label: 'App.vue',
-    isCanDrag: false
+    isCanDrag: false,
+    fileText: '' // 里面的文本数据
 },{
     id: 11,
     type: 'js',
     label: 'main.js',
-    isCanDrag: false
+    isCanDrag: false,
+    fileText: '' // 里面的文本数据
 },{
     id: 12,
     type: 'json',
     label: 'manifest.json',
-    isCanDrag: false
+    isCanDrag: false,
+    fileText: ''
 },{
     id: 13,
     type: 'json',

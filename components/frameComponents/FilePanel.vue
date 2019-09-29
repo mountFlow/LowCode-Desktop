@@ -5,26 +5,28 @@
             default-expand-all
             draggable
             @node-click="nodeClick"
+            :expand-on-click-node="false"
             :allow-drop="allowDrop"
             :allow-drag="allowDrag">
          <span class="custom-tree-node" slot-scope="{ node, data }">
               <template v-if="data.type === 'folder'">
                   <span><i class="el-icon-folder" style="margin-right: 5px"></i>{{ node.label }}</span>
 
-                   <div>
-                     <i class="el-icon-upload" style="margin-right: 5px"></i>
-                    <i class="el-icon-plus" style="margin-right: 5px"></i>
-                    <i class="el-icon-delete" style="margin-right: 5px"></i>
+                   <div style="color: #ccc" >
+                     <i class="el-icon-upload right-icon" style="margin-right: 5px" @click="updateFolder(data)"></i>
+                        <i class="el-icon-plus right-icon" @click="addFile(data)" style="margin-right: 5px"></i>
+                       <!--<i class="el-icon-edit right-icon" style="margin-right: 5px"></i>-->
+                    <i class="el-icon-delete right-icon" style="margin-right: 5px" @click="deleteFolder(node,data)"></i>
                 </div>
               </template>
              <template v-else>
                      <span><svg class="icon" aria-hidden="true">
                           <use v-bind:xlink:href="'#icon' + data.type"></use>
                         </svg>{{ node.label }}</span>
-
-                <div>
-                     <i class="el-icon-upload" style="margin-right: 5px"></i>
-                    <i class="el-icon-delete" style="margin-right: 5px"></i>
+                <div style="color: #ccc">
+                     <i class="el-icon-upload right-icon" style="margin-right: 5px" @click="updateFile(data)"></i>
+                    <!--<i class="el-icon-edit right-icon" style="margin-right: 5px"></i>-->
+                    <i class="el-icon-delete right-icon" style="margin-right: 5px" @click="deleteFolder(node,data)"></i>
                 </div>
               </template>
          </span>
@@ -33,6 +35,7 @@
 
 <script>
     import iconFont from 'static/iconfont'
+    import {outCommonExportFile,outExportFolder,outExportStr,outExportFileByStr} from 'common/js/outExportFile'
 
     export default {
         name: "FilePanel",
@@ -41,7 +44,15 @@
         },
         methods: {
             nodeClick(data, node, component){
-                this.$store.commit('setCheckFile',data)
+                if (data.type !== 'folder'){
+
+                    // 翻译普通模板文件
+                    if (data.isCanDrag !== true ){
+                        data.fileText = outCommonExportFile(data.label,{projectName:this.currentProjcetNam})
+                    }
+
+                    this.$store.commit('setCheckFile',data)
+                }
             },
             allowDrop(draggingNode, dropNode, type) {
                 if (dropNode.data.label === '二级 3-1') {
@@ -52,9 +63,49 @@
             },
             allowDrag(draggingNode) {
                 return draggingNode.data.label.indexOf('三级 3-2-2') === -1;
+            },
+            addFile(data){
+                // 这里data是个指针，所以打算直接传出去。
+                this.$store.commit('setCheckFolder',data)
+                this.$store.commit('setAddFileModel',{addFileModel: true})
+            },
+            updateFolder(data){
+                let {children,label} = data
+                if (children === undefined || children.length === 0){
+                    this.$notify({
+                        title: '导出失败',
+                        message: '导出的目录为空',
+                        type: 'warning'
+                    });
+                    return
+                }
+                let customClass = this.$store.state.currentCheckAttr.customClass
+                outExportFolder(label,children,customClass,{})
+            },
+            updateFile(data){
+                let fileText = ''
+                if (data.isCanDrag === true){
+                    fileText = outExportStr(data.dragList)
+                } else {
+                    fileText = outCommonExportFile(data.label,{projectName:this.currentProjcetNam})
+                }
+                outExportFileByStr(data.label,fileText)
+            },
+            deleteFolder(node,data){
+                const parent = node.parent;
+                const children = parent.data.children || parent.data;
+                const index = children.findIndex(d => d.id === data.id);
+                children.splice(index, 1);
             }
         },
         computed:{
+            currentProjcetNam() {
+                let {currentProjcetIndex,list} = this.$store.state.project
+                if (currentProjcetIndex !== ''){
+                    return list[currentProjcetIndex].projectName
+                }
+                return ''
+            },
             data(){
                 let {list,currentProjcetIndex } = this.$store.state.project
                 if (currentProjcetIndex !== ''){
@@ -82,5 +133,9 @@
         align-items: center;
         justify-content: space-between;
         padding-right: 8px;
+    }
+
+    .right-icon:hover{
+        color: #3F536E;
     }
 </style>

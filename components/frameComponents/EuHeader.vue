@@ -18,7 +18,9 @@
             </view>
         </el-col>
         <el-col :span="6">
+
             <view style="display: flex;align-items: center;font-size: 14px;color: #5f5e5e;justify-content: flex-end">
+
                 <span style="margin-right: 5px">布局锁定</span>
                 <el-switch
                         v-model="layoutLock"
