@@ -133,17 +133,17 @@
     .sortable-fallback{
     }
     .i-flex{
-        min-height: 25upx;
+        min-height: 20px;
 
         &-border {
-            border-left: #675e6f solid 1px;
-            border-right: #675e6f solid 1px;
-            border-bottom: #675e6f solid 1px;
+            border-left: #675e6f solid 0.5px;
+            border-right: #675e6f solid 0.5px;
+            border-bottom: #675e6f solid 0.5px;
         }
     }
 
     .flex-draggalbe-handle {
-        $handleHeight: 30upx;
+        $handleHeight: 16px;
 
         cursor: pointer;
         background-color: #675e6f;
@@ -164,9 +164,9 @@
             width: 100%;
 
             &-item{
-                border-left: #ead2f7 solid 1px;
-                border-right: #ead2f7 solid 1px;
-                border-top: #ead2f7 solid 1px;
+                border-left: #ead2f7 solid 0.5px;
+                border-right: #ead2f7 solid 0.5px;
+                border-top: #ead2f7 solid 0.5px;
                 background-color: #897c94;
             }
             &-item:hover{

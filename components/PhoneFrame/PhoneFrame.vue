@@ -39,7 +39,6 @@
           return {
               dragging: false,
               phoneStyle:{
-                  fontSize: '32px'
               },
               time: ''
           }
@@ -89,12 +88,9 @@
 
 <style lang="scss">
 
-    //$phoneWidth: 375upx;
-    //$phoneHeight: 667upx;
+    $phoneWidth: 375px;
+    $phoneHeight: 667px;
     $rote: 0.2;
-
-    $phoneWidth: 750upx;
-    $phoneHeight: 1334upx;
 
     $windowsWidth: $phoneWidth / 0.2;
 
@@ -105,9 +101,8 @@
         height: $phoneHeight;
         background-color: white;
         position: relative;
-        transform: scale($rote,$rote);
-        margin-top: -145%;
-        margin-left: -53.5%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .sortable-fallback{
@@ -115,15 +110,14 @@
     }
 
     .phone-top{
-        height: 44 * $onePx;
+        height: 25px;
         width: 100%;
         background-color: black;
         display: flex;
         align-items: center;
         color: #aeb1b7;
         justify-content: space-between;
-        font-size: 28 * $onePx;
-        padding: 0 16 * $onePx;
+        padding: 0 10px;
         position: absolute;
         top: 0;
         left: 0;
@@ -135,7 +129,7 @@
         }
     }
     .phone-top-blok{
-        height: 44 * $onePx;
+        height: 25px;
         width: 100%;
     }
 </style>
