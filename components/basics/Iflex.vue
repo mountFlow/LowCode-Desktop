@@ -86,7 +86,6 @@
                 return style
             },
             choosLayouts(index,evt){
-                console.log('layouts')
                 this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
                 this.$store.commit('setDeleteGroupName',{deleteGroupName:'layouts'})
                 this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
@@ -105,7 +104,6 @@
                 this.isDraggalbe = flag
             },
             dddd(){
-                console.log('ddd')
             }
         },
         computed:{

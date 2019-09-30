@@ -115,7 +115,6 @@
         },
         methods:{
             validateCustomValue(rule, value, callback){
-                console.log(value)
                 if (value === '') {
                     callback(new Error('请填写布局比例'));
                     return
@@ -123,7 +122,6 @@
                 let arrValue = value.split("-")
                 for (let i = 0; i < arrValue.length; i++) {
                     let item = arrValue[i]
-                    console.log(item)
                     let itemRex = /^[1-5]$/
                     if (!itemRex.test(item)){
                         callback(new Error(`布局比例在1-${maxLayoutRote}之间,并以 - 分割。`));

@@ -39,7 +39,6 @@
           return {
               dragging: false,
               phoneStyle:{
-                  fontSize: '32px'
               },
               time: ''
           }
@@ -72,7 +71,6 @@
           }*/
             list:{
                 get() {
-                    console.log(this.$store.state.project.checkFile)
                     return this.$store.state.project.checkFile.dragList
                 },
                 set(value){

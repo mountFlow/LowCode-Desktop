@@ -168,7 +168,6 @@
         methods:{
             changeInfo(evt){
                 this.listNull = []
-                console.log(evt)
             },
             cloneLayout(cloneObj) {
                 let newObj = {...cloneObj}
