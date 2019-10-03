@@ -38,8 +38,6 @@
         data(){
           return {
               dragging: false,
-              phoneStyle:{
-              },
               time: ''
           }
         },
@@ -61,6 +59,12 @@
             }
         },
         computed:{
+            phoneStyle(){
+                let rote = this.$store.state.phoneSize / 100
+                return {
+                    zoom: rote
+                }
+            },
           /*list:{
             get() {
                 return this.$store.state.list
@@ -122,6 +126,7 @@
         top: 0;
         left: 0;
         right: 0;
+        font-size: 12px;
 
         i {
             color: rgb(174, 177, 183);

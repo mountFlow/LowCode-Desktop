@@ -13,10 +13,13 @@ const store = new Vuex.Store({
         deleteGroupName: 'layouts',
         iflexGroup: 'components',
         showFlexDraggalbeHandle: true,
-        preview: true
+        preview: true,
+        phoneSize: 100
     },
-
     mutations: {
+        setPhoneSize(state,data){
+            state.phoneSize = data.phoneSize
+        },
         setPreview(state,data){
             state.preview = data.preview
         },

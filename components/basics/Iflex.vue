@@ -12,7 +12,7 @@
             </view>
         </view>
         <view class="flex i-flex-r" style="position: relative"
-              :style="[computedClassToStyle(iClass),iStyle]"
+              :style="[computedClassToStyle(iClass),computedStyleToStyle(iStyle)]"
               :class="iClass"
               @mouseover="flexDraggalbeHandle(true)"
               @mouseout="flexDraggalbeHandle(false)"
@@ -27,14 +27,14 @@
                             }"
                            @choose="choosComponents"
                            style="height: 100%;width: 100%"
-                           :style="[computedClassToStyle(item.iClass),item.iStyle]"
+                           :style="[computedClassToStyle(item.iClass),computedStyleToStyle(item.iStyle)]"
                 >
                     <template v-for="(item2,index) in item.itemList">
                         <component :key="index" :is="item2.componentName"
                                    :dataIIndex="dataIIndex + '-' + index0 + '-' +index"
                                    :data-i-index="dataIIndex + '-' + index0 + '-' +index"
                                    v-bind="item2"
-                                   :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),item2.iStyle]:''"
+                                   :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),computedStyleToStyle(item2.iStyle)]:''"
                         >
                         </component>
                     </template>
@@ -78,6 +78,16 @@
             }
         },
         methods:{
+            computedStyleToStyle(styleObje){
+                let styleObjeStr = JSON.stringify(styleObje)
+                let regx = /([0-9\.]+)(upx|rpx)/g
+                let newStr = styleObjeStr.replace(regx,(a,b,c,d)=>{
+                    let bFloat = parseFloat(b)
+                    let px = (bFloat / 750) * 375
+                    return px + 'px'
+                })
+                return JSON.parse(newStr)
+            },
             computedClassToStyle(classNames){
                 let style = {}
                 classNames.forEach(e=>{
