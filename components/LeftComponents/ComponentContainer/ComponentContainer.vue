@@ -2,9 +2,9 @@
     <view>
         <view  v-if="type === 'basics'" class="content">
             <component :is="componentName" :name="name">{{name}}</component>
-            <view class="title">
-                {{name}}
-            </view>
+        </view>
+        <view class="title"  v-if="type === 'basics'">
+            {{name}}
         </view>
         <view  v-if="type === 'layout'" >
             <view class="flex content-layout">
@@ -49,11 +49,15 @@
 
 <style scoped>
     .content{
-        height: 75px;
+        height: 55px;
         width: 75px;
-        background-color: #d4d4d4;
+        background-color: #ffffff;
         position: relative;
-        border: 2px solid #ccc;
+        border: 2px solid #f7f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: none;
     }
 
     .content-layout{
@@ -78,8 +82,9 @@
         height: 20px;
         width: 100%;
         background-color: white;
-        position: absolute;
-        opacity: .4;
-        bottom: 0;
+        border: 2px solid #f7f9fa;
+        border-top: none;
+        color: #cccccc;
+        line-height: 20px;
     }
 </style>

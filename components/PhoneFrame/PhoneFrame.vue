@@ -107,6 +107,7 @@
         position: relative;
         margin-left: auto;
         margin-right: auto;
+        overflow: scroll;
     }
 
     .sortable-fallback{

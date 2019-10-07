@@ -18,7 +18,7 @@
               @mouseout="flexDraggalbeHandle(false)"
         >
             <view class="margin-0  i-flex"
-                  :class="[{'i-flex-border': preview},item.layoutClass]"
+                  :class="[isIFlexClassBorder(num,index0),item.layoutClass]"
                   v-for="(item,index0) in num"
                   :dataIIndex="dataIIndex + '-' +index0"
             >
@@ -78,6 +78,16 @@
             }
         },
         methods:{
+            isIFlexClassBorder(num,index){
+                if (!this.preview){
+                    return ''
+                }
+
+                if(num.length - 1 === index ){
+                    return 'i-flex-border-r'
+                }
+                return 'i-flex-border'
+            },
             computedStyleToStyle(styleObje){
                 let styleObjeStr = JSON.stringify(styleObje)
                 let regx = /([0-9\.]+)(upx|rpx)/g
@@ -146,6 +156,11 @@
         min-height: 20px;
 
         &-border {
+            border-left: #675e6f solid 0.5px;
+            border-bottom: #675e6f solid 0.5px;
+        }
+
+        &-border-r {
             border-left: #675e6f solid 0.5px;
             border-right: #675e6f solid 0.5px;
             border-bottom: #675e6f solid 0.5px;
