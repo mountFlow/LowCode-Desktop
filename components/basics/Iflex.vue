@@ -33,7 +33,7 @@
                         <component :key="index" :is="item2.componentName"
                                    :dataIIndex="dataIIndex + '-' + index0 + '-' +index"
                                    :data-i-index="dataIIndex + '-' + index0 + '-' +index"
-                                   v-bind="item2"
+                                   v-bind="item2.componentName !== 'Iflex' ? item2.propsValue:item2"
                                    :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),computedStyleToStyle(item2.iStyle)]:''"
                         >
                         </component>

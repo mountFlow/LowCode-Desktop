@@ -1,10 +1,16 @@
 <template>
-    <input type="text" placeholder="input"/>
+    <input type="text" placeholder="input" :value="value"/>
 </template>
 
 <script>
     export default {
-        name: 'Iinput'
+        name: 'Iinput',
+        props:{
+            value: {
+                type: String,
+                default: ''
+            }
+        }
     }
 </script>
 

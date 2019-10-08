@@ -2,6 +2,7 @@ import vue from 'vue'
 
 const currentCheckAttr = {
     state: {
+        contextMenuTarget: undefined,
         item: undefined,
         customClass: {},
         formList: [
@@ -182,6 +183,9 @@ const currentCheckAttr = {
         ]
     },
     mutations: {
+        setContextMenuTarget(state,{contextMenuTarget}){
+            state.contextMenuTarget = contextMenuTarget
+        },
         deleteCustomClass(state,{name}){
             vue.set(state.customClass,name,undefined)
             delete state.customClass[name]

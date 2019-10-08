@@ -1,5 +1,5 @@
 <template>
-    <view class="phone" :style="phoneStyle">
+    <view class="phone" :style="phoneStyle" ref="contextMenuTarget">
         <view class="phone-top">
             <view style="flex: 1"><i class="el-icon-more"></i>&nbsp;无服务</view>
             <view style="flex: 1;text-align: center">{{time}}</view>
@@ -20,6 +20,12 @@
                 ></component>
             </template>
         </draggable>
+        <vue-context-menu class="right-menu"
+                          :target="contextMenuTarget"
+                          :show="contextMenuVisible"
+                          @update:show="contextMenuVisibleFun">
+            <a href="javascript:" @click="deleteDataIndex">删除</a>
+        </vue-context-menu>
     </view>
 </template>
 
@@ -27,6 +33,7 @@
     import draggable from '@/common/js/vuedraggable'
     import basicsMixin from '@/common/js/importBasics'
     import Iflex from '@/components/basics/Iflex'
+    import { component as VueContextMenu } from '@xunlei/vue-context-menu'
 
     export default {
         mixins: [basicsMixin],
@@ -37,14 +44,25 @@
         },
         data(){
           return {
+              contextMenuTarget: undefined,
+              contextMenuVisible: false,
               dragging: false,
               time: ''
           }
+        },
+        mounted(){
+            this.contextMenuTarget = this.$refs.contextMenuTarget.$el
         },
         created(){
             this.startTime()
         },
         methods:{
+            contextMenuVisibleFun(show){
+                this.contextMenuVisible = show
+            },
+            deleteDataIndex(){
+                // do delete action
+            },
             getTime(){
                 let now = new Date()
                 let h = now.getHours();h = h < 10 ? ('0'+ h) : h
@@ -85,7 +103,8 @@
         },
         components:{
             draggable,
-            Iflex
+            Iflex,
+            VueContextMenu
         }
     }
 </script>
@@ -137,5 +156,47 @@
     .phone-top-blok{
         height: 25px;
         width: 100%;
+    }
+
+
+    a {
+        color: #333;
+    }
+    .right-menu {
+        position: fixed;
+        background: #fff;
+        border: solid 1px rgba(0, 0, 0, .2);
+        border-radius: 3px;
+        z-index: 999999;
+        display: none;
+    }
+    .right-menu a {
+        width: 75px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        display: block;
+        color: #1a1a1a;
+    }
+    .right-menu a:hover {
+        background: #eee;
+        color: #fff;
+    }
+    .right-menu {
+        border: 1px solid #eee;
+        box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.1);
+        border-radius: 1px;
+    }
+    a {
+        text-decoration: none;
+    }
+    .right-menu a {
+        padding: 2px;
+    }
+    .right-menu a:hover {
+        background: #42b983;
+    }
+    path {
+        fill: black;
     }
 </style>
