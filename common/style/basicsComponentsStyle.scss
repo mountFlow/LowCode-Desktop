@@ -13,38 +13,6 @@ $onePx: $windowsWidth / 750 * 0.2;
 
 .phone{
 
-  uni-button {
-    zoom:5 !important;
-  }
-  uni-button:after {
-  }
-
-  uni-radio {
-    zoom:5 !important;
-  }
-
-  uni-progress{
-    zoom: 5 !important;
-  }
-
-  uni-switch {
-    zoom: 5 !important;
-  }
-
-  uni-slider {
-    zoom: 5 !important;
-  }
-  uni-input{
-    zoom: 5 !important;
-  }
-
-  uni-textarea{
-    zoom: 5 !important;
-  }
-
-  uni-text{
-    zoom: 5 !important;
-  }
 }
 
 .components-class{

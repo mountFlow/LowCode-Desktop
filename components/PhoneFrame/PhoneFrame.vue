@@ -38,8 +38,6 @@
         data(){
           return {
               dragging: false,
-              phoneStyle:{
-              },
               time: ''
           }
         },
@@ -61,6 +59,12 @@
             }
         },
         computed:{
+            phoneStyle(){
+                let rote = this.$store.state.phoneSize / 100
+                return {
+                    zoom: rote
+                }
+            },
           /*list:{
             get() {
                 return this.$store.state.list
@@ -71,6 +75,7 @@
           }*/
             list:{
                 get() {
+                    console.log(this.$store.state.project.checkFile)
                     return this.$store.state.project.checkFile.dragList
                 },
                 set(value){
@@ -87,12 +92,9 @@
 
 <style lang="scss">
 
-    //$phoneWidth: 375upx;
-    //$phoneHeight: 667upx;
+    $phoneWidth: 375px;
+    $phoneHeight: 667px;
     $rote: 0.2;
-
-    $phoneWidth: 750upx;
-    $phoneHeight: 1334upx;
 
     $windowsWidth: $phoneWidth / 0.2;
 
@@ -103,9 +105,9 @@
         height: $phoneHeight;
         background-color: white;
         position: relative;
-        transform: scale($rote,$rote);
-        margin-top: -145%;
-        margin-left: -53.5%;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: scroll;
     }
 
     .sortable-fallback{
@@ -113,19 +115,19 @@
     }
 
     .phone-top{
-        height: 44 * $onePx;
+        height: 25px;
         width: 100%;
         background-color: black;
         display: flex;
         align-items: center;
         color: #aeb1b7;
         justify-content: space-between;
-        font-size: 28 * $onePx;
-        padding: 0 16 * $onePx;
+        padding: 0 10px;
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
+        font-size: 12px;
 
         i {
             color: rgb(174, 177, 183);
@@ -133,7 +135,7 @@
         }
     }
     .phone-top-blok{
-        height: 44 * $onePx;
+        height: 25px;
         width: 100%;
     }
 </style>

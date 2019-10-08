@@ -12,13 +12,13 @@
             </view>
         </view>
         <view class="flex i-flex-r" style="position: relative"
-              :style="[computedClassToStyle(iClass),iStyle]"
+              :style="[computedClassToStyle(iClass),computedStyleToStyle(iStyle)]"
               :class="iClass"
               @mouseover="flexDraggalbeHandle(true)"
               @mouseout="flexDraggalbeHandle(false)"
         >
             <view class="margin-0  i-flex"
-                  :class="[{'i-flex-border': preview},item.layoutClass]"
+                  :class="[isIFlexClassBorder(num,index0),item.layoutClass]"
                   v-for="(item,index0) in num"
                   :dataIIndex="dataIIndex + '-' +index0"
             >
@@ -27,14 +27,14 @@
                             }"
                            @choose="choosComponents"
                            style="height: 100%;width: 100%"
-                           :style="[computedClassToStyle(item.iClass),item.iStyle]"
+                           :style="[computedClassToStyle(item.iClass),computedStyleToStyle(item.iStyle)]"
                 >
                     <template v-for="(item2,index) in item.itemList">
                         <component :key="index" :is="item2.componentName"
                                    :dataIIndex="dataIIndex + '-' + index0 + '-' +index"
                                    :data-i-index="dataIIndex + '-' + index0 + '-' +index"
                                    v-bind="item2"
-                                   :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),item2.iStyle]:''"
+                                   :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),computedStyleToStyle(item2.iStyle)]:''"
                         >
                         </component>
                     </template>
@@ -78,6 +78,26 @@
             }
         },
         methods:{
+            isIFlexClassBorder(num,index){
+                if (!this.preview){
+                    return ''
+                }
+
+                if(num.length - 1 === index ){
+                    return 'i-flex-border-r'
+                }
+                return 'i-flex-border'
+            },
+            computedStyleToStyle(styleObje){
+                let styleObjeStr = JSON.stringify(styleObje)
+                let regx = /([0-9\.]+)(upx|rpx)/g
+                let newStr = styleObjeStr.replace(regx,(a,b,c,d)=>{
+                    let bFloat = parseFloat(b)
+                    let px = (bFloat / 750) * 375
+                    return px + 'px'
+                })
+                return JSON.parse(newStr)
+            },
             computedClassToStyle(classNames){
                 let style = {}
                 classNames.forEach(e=>{
@@ -131,17 +151,22 @@
     .sortable-fallback{
     }
     .i-flex{
-        min-height: 25upx;
+        min-height: 20px;
 
         &-border {
-            border-left: #675e6f solid 1px;
-            border-right: #675e6f solid 1px;
-            border-bottom: #675e6f solid 1px;
+            border-left: #675e6f solid 0.5px;
+            border-bottom: #675e6f solid 0.5px;
+        }
+
+        &-border-r {
+            border-left: #675e6f solid 0.5px;
+            border-right: #675e6f solid 0.5px;
+            border-bottom: #675e6f solid 0.5px;
         }
     }
 
     .flex-draggalbe-handle {
-        $handleHeight: 30upx;
+        $handleHeight: 16px;
 
         cursor: pointer;
         background-color: #675e6f;
@@ -162,9 +187,9 @@
             width: 100%;
 
             &-item{
-                border-left: #ead2f7 solid 1px;
-                border-right: #ead2f7 solid 1px;
-                border-top: #ead2f7 solid 1px;
+                border-left: #ead2f7 solid 0.5px;
+                border-right: #ead2f7 solid 0.5px;
+                border-top: #ead2f7 solid 0.5px;
                 background-color: #897c94;
             }
             &-item:hover{

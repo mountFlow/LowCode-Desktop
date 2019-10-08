@@ -29,6 +29,18 @@
                 </el-tooltip>
             </div>
 
+            <div class="tool-item block" style="height: 130px">
+                <el-slider
+                        v-model="phoneSize"
+                        vertical
+                        :min="50"
+                        :step="5"
+                        :max="150"
+                        input-size="mini"
+                        height="100px">
+                </el-slider>
+            </div>
+
         </template>
 
         <el-dialog title="代码演示" :visible.sync="dialogTableVisible">
@@ -264,6 +276,15 @@
             }
         },
         computed:{
+            phoneSize: {
+                get(){
+                    return this.$store.state.phoneSize
+                },
+                set(val){
+                    let obj = {phoneSize:val}
+                    this.$store.commit('setPhoneSize',obj)
+                }
+            },
             deleteGroupName(){
                 return this.$store.state.deleteGroupName
             },
