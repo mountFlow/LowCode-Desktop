@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="24">
-            <el-collapse value="2">
+            <el-collapse :value="['2','3']">
                 <el-collapse-item name="1">
                     <template slot="title">
                         <view style="width: 100%;text-align: center">
@@ -32,6 +32,30 @@
                         </ComponentContainer>
                     </draggable>
                 </el-collapse-item>
+                <el-collapse-item name="3" disabled>
+                    <template slot="title">
+                        <view style="width: 100%;text-align: center">
+                            我的组件
+                        </view>
+                    </template>
+                    <draggable :list="list"
+                               :clone="cloneComponent"
+                               :options="{
+                            sort:false
+                            }"
+                               :group="{ name: 'components', pull: 'clone', put: false}"
+                               @choose="choosComponents"
+                               class="components-class"
+                               style="position: relative;display: flex;justify-content: center;flex-wrap: wrap;">
+                        <my-components v-for="item in list"
+                                            :key="item.id"
+                                            :name="item.name"
+                                            :componentName="item.componentName">
+                        </my-components>
+                        <my-components @addMyComponents="addMyComponents">
+                        </my-components>
+                    </draggable>
+                </el-collapse-item>
             </el-collapse>
 
         </el-col>
@@ -42,6 +66,7 @@
     import ComponentContainer from '@/components/LeftComponents/ComponentContainer/ComponentContainer'
     import draggable from '@/common/js/vuedraggable'
     import LeftCompoentsByLayouts from './LeftCompoentsByLayouts'
+    import MyComponents from './ComponentContainer/MyComponents'
 
     let layoutGlobalId = 100;
     let compnentGlobalId = 100
@@ -151,14 +176,14 @@
               ],
               list: [
                   {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{},iClass: [],propsValue: {value: 'hello'}},
+                  {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{},iClass: [],propsValue: {value: 'hello',password: true}},
                   {name:'选项',id: 2, componentName: 'Iradio',iStyle:{},iClass: [],propsValue: {}},
                   {name:'图标',id: 3, componentName: 'Iicon',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'文本',id: 4, componentName: 'Itext',iStyle:{},iClass: [],propsValue: {}},
+                  {name:'文本',id: 4, componentName: 'Itext',iStyle:{},iClass: [],propsValue: {text:'文本'}},
                   {name:'进度条',id: 5, componentName: 'Iprogress',iStyle:{},iClass: [],propsValue: {}},
                   {name:'滑动选择',id: 6, componentName: 'Islider',iStyle:{},iClass: [],propsValue: {}},
                   {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: {}},
+                  {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: {value:'这是一段长文本'}},
                   {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: [],propsValue: {}},
                   // {name:'webView',id: 3, componentName: 'IwebView'},
 
@@ -166,6 +191,9 @@
           }
         },
         methods:{
+            addMyComponents(){
+                this.$store.commit('setPattern',{pattern: 'component'})
+            },
             changeInfo(evt){
                 this.listNull = []
             },
@@ -201,7 +229,8 @@
         components:{
             ComponentContainer,
             draggable,
-            LeftCompoentsByLayouts
+            LeftCompoentsByLayouts,
+            MyComponents
         }
     }
 </script>

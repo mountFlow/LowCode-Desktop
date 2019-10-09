@@ -2,8 +2,17 @@
     <el-row>
         <el-col :span="22" :offset="1" style="">
             <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-                <el-tab-pane label="目录" name="four">
+                <el-tab-pane v-if="centerValue === 'page'" label="目录" name="four">
                     <right-com-catalog></right-com-catalog>
+                </el-tab-pane>
+                <el-tab-pane label="props" name="five">
+                    <el-form ref="form" label-width="80px" label-position="right">
+                        <el-form-item label="组件名称">
+                            <el-input :value="currentCompentenName" disabled size="mini"></el-input>
+                        </el-form-item>
+                        <el-divider><span style="color: #DCDFE6">组件传值</span></el-divider>
+                        <props-panel v-model="propsValue" :objKey="propsValueKeys"></props-panel>
+                    </el-form>
                 </el-tab-pane>
                 <el-tab-pane label="属性" name="first">
                         <el-form ref="form" label-width="80px" label-position="right">
@@ -43,6 +52,7 @@
     import stylePanel from './styleCompentens/stylePanel'
     import rightComClassAdd from './rightComClassAdd'
     import rightComCatalog from './rightComCatalog'
+    import propsPanel from './styleCompentens/propsPanel'
 
     export default {
         name: 'RightComponents',
@@ -53,6 +63,14 @@
             }
         },
         watch:{
+            centerValue(val){
+                console.log(val)
+                if (val === 'page'){
+                    this.activeName = 'four'
+                }else {
+                    this.activeName = 'first'
+                }
+            }
         },
         methods:{
             handleClick(){
@@ -60,6 +78,25 @@
             }
         },
         computed:{
+            centerValue(){
+                return this.$store.state.pattern
+            },
+            propsValue() {
+                if (this.$store.state.currentCheckAttr.item){
+                    return this.$store.state.currentCheckAttr.item.propsValue
+                }
+                return undefined
+            },
+            propsValueKeys() {
+                if (!this.propsValue){
+                    return []
+                }
+                let propsArr = []
+                Object.keys(this.propsValue).map((key)=>{
+                    propsArr.push(key)
+                })
+                return propsArr
+            },
             customClassList(){
                 let customClass = this.$store.state.currentCheckAttr.customClass
                 let customClassList = []
@@ -104,7 +141,8 @@
             rightComStyleAdd,
             stylePanel,
             rightComClassAdd,
-            rightComCatalog
+            rightComCatalog,
+            propsPanel
         }
     }
 </script>

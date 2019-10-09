@@ -183,12 +183,24 @@ const currentCheckAttr = {
         ]
     },
     mutations: {
+        deletePropsValue(state,{key}){
+            if (state.item){
+                state.item.propsValue[key] = ''
+                vue.delete(state.item.propsValue,key)
+            }
+        },
+        addPropsValue(state,obj){
+            if (state.item){
+                let {key,defaultValue} = obj
+                vue.set(state.item.propsValue,key,defaultValue)
+            }
+        },
         setContextMenuTarget(state,{contextMenuTarget}){
             state.contextMenuTarget = contextMenuTarget
         },
         deleteCustomClass(state,{name}){
             vue.set(state.customClass,name,undefined)
-            delete state.customClass[name]
+            vue.delete(state.customClass,name)
         },
         setCustomClass(state,{name,value}){
             vue.set(state.customClass,name,value)
@@ -225,7 +237,7 @@ const currentCheckAttr = {
         deleteItemStyleAttr(state,{key}){
             if (key && key!==''){
                 state.item.iStyle[key] = ''
-                delete state.item.iStyle[key]
+                vue.delete(state.item.iStyle,key)
             }
         }
     },
@@ -235,7 +247,16 @@ const currentCheckAttr = {
         setCurrentCheckAttrNameComputed({ state, commit, rootState },content){
             let {index} = content
             let arrIndex = index.split('-')
-            let list = rootState.project.checkFile.dragList
+            let list = []
+            switch (rootState.pattern) {
+                case 'page':
+                    list = this.$store.state.project.checkFile.dragList
+                    break
+                case 'component':
+                    list = rootState.patternComponents.list
+                    break
+            }
+
             let currentObj = list
             for (let i = 0; i < arrIndex.length; i++) {
                 let index = parseInt(arrIndex[i])

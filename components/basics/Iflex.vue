@@ -33,8 +33,10 @@
                         <component :key="index" :is="item2.componentName"
                                    :dataIIndex="dataIIndex + '-' + index0 + '-' +index"
                                    :data-i-index="dataIIndex + '-' + index0 + '-' +index"
-                                   v-bind="item2.componentName !== 'Iflex' ? item2.propsValue:item2"
+                                   v-bind="item2"
+                                   :propsValue = "item2.componentName !== 'Iflex' ? item2.propsValue: undefined"
                                    :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),computedStyleToStyle(item2.iStyle)]:''"
+                                   @handresize="handresize"
                         >
                         </component>
                     </template>
@@ -78,6 +80,18 @@
             }
         },
         methods:{
+            handresize(val){
+                let {width,height} = val
+                let widthPx = parseInt(width.replace('px',''))
+                let heightPx = parseInt(height.replace('px',''))
+
+                let widthUpx = (widthPx / 375) * 750
+                let heightUpx = (heightPx / 375) * 750
+                if (this.$store.state.currentCheckAttr.item){
+                    this.$set(this.$store.state.currentCheckAttr.item.iStyle,'width',widthUpx + 'upx')
+                    this.$set(this.$store.state.currentCheckAttr.item.iStyle,'height',heightUpx + 'upx')
+                }
+            },
             isIFlexClassBorder(num,index){
                 if (!this.preview){
                     return ''

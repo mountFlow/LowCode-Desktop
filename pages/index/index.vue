@@ -11,7 +11,7 @@
 				</el-aside>
 				<el-main style="position: relative">
 					<eu-edit-tool></eu-edit-tool>
-					<template v-if="checkFile.isCanDrag === true">
+					<template v-if="pattern==='component' || checkFile.isCanDrag === true">
 						<PhoneFrame></PhoneFrame>
 					</template>
 					<template v-else>
@@ -47,6 +47,9 @@
 
 		},
 		computed:{
+			pattern() {
+				return this.$store.state.pattern
+			},
             checkFile(){
                 if (this.$store.state.project.checkFile){
                     return this.$store.state.project.checkFile

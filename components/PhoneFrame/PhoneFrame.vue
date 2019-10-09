@@ -20,6 +20,7 @@
                 ></component>
             </template>
         </draggable>
+
         <vue-context-menu class="right-menu"
                           :target="contextMenuTarget"
                           :show="contextMenuVisible"
@@ -94,10 +95,23 @@
             list:{
                 get() {
                     console.log(this.$store.state.project.checkFile)
-                    return this.$store.state.project.checkFile.dragList
+
+                    switch (this.$store.state.pattern) {
+                        case 'page':
+                            return this.$store.state.project.checkFile.dragList
+                        case 'component':
+                            return this.$store.state.patternComponents.list
+                    }
                 },
                 set(value){
-                    this.$store.commit('setCheckFileDragList',value)
+                    switch (this.$store.state.pattern) {
+                        case 'page':
+                            this.$store.commit('setCheckFileDragList',value)
+                            break
+                        case 'component':
+                            this.$store.commit('setPatternComponentslList',value)
+                            break
+                    }
                 }
             }
         },

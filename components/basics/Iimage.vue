@@ -1,10 +1,16 @@
 <template>
-    <image class="i-images-style" style="" :mode="array[0].mode" :src="src"></image>
+    <image class="i-images-style" style="" :mode="array[0].mode" :src="src"
+           :ref="'Iimage-' + dataIIndex"
+           @mouseup="initComponenSizeStyle('Iimage-' + dataIIndex)"
+    ></image>
 </template>
 
 <script>
+    import commoMethodsByBasicsComponents from 'common/js/commoMethodsByBasicsComponents'
+
     export default {
         name: 'Iimage',
+        mixins: [commoMethodsByBasicsComponents],
         data(){
             return {
                 array: [{
@@ -56,5 +62,7 @@
         width: 150upx;
         height: 100upx;
         background-color: #eeeeee;
+        resize: both;
     }
+
 </style>

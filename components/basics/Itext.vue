@@ -1,10 +1,18 @@
 <template>
-    <text>文本</text>
+    <text>{{ propsValue.text}}</text>
 </template>
 
 <script>
     export default {
-        name: 'Itext'
+        name: 'Itext',
+        props:{
+            propsValue: {
+                type: Object,
+                default: () => ({
+                    text: '文本'
+                })
+            }
+        }
     }
 </script>
 

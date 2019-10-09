@@ -1,6 +1,6 @@
 <template>
     <div class="tool">
-        <template v-if="checkFile && checkFile.isCanDrag === true">
+        <template v-if="(pattern === 'component') || (checkFile && checkFile.isCanDrag === true)">
             <div class="tool-item" >
                 <el-tooltip class="item" effect="dark" content="把组件托到这里删除" placement="right">
                     <draggable :group="{ name: deleteGroupName}"
@@ -41,6 +41,13 @@
                 </el-slider>
             </div>
 
+            <div class="tool-item">
+                <el-tooltip class="item" effect="dark" content="保存组件" placement="right">
+                    <div class="tool-item-icon" @click="saveComponenet">
+                        <i class="el-icon-circle-plus" style="font-size: 23px;color: white;"></i>
+                    </div>
+                </el-tooltip>
+            </div>
         </template>
 
         <el-dialog title="代码演示" :visible.sync="dialogTableVisible">
@@ -108,6 +115,36 @@
                 </el-form-item>
             </el-form>
         </el-dialog>
+
+        <el-dialog
+                title="保存组件"
+                :visible="saveComponentModel"
+                width="30%"
+                @close="closeSaveComponentModel"
+                center>
+            <el-form ref="addFileForm" :model="addFileForm" :rules="addFileRule" label-width="80px">
+                <el-form-item  label="文件名称" prop="fileName">
+                    <el-input :value="addFileForm.fileName.replace('.vue','')" @input="addFileNameInput">
+                        <span slot="append" v-if="addFileForm.fileType !== '0'">.vue</span>
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="文件类型" prop="fileType">
+                    <el-select v-model="addFileForm.fileType" placeholder="请选择">
+                        <el-option
+                                v-for="item in addFileTypeSelect"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-checkbox v-show="addFileForm.fileType === '1'" style="margin-bottom: 20px" v-model="addFileForm.isAddPagePath" label="自动在pages.json中注册" name="type"></el-checkbox>
+                <el-form-item>
+                    <el-button @click="closeAddFileModel">取 消</el-button>
+                    <el-button type="primary" @click="yesAddFile('addFileForm')">确 定</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
     </div>
 </template>
 
@@ -124,6 +161,8 @@
         name: 'EuEditTool',
         data(){
             return {
+                saveComponentModel: false,
+
                 form:{
                   fileName: ''
                 },
@@ -160,6 +199,9 @@
             }
         },
         methods:{
+            closeSaveComponentModel(){
+                this.saveComponentModel = false
+            },
             addFileNameInput(val){
                 if (this.addFileForm.fileType !== 'folder'){
                     this.addFileForm.fileName = val + '.vue'
@@ -186,9 +228,18 @@
                 // }, (err) => {
                 //     alert('导出失败')
                 // })
+                let list = []
+                switch (this.$store.state.pattern) {
+                    case 'page':
+                        list = this.checkFile.dragList
+                        this.form.fileName = this.checkFile.label.replace('.vue','')
+                        break
+                    case 'component':
+                        list = this.$store.state.patternComponents.list
+                        break
+                }
 
-                this.form.fileName = this.checkFile.label.replace('.vue','')
-                let showDialogData = outExportStr(this.checkFile.dragList,this.$store.state.currentCheckAttr.customClass)
+                let showDialogData = outExportStr(list,this.$store.state.currentCheckAttr.customClass)
                 this.showDialogData = showDialogData.replace(VUE_NAME,this.form.fileName)
                 this.dialogTableVisible = true
                 // outExportFile('a.vue',this.$store.state.list)
@@ -273,9 +324,15 @@
                         return false;
                     }
                 });
+            },
+            saveComponenet(){
+                this.saveComponentModel = true
             }
         },
         computed:{
+            pattern(){
+                return this.$store.state.pattern
+            },
             phoneSize: {
                 get(){
                     return this.$store.state.phoneSize

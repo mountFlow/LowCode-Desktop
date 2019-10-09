@@ -1,5 +1,5 @@
 <template>
-    <view>
+    <div>
         <div style="display: flex;flex-wrap: wrap" class="form-line" >
             <template v-for="(item,index) in formList">
                 <el-form-item v-show="haveMustCheck(item)" :label="item.label" class="i-form-item" :key="index">
@@ -60,7 +60,7 @@
         <el-form-item label="样式配置" style="margin: 15px 0">
             <el-input class="style-json" type="textarea" v-model="iStyleJson" :autosize="{ minRows:6 }"></el-input>
         </el-form-item>
-    </view>
+    </div>
 </template>
 
 <script>

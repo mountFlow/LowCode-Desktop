@@ -51,10 +51,17 @@
                     value: 'component',
                     label: '组件模式'
                 }],
-                centerValue: 'page',
             }
         },
         computed:{
+            centerValue: {
+                set(val){
+                    this.$store.commit('setPattern',{pattern: val})
+                },
+                get(){
+                    return this.$store.state.pattern
+                }
+            },
             preview: {
                 get(){
                     return this.$store.state.preview

@@ -3,12 +3,14 @@ import Vuex from 'vuex'
 import currentCheckAttr from './modules/currentCheckAttr'
 import euEditTool from './modules/euEditTool'
 import project from './modules/project'
+import patternComponents from './modules/patternComponents'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
 
     state: {
+        pattern: 'page',
         list: [],
         deleteGroupName: 'layouts',
         iflexGroup: 'components',
@@ -17,6 +19,9 @@ const store = new Vuex.Store({
         phoneSize: 100
     },
     mutations: {
+        setPattern(state,data){
+            state.pattern = data.pattern
+        },
         setPhoneSize(state,data){
             state.phoneSize = data.phoneSize
         },
@@ -46,7 +51,8 @@ const store = new Vuex.Store({
     modules:{
         currentCheckAttr,
         euEditTool,
-        project
+        project,
+        patternComponents
     }
 })
 

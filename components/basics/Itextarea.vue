@@ -1,10 +1,18 @@
 <template>
-    <textarea auto-height value="textarea" />
+    <textarea auto-height v-bind="propsValue"/>
 </template>
 
 <script>
     export default {
-        name: 'Itextarea'
+        name: 'Itextarea',
+        props:{
+            propsValue: {
+                type: Object,
+                default: () => ({
+                    value: '长文本'
+                })
+            }
+        }
     }
 </script>
 

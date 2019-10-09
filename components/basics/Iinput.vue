@@ -1,19 +1,18 @@
 <template>
-    <input type="text" placeholder="input" :value="value"/>
+    <input type="text" class="i-input" placeholder="input" v-bind="propsValue"/>
 </template>
 
 <script>
     export default {
         name: 'Iinput',
         props:{
-            value: {
-                type: String,
-                default: ''
+            propsValue: {
+                type: Object,
+                default: () => {}
             }
         }
     }
 </script>
 
 <style scoped>
-
 </style>

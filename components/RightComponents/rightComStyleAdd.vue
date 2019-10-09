@@ -246,7 +246,7 @@
             checkSelectKeyValue(){
                 for (let i = 0; i < this.selectKeyValue.length; i++) {
                     let item = this.selectKeyValue[i]
-                    if (item.key === '' || item.value === ''){
+                    if (item.label === '' || item.value === ''){
                         return false
                     }
                 }
