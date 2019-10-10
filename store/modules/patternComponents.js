@@ -9,6 +9,10 @@ const patternComponents = {
         setPatternComponentslList(state,data){
             state.list = data.list
         },
+        deleteComponentsListKey(state,data){
+            state.componentsList[data.key] = undefined
+            vue.delete(state.componentsList,data.key)
+        },
         setComponentsList(state,data){
             let {name,list} = data
             vue.set(state.componentsList,name,list)

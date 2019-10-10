@@ -49,6 +49,7 @@
 <script>
     import draggable from '@/common/js/vuedraggable'
     import basicsMixin from '@/common/js/importBasics'
+    import MyComponentsEntity from '@/components/LeftComponents/ComponentContainer/MyComponents/MyComponentsEntity'
 
     export default {
         mixins: [basicsMixin],
@@ -103,6 +104,10 @@
                 return 'i-flex-border'
             },
             computedStyleToStyle(styleObje){
+                let item = this.$store.state.currentCheckAttr.item
+                if (item && item.upxSwitch === false){
+                    return styleObje
+                }
                 let styleObjeStr = JSON.stringify(styleObje)
                 let regx = /([0-9\.]+)(upx|rpx)/g
                 let newStr = styleObjeStr.replace(regx,(a,b,c,d)=>{
@@ -155,7 +160,8 @@
             }
         },
         components:{
-            draggable
+            draggable,
+            MyComponentsEntity
         }
     }
 </script>

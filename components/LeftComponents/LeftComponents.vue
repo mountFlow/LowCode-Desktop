@@ -38,8 +38,8 @@
                             我的组件
                         </view>
                     </template>
-                    <draggable :list="list"
-                               :clone="cloneComponent"
+                    <draggable :list="myComponentsList"
+                               :clone="cloneMyComponent"
                                :options="{
                             sort:false
                             }"
@@ -47,9 +47,10 @@
                                @choose="choosComponents"
                                class="components-class"
                                style="position: relative;display: flex;justify-content: center;flex-wrap: wrap;">
-                        <my-components v-for="item in list"
+                        <my-components v-for="item in myComponentsList"
                                             :key="item.id"
                                             :name="item.name"
+                                            :list="item.list"
                                             :componentName="item.componentName">
                         </my-components>
                         <my-components @addMyComponents="addMyComponents">
@@ -66,7 +67,7 @@
     import ComponentContainer from '@/components/LeftComponents/ComponentContainer/ComponentContainer'
     import draggable from '@/common/js/vuedraggable'
     import LeftCompoentsByLayouts from './LeftCompoentsByLayouts'
-    import MyComponents from './ComponentContainer/MyComponents'
+    import MyComponents from './ComponentContainer/MyComponents/MyComponents'
 
     let layoutGlobalId = 100;
     let compnentGlobalId = 100
@@ -185,6 +186,7 @@
                   {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{},iClass: [],propsValue: {}},
                   {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: {value:'这是一段长文本'}},
                   {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: [],propsValue: {}},
+                  {name:'轮播图',id: 9, componentName: 'Iswiper',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
                   // {name:'webView',id: 3, componentName: 'IwebView'},
 
               ],
@@ -192,6 +194,7 @@
         },
         methods:{
             addMyComponents(){
+                this.$store.commit('setPatternComponentslList',{list: []})
                 this.$store.commit('setPattern',{pattern: 'component'})
             },
             changeInfo(evt){
@@ -219,11 +222,45 @@
                 newObj.iClass = []
                 return newObj
             },
+            cloneMyComponent(cloneObj){
+                let newObj = {...cloneObj}
+                compnentGlobalId++
+                newObj.id = compnentGlobalId
+                newObj.iStyle = {}
+                newObj.iClass = []
+                return newObj
+            },
             choosComponents(){
                 this.$store.commit('setIflexGroup',{iflexGroup:'components'})
             },
             choosLayouts(){
                 this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
+            },
+            filterListFun(list){
+                let filterListStr = JSON.stringify(list)
+                filterListStr =filterListStr.replace(/"Iflex"/g,'"SimpleIflex"')
+                return JSON.parse(filterListStr)
+            },
+        },
+        computed:{
+            myComponentsList(){
+                let id = 777
+                //  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: {}},
+                let list = []
+                let componentsList = this.$store.state.patternComponents.componentsList
+                Object.keys(componentsList).map((key)=>{
+                    let filterComponentsList = this.filterListFun(componentsList[key])
+                    list.push({
+                        name: key,
+                        id: id++,
+                        componentName: 'MyComponentsEntity',
+                        iStyle: {},
+                        iClass: {},
+                        propsValue: {},
+                        list: filterComponentsList
+                    })
+                })
+                return list
             }
         },
         components:{

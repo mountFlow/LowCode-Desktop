@@ -94,8 +94,6 @@
           }*/
             list:{
                 get() {
-                    console.log(this.$store.state.project.checkFile)
-
                     switch (this.$store.state.pattern) {
                         case 'page':
                             return this.$store.state.project.checkFile.dragList

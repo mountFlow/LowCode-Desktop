@@ -9,6 +9,7 @@ import Iswitch from '@/components/basics/Iswitch'
 import Itextarea from '@/components/basics/Itextarea'
 import Iimage from '@/components/basics/Iimage'
 import IwebView from '@/components/basics/IwebView'
+import Iswiper from '@/components/basics/Iswiper'
 
 let basics = {
     components:{
@@ -22,7 +23,8 @@ let basics = {
         Iswitch,
         Itextarea,
         Iimage,
-        IwebView
+        IwebView,
+        Iswiper
     }
 }
 

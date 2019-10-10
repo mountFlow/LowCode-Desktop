@@ -41,9 +41,9 @@
                 </el-slider>
             </div>
 
-            <div class="tool-item">
+            <div class="tool-item" v-if="pattern === 'component'">
                 <el-tooltip class="item" effect="dark" content="保存组件" placement="right">
-                    <div class="tool-item-icon" @click="saveComponenet">
+                    <div class="tool-item-icon" style="background-color: #00d2dc" @click="saveComponenet">
                         <i class=" el-icon-s-check" style="font-size: 23px;color: white;"></i>
                     </div>
                 </el-tooltip>
@@ -195,7 +195,17 @@
             yesAddComponents(ref){
                 this.$refs[ref].validate((valid) => {
                     if (valid) {
-                        alert(1)
+                        let name = this.addComponentsFrom.ComponentName
+                        let list = this.$store.state.patternComponents.list
+                        if (list.length === 0){
+                            this.$notify.error({
+                                title: '错误',
+                                message: '组件内容为空！'
+                            });
+                            return false
+                        }
+                        this.$store.commit('setComponentsList',{name,list})
+                        this.$store.commit('setPatternComponentslList',{list:[]})
                         this.closeComponentsModel()
                     } else {
                         return false;
@@ -203,6 +213,7 @@
                 });
             },
             closeComponentsModel(){
+                this.addComponentsFrom.ComponentName = ''
                 this.saveComponentModel = false
             },
             addFileNameInput(val){

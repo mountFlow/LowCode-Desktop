@@ -64,7 +64,6 @@
         },
         watch:{
             centerValue(val){
-                console.log(val)
                 if (val === 'page'){
                     this.activeName = 'four'
                 }else {
