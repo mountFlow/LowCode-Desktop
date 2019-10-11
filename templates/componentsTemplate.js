@@ -1,29 +1,22 @@
-<template>
-    <swiper class="screen-swiper xxx"
-            :class="dotStyle?'square-dot':'round-dot'"
-            :style="styleObj"
-            :indicator-dots="true"
+let Iswiper =
+    `<swiper<%- iClassToString(itemListItem.iClass,'screen-swiper','square-dot') %> <%- iStyleToString(itemListItem.iStyle) %>:indicator-dots="true"
             :circular="true"
             :autoplay="true"
             interval="5000"
             duration="500">
-        <swiper-item v-for="(item,index) in swiperList" :key="index">
-            <image :src="item.url" mode="aspectFill" ></image>
+        <swiper-item v-for="(item,index) in swiperList<%- itemListItem.id -%>" :key="index">
+            <image :src="item.url" mode="aspectFill"></image>
         </swiper-item>
-    </swiper>
-</template>
+    </swiper>`
 
-<script>
-    export default {
-        name: "Iswiper",
-        props:{
-            dotStyle: {
-                type: Boolean,
-                default: false
-            },
-            swiperList: {
-                type: Array,
-                default: () => ([{
+let Iinput =
+    `<input type="text"<%- iClassToString(itemListItem.iClass,'i-input') %> <%- iStyleToString(itemListItem.iStyle) %>placeholder="input" v-bind="propsValue"/>`
+
+let defaultTemplate =
+`<<%- itemListItem.componentName.replace(/^I/,'') -%><%- iClassToString(itemListItem.iClass) %><%- iStyleToString(itemListItem.iStyle) %>><%- itemListItem.name  -%></<%- itemListItem.componentName.replace(/^I/,'') -%>>`
+
+
+let IswiperByData = `swiperList<%- id -%>: [{
                     id: 0,
                     type: 'image',
                     url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
@@ -51,21 +44,8 @@
                     id: 6,
                     type: 'image',
                     url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-                }])
-            }
-        },
-        data(){
-            return {
-                styleObj: {
-                    zoom: 375 / document.body.clientWidth
-                }
-            }
-        },
-        created(){
-            console.log(document.body.clientWidth)
-        }
-    }
-</script>
+                }]`
 
-<style scoped>
-</style>
+let data = {Iswiper,Iinput,defaultTemplate,IswiperByData}
+
+export default data

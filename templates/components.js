@@ -6,7 +6,7 @@ let itemTemplates = `
         <% if(itemListItem.componentName === 'Iflex'){ -%>
             <%- fun(itemListItem,fun) -%>
         <% } else { -%>
-            <<%- itemListItem.componentName.replace(/^I/,'')  -%><%- iClassToString(itemListItem.iClass) %><%- iStyleToString(itemListItem.iStyle) %> ><%- itemListItem.name -%></<%- itemListItem.componentName.replace(/^I/,'') -%>>
+            <%- renderComponentsTemplate(itemListItem,byDataArr) -%>
         <% } -%>
     <%}) -%>
     </view>
@@ -25,7 +25,7 @@ let fileTemplates =
                          <% if(itemListItem.componentName === 'Iflex'){ -%>
                          <%- fun(itemListItem,fun) -%>
                          <% } else { -%>
-                             <<%- itemListItem.componentName.replace(/^I/,'') -%><%- iClassToString(itemListItem.iClass) %><%- iStyleToString(itemListItem.iStyle) %>><%- itemListItem.name  -%></<%- itemListItem.componentName.replace(/^I/,'') -%>>
+                             <%- renderComponentsTemplate(itemListItem,byDataArr) -%>
                          <% } -%>
                      <%}) -%>
                  </view>
@@ -34,11 +34,18 @@ let fileTemplates =
         <%}) -%>
     </view>
 </template>
-<script>
+<%- renderComponentsTemplateByScript(byDataArr) %>
+<style scoped>
+    <%= classData %>
+</style>`
+
+let fileTemplatesByScript = `<script>
     export default {
         name: "This#is#fileName",
         data() {
-            return {}
+            return {
+                <%- renderComponentsTemplateByData(byDataArr) %>
+            }
         },
         methods() {
             
@@ -50,8 +57,6 @@ let fileTemplates =
         }
     }
 </script>
-<style scoped>
-    <%= classData %>
-</style>`
+`
 
-export {fileTemplates,itemTemplates}
+export {fileTemplates,itemTemplates,fileTemplatesByScript}

@@ -1,8 +1,9 @@
 import ejs from 'ejs'
 import FileSaver     from 'file-saver'
 import JSZip from 'jszip'
-import {fileTemplates,itemTemplates} from 'templates/components'
-import {humpToLine,iStyleToString,iClassToString,getArrClassToMap} from 'common/js/utils'
+import {fileTemplates,itemTemplates,fileTemplatesByScript} from 'templates/components'
+import COMPONENTS_TEMPLATE from 'templates/componentsTemplate'
+import {humpToLine,iStyleToString,iClassToString,getArrClassToMap,formatStrByHtml} from 'common/js/utils'
 import PROJECT from 'templates/project'
 
 const VUE_NAME = 'This#is#fileName'
@@ -48,14 +49,55 @@ let beforDisposeListToClassDataString = (list,customClass) => {
 }
 
 /**
+ * 渲染html部分
+ * @param itemListItem
+ * @param byDataArr
+ * @returns {*}
+ */
+let renderComponentsTemplate = (itemListItem,byDataArr) => {
+    let componentsName = itemListItem.componentName
+    if (COMPONENTS_TEMPLATE[componentsName] === undefined){
+        componentsName = 'defaultTemplate'
+    } else {
+        byDataArr.push({
+            componentsName,id:itemListItem.id
+        })
+    }
+    let x = ejs.render(COMPONENTS_TEMPLATE[componentsName],{itemListItem,iStyleToString,iClassToString},{rmWhitespace:true})
+    return x
+}
+
+/**
+ * 渲染data部分
+ * @param byDataArr
+ */
+let renderComponentsTemplateByData = (byDataArr) => {
+    let result = ''
+    byDataArr.forEach(e=>{
+        let dataKey = e.componentsName + 'ByData'
+        if (COMPONENTS_TEMPLATE[dataKey] !== undefined){
+            let x = ejs.render(COMPONENTS_TEMPLATE[dataKey],{id:e.id},{rmWhitespace:false})
+            result += x
+            result += ','
+        }
+    })
+    return result
+}
+
+let renderComponentsTemplateByScript = (byDataArr) => {
+    let x = ejs.render(fileTemplatesByScript,{renderComponentsTemplateByData,byDataArr},{rmWhitespace:false})
+    return x
+}
+
+/**
  * 提供list 导出组件的渲染后的递归模板
  * @param list
  * @param fun
  * @returns {*}
  * @private
  */
-let _outExportItem = (list,fun) => {
-    let x = ejs.render(itemTemplates,{list,fun,humpToLine,iStyleToString,iClassToString},{rmWhitespace:true})
+let _outExportItem = (list,fun,byDataArr) => {
+    let x = ejs.render(itemTemplates,{list,fun,humpToLine,iStyleToString,iClassToString,renderComponentsTemplate,byDataArr},{rmWhitespace:true})
     return x
 }
 
@@ -66,8 +108,10 @@ let _outExportItem = (list,fun) => {
  * @returns {*}
  */
 let outExportStr = (list,customClass) => {
+    let byDataArr = [] // 存放模板需要的 data 的值
     let classData = beforDisposeListToClassDataString(list,customClass)
-    let x = ejs.render(fileTemplates,{list,fun:_outExportItem,humpToLine,iStyleToString,iClassToString,classData},{rmWhitespace:true},)
+    let x = ejs.render(fileTemplates,{list,fun:_outExportItem,humpToLine,iStyleToString,iClassToString,classData,renderComponentsTemplate,byDataArr,renderComponentsTemplateByScript},{rmWhitespace:true},)
+    x = formatStrByHtml(x)
     return x
 }
 
