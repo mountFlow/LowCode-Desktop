@@ -47,10 +47,10 @@ let fileTemplatesByScript = `<script>
                 <%- renderComponentsTemplateByData(byDataArr) %>
             }
         },
-        methods() {
+        methods: {
             
         },
-        computed() {
+        computed: {
             
         },
         components:{
