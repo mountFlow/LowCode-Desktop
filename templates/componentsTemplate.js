@@ -1,4 +1,4 @@
-let Iswiper =
+let Cswiper =
     `<swiper<%- iClassToString(itemListItem.iClass,'screen-swiper','square-dot') %> <%- iStyleToString(itemListItem.iStyle) %>:indicator-dots="true"
             :circular="true"
             :autoplay="true"
@@ -16,7 +16,7 @@ let defaultTemplate =
 `<<%- itemListItem.componentName.replace(/^I/,'') -%><%- iClassToString(itemListItem.iClass) %><%- iStyleToString(itemListItem.iStyle) %>><%- itemListItem.name  -%></<%- itemListItem.componentName.replace(/^I/,'') -%>>`
 
 
-let IswiperByData = `swiperList<%- id -%>: [{
+let CswiperByData = `swiperList<%- id -%>: [{
                     id: 0,
                     type: 'image',
                     url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg'
@@ -46,6 +46,6 @@ let IswiperByData = `swiperList<%- id -%>: [{
                     url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
                 }]`
 
-let data = {Iswiper,Iinput,defaultTemplate,IswiperByData}
+let data = {Cswiper,Iinput,defaultTemplate,CswiperByData}
 
 export default data

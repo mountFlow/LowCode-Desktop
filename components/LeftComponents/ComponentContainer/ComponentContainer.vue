@@ -58,6 +58,7 @@
         justify-content: center;
         align-items: center;
         border-bottom: none;
+        overflow: hidden;
     }
 
     .content-layout{

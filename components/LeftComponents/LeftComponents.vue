@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="24">
-            <el-collapse :value="['2','3']">
+            <el-collapse :value="['2','3','4']">
                 <el-collapse-item name="1">
                     <template slot="title">
                         <view style="width: 100%;text-align: center">
@@ -26,6 +26,50 @@
                                class="components-class"
                                style="position: relative;display: flex;justify-content: center;flex-wrap: wrap;">
                         <ComponentContainer v-for="item in list"
+                                            :key="item.id"
+                                            :name="item.name"
+                                            :componentName="item.componentName">
+                        </ComponentContainer>
+                    </draggable>
+                </el-collapse-item>
+                <el-collapse-item name="4" disabled>
+                    <template slot="title">
+                        <view style="width: 100%;text-align: center">
+                            ColorUI组件
+                        </view>
+                    </template>
+                    <draggable :list="colorUiList"
+                               :clone="cloneComponent"
+                               :options="{
+                            sort:false
+                            }"
+                               :group="{ name: 'components', pull: 'clone', put: false}"
+                               @choose="choosComponents"
+                               class="components-class"
+                               style="position: relative;display: flex;justify-content: center;flex-wrap: wrap;">
+                        <ComponentContainer v-for="item in colorUiList"
+                                            :key="item.id"
+                                            :name="item.name"
+                                            :componentName="item.componentName">
+                        </ComponentContainer>
+                    </draggable>
+                </el-collapse-item>
+                <el-collapse-item name="4" disabled>
+                    <template slot="title">
+                        <view style="width: 100%;text-align: center">
+                            表单组件
+                        </view>
+                    </template>
+                    <draggable :list="formList"
+                               :clone="cloneComponent"
+                               :options="{
+                            sort:false
+                            }"
+                               :group="{ name: 'components', pull: 'clone', put: false}"
+                               @choose="choosComponents"
+                               class="components-class"
+                               style="position: relative;display: flex;justify-content: center;flex-wrap: wrap;">
+                        <ComponentContainer v-for="item in formList"
                                             :key="item.id"
                                             :name="item.name"
                                             :componentName="item.componentName">
@@ -186,9 +230,31 @@
                   {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{},iClass: [],propsValue: {}},
                   {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: {value:'这是一段长文本'}},
                   {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'轮播图',id: 9, componentName: 'Iswiper',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
                   // {name:'webView',id: 3, componentName: 'IwebView'},
-
+              ],
+              colorUiList: [
+                  {name:'轮播图',id: 10, componentName: 'Cswiper',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'图标',id: 11, componentName: 'Cicon',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'按钮',id: 12, componentName: 'Cbutton',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'标签',id: 13, componentName: 'Ctag',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'头像',id: 14, componentName: 'Cavatar',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'进度条',id: 15, componentName: 'Cprogress',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'导航栏',id: 16, componentName: 'Cnav',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'宫格列表',id: 17, componentName: 'ClistGrid',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'菜单列表',id: 18, componentName: 'Clist',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'卡片',id: 19, componentName: 'Ccard',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'时间线',id: 20, componentName: 'Ctimeline',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'步骤条',id: 21, componentName: 'Csteps',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+              ],
+              formList: [
+                  {name:'输入框',id: 22, componentName: 'FormInput',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'输入框2',id: 23, componentName: 'FormInput2',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'选择框',id: 24, componentName: 'FromSelect',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'时间选择',id: 25, componentName: 'FromSelectByTime',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'日期选择',id: 26, componentName: 'FromSelectByDate',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'开关',id: 27, componentName: 'FromSwitch',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'单选操作',id: 28, componentName: 'FormRadio',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'图片上传',id: 29, componentName: 'FormUpdataImage',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
               ],
           }
         },

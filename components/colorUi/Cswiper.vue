@@ -15,7 +15,7 @@
 
 <script>
     export default {
-        name: "Iswiper",
+        name: "Cswiper",
         props:{
             dotStyle: {
                 type: Boolean,
