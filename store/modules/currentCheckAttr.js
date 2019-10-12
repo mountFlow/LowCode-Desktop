@@ -250,7 +250,7 @@ const currentCheckAttr = {
             let list = []
             switch (rootState.pattern) {
                 case 'page':
-                    list = this.$store.state.project.checkFile.dragList
+                    list = rootState.project.checkFile.dragList
                     break
                 case 'component':
                     list = rootState.patternComponents.list

@@ -21,6 +21,7 @@ import Clist from '@/components/colorUi/Clist'
 import Ccard from '@/components/colorUi/Ccard'
 import Ctimeline from '@/components/colorUi/Ctimeline'
 import Csteps from '@/components/colorUi/Csteps'
+import CverticalBox from '@/components/colorUi/CverticalBox'
 import FormInput from '@/components/form/FormInput'
 import FormInput2 from '@/components/form/FormInput2'
 import FromSelect from '@/components/form/FromSelect'
@@ -56,6 +57,7 @@ let basics = {
         Ccard,
         Ctimeline,
         Csteps,
+        CverticalBox,
         FormInput,
         FormInput2,
         FromSelect,

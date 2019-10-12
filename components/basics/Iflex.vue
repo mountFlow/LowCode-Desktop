@@ -132,8 +132,7 @@
             choosComponents(evt){
                 let index = evt.item.dataset['iIndex']
                 this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
-
-                if (evt.item.firstChild.className !== 'flex-draggalbe-handle'){
+                if (!evt.item.firstChild || evt.item.firstChild.className !== 'flex-draggalbe-handle'){
                     this.$store.commit('setDeleteGroupName',{deleteGroupName:'components'})
                     this.$store.commit('setIflexGroup',{iflexGroup:'components'})
                 }
