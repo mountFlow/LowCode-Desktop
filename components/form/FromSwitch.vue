@@ -1,7 +1,9 @@
 <template>
-    <view class="cu-form-group ">
-        <view class="title">开关选择</view>
-        <switch style="zoom: 5" @change="SwitchA" :class="switchA?'checked':''" :checked="switchA?true:false"></switch>
+    <view>
+        <view class="cu-form-group ">
+            <view class="title">开关选择</view>
+            <switch style="zoom: 5" @change="SwitchA" :class="switchA?'checked':''" :checked="switchA?true:false"></switch>
+        </view>
     </view>
 </template>
 

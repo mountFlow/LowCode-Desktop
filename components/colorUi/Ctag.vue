@@ -1,5 +1,7 @@
 <template>
-    <view class='cu-tag round'>椭圆</view>
+    <view class="inline-flex">
+        <view class='cu-tag round'>椭圆</view>
+    </view>
 </template>
 
 <script>

@@ -1,6 +1,8 @@
 <template>
-    <view class="cu-form-group ">
-        <textarea maxlength="-1"  @input="textareaAInput" placeholder="多行文本输入框"></textarea>
+    <view>
+        <view class="cu-form-group ">
+            <textarea maxlength="-1"  @input="textareaAInput" placeholder="多行文本输入框"></textarea>
+        </view>
     </view>
 </template>
 

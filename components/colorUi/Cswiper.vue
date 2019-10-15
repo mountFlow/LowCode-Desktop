@@ -1,16 +1,18 @@
 <template>
-    <swiper class="screen-swiper xxx"
-            :class="dotStyle?'square-dot':'round-dot'"
-            :style="styleObj"
-            :indicator-dots="true"
-            :circular="true"
-            :autoplay="true"
-            interval="5000"
-            duration="500">
-        <swiper-item v-for="(item,index) in swiperList" :key="index">
-            <image :src="item.url" mode="aspectFill" ></image>
-        </swiper-item>
-    </swiper>
+    <view>
+        <swiper class="screen-swiper xxx"
+                :class="dotStyle?'square-dot':'round-dot'"
+                :style="styleObj"
+                :indicator-dots="true"
+                :circular="true"
+                :autoplay="true"
+                interval="5000"
+                duration="500">
+            <swiper-item v-for="(item,index) in swiperList" :key="index">
+                <image :src="item.url" mode="aspectFill" ></image>
+            </swiper-item>
+        </swiper>
+    </view>
 </template>
 
 <script>

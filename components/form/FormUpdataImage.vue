@@ -1,23 +1,25 @@
 <template>
-    <view class="updata-image">
-        <view class="cu-bar bg-white ">
-            <view class="action">
-                图片上传
-            </view>
-            <view class="action">
-                {{imgList.length}}/4
-            </view>
-        </view>
-        <view class="cu-form-group">
-            <view class="grid col-4 grid-square flex-sub">
-                <view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
-                    <image :src="imgList[index]" mode="aspectFill"></image>
-                    <view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
-                        <text class='cuIcon-close'></text>
-                    </view>
+    <view>
+        <view class="updata-image">
+            <view class="cu-bar bg-white ">
+                <view class="action">
+                    图片上传
                 </view>
-                <view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
-                    <text class='cuIcon-cameraadd'></text>
+                <view class="action">
+                    {{imgList.length}}/4
+                </view>
+            </view>
+            <view class="cu-form-group">
+                <view class="grid col-4 grid-square flex-sub">
+                    <view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+                        <image :src="imgList[index]" mode="aspectFill"></image>
+                        <view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+                            <text class='cuIcon-close'></text>
+                        </view>
+                    </view>
+                    <view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+                        <text class='cuIcon-cameraadd'></text>
+                    </view>
                 </view>
             </view>
         </view>

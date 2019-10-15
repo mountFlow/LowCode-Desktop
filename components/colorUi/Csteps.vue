@@ -1,12 +1,13 @@
 <template>
-    <view class="steps bg-white padding">
-        <view class="cu-steps">
-            <view class="cu-item" :class="index>basics?'':'text-red'" v-for="(item,index) in basicsList" :key="index">
-                <text :class="'cuIcon-' + item.cuIcon"></text> {{item.name}}
+    <view>
+        <view class="steps bg-white padding">
+            <view class="cu-steps">
+                <view class="cu-item" :class="index>basics?'':'text-red'" v-for="(item,index) in basicsList" :key="index">
+                    <text :class="'cuIcon-' + item.cuIcon"></text> {{item.name}}
+                </view>
             </view>
         </view>
     </view>
-
 </template>
 
 <script>

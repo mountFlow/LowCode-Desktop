@@ -1,5 +1,7 @@
 <template>
-    <button class="cu-btn">默认</button>
+    <view class="inline-flex">
+        <button class="cu-btn">默认</button>
+    </view>
 </template>
 
 <script>

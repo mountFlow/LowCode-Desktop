@@ -1,5 +1,7 @@
 <template>
-    <text class="lg text-gray" :class="'cuIcon-appreciate'"></text>
+    <view class="inline-flex">
+        <text class="lg text-gray" :class="'cuIcon-appreciate'"></text>
+    </view>
 </template>
 
 <script>
