@@ -1,13 +1,13 @@
 <template>
     <view>
-        <view class="flex-draggalbe-handle" v-show="showFlexDraggalbeHandle && preview">
-            <view class="flex-draggalbe-handle-top" @mousedown="choosLayouts(dataIIndex)"></view>
+        <view class="flex-draggalbe-handle" v-if="showFlexDraggalbeHandle && preview">
+            <view class="flex-draggalbe-handle-top" @mousedown="choosLayouts(dataIIndex,$event)"></view>
             <view class="flex-draggalbe-handle-bottom">
                 <view class="flex-draggalbe-handle-bottom-item"
                       :class="handleItem.layoutClass"
                       v-for="(handleItem,handleIndex) in num"
                       :key="handleIndex"
-                      @mousedown="choosLayouts(dataIIndex + '-' + handleIndex)"
+                      @mousedown="choosLayouts(dataIIndex + '-' + handleIndex,$event)"
                 ></view>
             </view>
         </view>
@@ -26,6 +26,7 @@
                            :options="{
                             }"
                            @choose="choosComponents"
+                           @change="draggableChange"
                            style="height: 100%;width: 100%"
                            :style="[computedClassToStyle(item.iClass),computedStyleToStyle(item.iStyle)]"
                 >
@@ -141,8 +142,13 @@
             flexDraggalbeHandle(flag){
                 this.isDraggalbe = flag
             },
-            dddd(){
-            }
+            /**
+             * 会和另一个重复执行2遍，TODO 暂时没想到什么好的解决方法
+             * @param e
+             */
+            draggableChange(e){
+                this.$store.dispatch('cachesFolder')
+            },
         },
         computed:{
             customClass(){

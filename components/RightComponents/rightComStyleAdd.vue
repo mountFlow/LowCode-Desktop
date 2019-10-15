@@ -302,6 +302,7 @@
                             this.openSussese('成功','编辑样式属性成功')
                             this.$store.commit('deleteItemStyleAttr',{key:this.oldKey})
                         }
+
                         this.resetForm('ruleForm')
 
                     } else {

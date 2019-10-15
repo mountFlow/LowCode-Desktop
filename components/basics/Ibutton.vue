@@ -2,7 +2,7 @@
     <button v-bind="propsValue"
             :ref="'Ibutton-' + dataIIndex"
             @mouseup="initComponenSizeStyle('Ibutton-' + dataIIndex)"
-    >{{name}}</button>
+    >{{propsValue.value}}</button>
 </template>
 
 <script>
@@ -18,7 +18,9 @@
             },
             propsValue: {
                 type: Object,
-                default: () => {}
+                default: () => ({
+                    value: '按钮'
+                })
             }
         }
     }

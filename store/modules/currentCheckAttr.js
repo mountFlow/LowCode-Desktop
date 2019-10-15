@@ -1,4 +1,5 @@
 import vue from 'vue'
+import {getCachesClass,cachesClass,cachesStyle,getCachesStyle} from 'common/js/localStore'
 
 const currentCheckAttr = {
     state: {
@@ -202,18 +203,28 @@ const currentCheckAttr = {
             vue.set(state.customClass,name,undefined)
             vue.delete(state.customClass,name)
         },
+        initCustomClass(state,obj){
+            state.customClass = obj
+        },
         setCustomClass(state,{name,value}){
             vue.set(state.customClass,name,value)
+            cachesClass(state.customClass)
             // state.customClass[name] = value
+        },
+        initFromStyleList(state,obj){
+            state.formList = obj
         },
         addFromStyleList(state,obj){
             state.formList.push(obj)
+            cachesStyle(state.formList)
         },
         editFromStyleList(state,{index,value}){
             state.formList.splice(index,1,value)
+            cachesStyle(state.formList)
         },
         deleteFromStyleList(state,{index}){
             state.formList.splice(index,1)
+            cachesStyle(state.formList)
         },
         setCurrentCheckItem(state,obj){
             state.item = obj
@@ -244,6 +255,24 @@ const currentCheckAttr = {
     getters: {
     },
     actions: {
+        initFromStyleList({commit}){
+            let data = getCachesStyle()
+            if (data){
+                commit('initFromStyleList',getCachesStyle())
+            }
+        },
+        initCustomClass({commit}){
+            commit('initCustomClass',getCachesClass())
+        },
+        setCurrentCheckAttrNameComputedByBackGrand({ state, commit, rootState }){
+            if (rootState.project.checkFile){
+                let currentObj = rootState.project.checkFile.fileStyleAndClass
+                currentObj.name = '页面背景'
+                if (currentObj){
+                    commit('setCurrentCheckItem',currentObj)
+                }
+            }
+        },
         setCurrentCheckAttrNameComputed({ state, commit, rootState },content){
             let {index} = content
             let arrIndex = index.split('-')
@@ -255,6 +284,8 @@ const currentCheckAttr = {
                 case 'component':
                     list = rootState.patternComponents.list
                     break
+                default:
+                    return
             }
 
             let currentObj = list

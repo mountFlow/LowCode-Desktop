@@ -17,7 +17,11 @@ let data = [{
             type: 'vue-file',
             label: 'index.vue',
             isCanDrag: true,  // 是不是可以拖拽编辑不是则就是只提供展示
-            dragList: [] // 可编辑list
+            dragList: [], // 可编辑list
+            fileStyleAndClass: {
+                iStyle: {},
+                iClass: []
+            }, // 文件背景样式，本不应该写在外层，应与dragList合为一个对象，但这个后面才想到，改起来有点麻烦
         }]
     }]
 }, {

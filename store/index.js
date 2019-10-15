@@ -46,6 +46,16 @@ const store = new Vuex.Store({
     },
 
     actions: {
+        /**
+         * 初始化缓存数据
+         * @param dispatch
+         */
+        initData({dispatch}){
+            dispatch('initProject')
+            dispatch('initCustomClass')
+            dispatch('initFromStyleList')
+            dispatch('initComponentsList')
+        }
     },
 
     modules:{

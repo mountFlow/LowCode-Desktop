@@ -5,6 +5,7 @@
             default-expand-all
             draggable
             @node-click="nodeClick"
+            @node-drop="nodeChange"
             :expand-on-click-node="false"
             :allow-drop="allowDrop"
             :allow-drag="allowDrag">
@@ -43,6 +44,9 @@
             return {}
         },
         methods: {
+            nodeChange(){
+                this.$store.dispatch('cachesFolder')
+            },
             nodeClick(data, node, component){
                 if (data.type !== 'folder'){
 
@@ -96,6 +100,7 @@
                 const children = parent.data.children || parent.data;
                 const index = children.findIndex(d => d.id === data.id);
                 children.splice(index, 1);
+                this.$store.dispatch('cachesFolder')
             }
         },
         computed:{

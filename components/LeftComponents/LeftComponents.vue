@@ -220,7 +220,7 @@
                       }]},
               ],
               list: [
-                  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: {}},
+                  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: {value: '按钮'}},
                   {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{},iClass: [],propsValue: {value: 'hello',password: true}},
                   {name:'选项',id: 2, componentName: 'Iradio',iStyle:{},iClass: [],propsValue: {}},
                   {name:'图标',id: 3, componentName: 'Iicon',iStyle:{},iClass: [],propsValue: {}},
@@ -286,6 +286,7 @@
                 newObj.id = compnentGlobalId
                 newObj.iStyle = {}
                 newObj.iClass = []
+                newObj.propsValue = {...cloneObj.propsValue}
                 return newObj
             },
             cloneMyComponent(cloneObj){

@@ -2,17 +2,18 @@ let humpToLine = (str) =>{
     return str.replace(/([A-Z])/g,"-$1").toLowerCase();
 }
 
-let iStyleToString = (obj) => {
-    let str = '\n\tstyle="'
+let iStyleToString = (obj,builtInStyyle = "") => {
+    let str = ' style="'
     let styleContent = ""
     for (let key in obj){
         if (obj[key] !== ''){
             styleContent += ( humpToLine(key) + ':' + obj[key] + ';')
         }
     }
-    if (styleContent === ""){
+    if (styleContent === "" && builtInStyyle === ""){
         return ""
     }
+    str += builtInStyyle
     str += styleContent
     str += '"'
     return str
@@ -27,7 +28,7 @@ let iClassToString = (arr,...builtInClass) => {
     let buildtInClassStr = builtInClass.join(' ')
     let str = ` class="${buildtInClassStr}`
     for (let iClass in arr){
-        str += (' ' + iClass)
+        str += (' ' + arr[iClass])
     }
     str += `"`
     return str

@@ -10,7 +10,8 @@
 					<LeftComponents></LeftComponents>
 				</el-aside>
 				<el-main style="position: relative">
-					<eu-edit-tool></eu-edit-tool>
+					<eu-edit-tool-left></eu-edit-tool-left>
+					<eu-edit-tool-right></eu-edit-tool-right>
 					<template v-if="pattern==='component' || checkFile.isCanDrag === true">
 						<PhoneFrame></PhoneFrame>
 					</template>
@@ -29,8 +30,9 @@
 <script>
     import PhoneFrame from '@/components/PhoneFrame/PhoneFrame'
     import LeftComponents from '@/components/LeftComponents/LeftComponents'
-	import EuHeader from '@/components/frameComponents/EuHeader'
-	import EuEditTool from '@/components/frameComponents/EuEditTool'
+    import EuEditToolRight from '@/components/frameComponents/EuEditToolRight'
+    import EuHeader from '@/components/frameComponents/EuHeader'
+	import EuEditToolLeft from '@/components/frameComponents/EuEditToolLeft'
 	import RightComponents from '@/components/RightComponents/RightComponents'
 	import commonFileFrame from '@/components/PhoneFrame/commonFileFrame'
 
@@ -64,8 +66,9 @@
             PhoneFrame,
             LeftComponents,
             EuHeader,
-            EuEditTool,
+            EuEditToolLeft,
             RightComponents,
+            EuEditToolRight,
 			commonFileFrame
 		}
 	}

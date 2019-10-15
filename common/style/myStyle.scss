@@ -13,3 +13,9 @@
 .phone-width{
   width: 375px;
 }
+
+.tool {
+  .el-color-picker__trigger{
+    border: none !important;
+  }
+}

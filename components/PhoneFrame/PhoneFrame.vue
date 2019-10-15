@@ -1,5 +1,5 @@
 <template>
-    <view class="phone" :style="phoneStyle" ref="contextMenuTarget">
+    <view class="phone" :style="phoneSize" ref="contextMenuTarget" >
         <view class="phone-top">
             <view style="flex: 1"><i class="el-icon-more"></i>&nbsp;无服务</view>
             <view style="flex: 1;text-align: center">{{time}}</view>
@@ -10,7 +10,9 @@
         <draggable group="layouts" :list="list"
                    :options="{
                    }"
-                   style="height: calc(100% - 44px);width: 100%"
+                   @change="draggableChange"
+                   :style="[computedClassToStyle(phoneClass),phoneStyle]"
+                   style="position: absolute;top: 25px;bottom: 0;left: 0;right: 0"
                    handle=".flex-draggalbe-handle"
         >
             <template v-for="(item,index) in list">
@@ -58,6 +60,9 @@
             this.startTime()
         },
         methods:{
+            checkBackground(){
+                alert(1)
+            },
             contextMenuVisibleFun(show){
                 this.contextMenuVisible = show
             },
@@ -75,13 +80,46 @@
                 setInterval(()=>{
                     this.getTime()
                 },30000)
+            },
+            computedClassToStyle(classNames){
+                let style = {}
+                classNames.forEach(e=>{
+                    style = {...style,...this.customClass[e]}
+                })
+                return style
+            },
+            /**
+             * 会和另一个重复执行2遍，TODO 暂时没想到什么好的解决方法
+             * @param e
+             */
+            draggableChange(e){
+                this.$store.dispatch('cachesFolder')
             }
         },
         computed:{
-            phoneStyle(){
+            customClass(){
+                return  this.$store.state.currentCheckAttr.customClass
+            },
+            phoneClass(){
+                switch (this.$store.state.pattern) {
+                    case 'page':
+                        return this.$store.state.project.checkFile.fileStyleAndClass.iClass
+                    default:
+                        return []
+                }
+            },
+            phoneSize(){
                 let rote = this.$store.state.phoneSize / 100
                 return {
-                    zoom: rote
+                    zoom: rote,
+                }
+            },
+            phoneStyle(){
+                switch (this.$store.state.pattern) {
+                    case 'page':
+                        return this.$store.state.project.checkFile.fileStyleAndClass.iStyle
+                    default:
+                        return {}
                 }
             },
           /*list:{
@@ -150,6 +188,7 @@
         width: 100%;
         background-color: black;
         display: flex;
+        flex-direction: row;
         align-items: center;
         color: #aeb1b7;
         justify-content: space-between;

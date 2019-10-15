@@ -16,7 +16,7 @@ let itemTemplates = `
 
 let fileTemplates =
 `<template>
-    <view>
+    <view<%- iClassToString(fileStyleAndClass.iClass,'phone-content') -%><%- iStyleToString(fileStyleAndClass.iStyle) %>>
         <% list.forEach(item => { -%>
         <view<%- iClassToString(item.iClass,'flex') -%><%- iStyleToString(item.iStyle) %>>
             <% item.num.forEach(num => { -%>
@@ -35,8 +35,18 @@ let fileTemplates =
     </view>
 </template>
 <%- renderComponentsTemplateByScript(byDataArr) %>
+<%- classData %>`
+
+let fileTemplatesByStyle = `
 <style scoped>
-    <%= classData %>
+    .phone-content {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+<%= classStr %>
 </style>`
 
 let fileTemplatesByScript = `<script>
@@ -59,4 +69,4 @@ let fileTemplatesByScript = `<script>
 </script>
 `
 
-export {fileTemplates,itemTemplates,fileTemplatesByScript}
+export {fileTemplates,itemTemplates,fileTemplatesByScript,fileTemplatesByStyle}

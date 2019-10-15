@@ -191,6 +191,9 @@
                 }],
             }
         },
+        created(){
+
+        },
         methods:{
             yesAddComponents(ref){
                 this.$refs[ref].validate((valid) => {
@@ -243,17 +246,19 @@
                 //     alert('导出失败')
                 // })
                 let list = []
+                let fileStyleAndClass = {}
                 switch (this.$store.state.pattern) {
                     case 'page':
                         list = this.checkFile.dragList
                         this.form.fileName = this.checkFile.label.replace('.vue','')
+                        fileStyleAndClass = this.checkFile.fileStyleAndClass
                         break
                     case 'component':
                         list = this.$store.state.patternComponents.list
                         break
                 }
 
-                let showDialogData = outExportStr(list,this.$store.state.currentCheckAttr.customClass)
+                let showDialogData = outExportStr(list,this.$store.state.currentCheckAttr.customClass,fileStyleAndClass)
                 this.showDialogData = showDialogData.replace(VUE_NAME,this.form.fileName)
                 this.dialogTableVisible = true
                 // outExportFile('a.vue',this.$store.state.list)
@@ -279,9 +284,16 @@
             yesAddProject(formName){
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$store.commit('addNewProject',{projectName: this.addProjcetFrom.projectName,projectType: this.addProjcetFrom.projectType})
-                        this.$store.commit('setCurrentProjcetIndex',{index:this.$store.state.project.list.length - 1})
-                        this.closeProjectModel()
+                        try {
+                            this.$store.commit('addNewProject',{projectName: this.addProjcetFrom.projectName,projectType: this.addProjcetFrom.projectType})
+                            this.$store.commit('setCurrentProjcetIndex',{index:this.$store.state.project.list.length - 1})
+                            this.closeProjectModel()
+                        }catch (e) {
+                            this.$notify.error({
+                                title: '错误',
+                                message: e.msg
+                            });
+                        }
                     } else {
                         return false;
                     }
@@ -299,22 +311,29 @@
                         }else {
                             return false
                         }
-
+                        let item = this.$store.state.project.checkFolder.children
+                        let id = this.$store.state.project.checkFolder.children.length > 0 ? item[item.length - 1].id + 1 : 1
                         if (this.addFileForm.fileType === '0'){
+                            // 卧槽，我居然直接push ，（值得一提的是，这里因为checkFolder是指针，改变这里会同步改变project的list，省事了）
                             this.$store.state.project.checkFolder.children.push({
-                                id: gloadFolderListId++,
+                                id,
                                 type: 'folder',
                                 label: this.addFileForm.fileName,
                                 isCanDrag: false,  // 是不是可以拖拽编辑不是则就是只提供展示
                                 children: []
                             })
                         } else {
+
                             let fileNode = {
-                                id: gloadFolderListId++,
+                                id,
                                 type: 'vue-file',
                                 label: this.addFileForm.fileName,
                                 isCanDrag: true,  // 是不是可以拖拽编辑不是则就是只提供展示
-                                dragList: [] // 可编辑list
+                                dragList: [], // 可编辑list
+                                fileStyleAndClass: {
+                                    iStyle: {},
+                                    iClass: []
+                                }, // 文件背景样式，本不应该写在外层，应与dragList合为一个对象，但这个后面才想到，改起来有点麻烦
                             }
 
                             if (this.addFileForm.isAddPagePath){
@@ -332,7 +351,7 @@
                             }
                             this.$store.state.project.checkFolder.children.push(fileNode)
                         }
-
+                        this.$store.dispatch('cachesFolder')
                         this.closeAddFileModel()
                     } else {
                         return false;

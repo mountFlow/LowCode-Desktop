@@ -184,6 +184,7 @@
                             value: this.iStyle
                         }
                         this.$store.commit('setCustomClass',val)
+
                         this.resetForm('ruleForm')
                         this.openSussese('成功',this.editOrAdd === 'add' ? '创建类成功' : '编辑类成功')
 
