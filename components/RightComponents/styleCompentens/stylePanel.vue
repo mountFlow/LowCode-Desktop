@@ -195,7 +195,6 @@
             },
             iStyleJson: {
                 get(){
-                    console.log('iStyleJson')
                     this.$store.dispatch('cachesFolder')
                     return JSON.stringify(this.value,null,'    ')
                 },

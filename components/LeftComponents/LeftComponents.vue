@@ -220,41 +220,41 @@
                       }]},
               ],
               list: [
-                  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: {value: '按钮'}},
-                  {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{},iClass: [],propsValue: {value: 'hello',password: true}},
-                  {name:'选项',id: 2, componentName: 'Iradio',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'图标',id: 3, componentName: 'Iicon',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'文本',id: 4, componentName: 'Itext',iStyle:{},iClass: [],propsValue: {text:'文本'}},
-                  {name:'进度条',id: 5, componentName: 'Iprogress',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'滑动选择',id: 6, componentName: 'Islider',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{},iClass: [],propsValue: {}},
-                  {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: {value:'这是一段长文本'}},
-                  {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: [],propsValue: {}},
+                  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: [{label:'值',key:'text',value:'按钮',toDataOrHtml: 'html',type: 'String'},{label:'类型',key:'type',value:'default',toDataOrHtml: 'html',type:'select',select: [{label: '红色',value: 'warn'},{label: '蓝色',value: 'primary'},{label: '白色',value: 'default'}]}]},
+                  {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{},iClass: [],propsValue: [{label:'值',key:'value',value:'hello',toDataOrHtml: 'html',type: 'String',defaultValue: ''},{label:'密码',key:'password',value:'false',toDataOrHtml: 'html',type:'boolean',defaultValue: 'false'}]},
+                  {name:'选项',id: 2, componentName: 'Iradio',iStyle:{},iClass: [],propsValue: []},
+                  {name:'图标',id: 3, componentName: 'Iicon',iStyle:{},iClass: [],propsValue: []},
+                  {name:'文本',id: 4, componentName: 'Itext',iStyle:{},iClass: [],propsValue: [{label:'值',key:'text',value:'文本',toDataOrHtml: 'html',type: 'String',defaultValue: ''},{label:'是否可选',key:'selectable',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue:'false'},{label:'是否解码',key:'decode',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue: 'false'}]},
+                  {name:'进度条',id: 5, componentName: 'Iprogress',iStyle:{},iClass: [],propsValue: []},
+                  {name:'滑动选择',id: 6, componentName: 'Islider',iStyle:{},iClass: [],propsValue: []},
+                  {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{},iClass: [],propsValue: []},
+                  {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: [{label:'值',key: 'value',value:'这是一段长文本',toDataOrHtml: 'html',type: 'String',defaultValue: ''}]},
+                  {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: [],propsValue: []},
                   // {name:'webView',id: 3, componentName: 'IwebView'},
               ],
               colorUiList: [
-                  {name:'轮播图',id: 10, componentName: 'Cswiper',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'图标',id: 11, componentName: 'Cicon',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'按钮',id: 12, componentName: 'Cbutton',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'标签',id: 13, componentName: 'Ctag',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'头像',id: 14, componentName: 'Cavatar',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'宫格列表',id: 17, componentName: 'ClistGrid',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'菜单列表',id: 18, componentName: 'Clist',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'卡片',id: 19, componentName: 'Ccard',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'时间线',id: 20, componentName: 'Ctimeline',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'步骤条',id: 21, componentName: 'Csteps',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'进度条',id: 15, componentName: 'Cprogress',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'导航栏',id: 16, componentName: 'Cnav',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'轮播图',id: 10, componentName: 'Cswiper',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'图标',id: 11, componentName: 'Cicon',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'按钮',id: 12, componentName: 'Cbutton',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'标签',id: 13, componentName: 'Ctag',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'头像',id: 14, componentName: 'Cavatar',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'宫格列表',id: 17, componentName: 'ClistGrid',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'菜单列表',id: 18, componentName: 'Clist',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'卡片',id: 19, componentName: 'Ccard',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'时间线',id: 20, componentName: 'Ctimeline',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'步骤条',id: 21, componentName: 'Csteps',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'进度条',id: 15, componentName: 'Cprogress',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'导航栏',id: 16, componentName: 'Cnav',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
               ],
               formList: [
-                  {name:'输入框',id: 22, componentName: 'FormInput',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'输入框2',id: 23, componentName: 'FormInput2',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'选择框',id: 24, componentName: 'FromSelect',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'时间选择',id: 25, componentName: 'FromSelectByTime',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'日期选择',id: 26, componentName: 'FromSelectByDate',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'开关',id: 27, componentName: 'FromSwitch',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'单选操作',id: 28, componentName: 'FormRadio',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
-                  {name:'图片上传',id: 29, componentName: 'FormUpdataImage',iStyle:{},iClass: [],propsValue: {},upxSwitch: false},
+                  {name:'输入框',id: 22, componentName: 'FormInput',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'输入框2',id: 23, componentName: 'FormInput2',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'选择框',id: 24, componentName: 'FromSelect',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'时间选择',id: 25, componentName: 'FromSelectByTime',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'日期选择',id: 26, componentName: 'FromSelectByDate',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'开关',id: 27, componentName: 'FromSwitch',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'单选操作',id: 28, componentName: 'FormRadio',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                  {name:'图片上传',id: 29, componentName: 'FormUpdataImage',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
               ],
           }
         },
@@ -281,12 +281,9 @@
                 return newObj
             },
             cloneComponent(cloneObj){
-                let newObj = {...cloneObj}
+                let newObj = JSON.parse(JSON.stringify(cloneObj))
                 compnentGlobalId++
                 newObj.id = compnentGlobalId
-                newObj.iStyle = {}
-                newObj.iClass = []
-                newObj.propsValue = {...cloneObj.propsValue}
                 return newObj
             },
             cloneMyComponent(cloneObj){
@@ -312,7 +309,7 @@
         computed:{
             myComponentsList(){
                 let id = 777
-                //  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: {}},
+                //  {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: []},
                 let list = []
                 let componentsList = this.$store.state.patternComponents.componentsList
                 Object.keys(componentsList).map((key)=>{
@@ -323,7 +320,7 @@
                         componentName: 'MyComponentsEntity',
                         iStyle: {},
                         iClass: {},
-                        propsValue: {},
+                        propsValue: [],
                         list: filterComponentsList
                     })
                 })

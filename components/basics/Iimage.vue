@@ -11,6 +11,12 @@
     export default {
         name: 'Iimage',
         mixins: [commoMethodsByBasicsComponents],
+        props:{
+            propsValue: {
+                type: Array,
+                default: () => []
+            }
+        },
         data(){
             return {
                 array: [{
@@ -62,7 +68,7 @@
         width: 150upx;
         height: 100upx;
         background-color: #eeeeee;
-        resize: both;
+        /*resize: both;*/
     }
 
 </style>

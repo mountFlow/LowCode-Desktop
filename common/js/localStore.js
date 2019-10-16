@@ -17,6 +17,7 @@ let storeKey = {
     STYLE_LIST: 'STYLE_LIST_KEY', // 存储已生成的style，当用户在已有的基础上增加style时覆盖系统原有的数据
     CLASS_LIST: 'CLASS_LIST_KEY', // 存储用户生成的class数据
     COMPONENT_DATA: 'COMPONENT_DATA_KEY', // 存储自定义的组件
+    BASICS_COMPONENT_DATA: 'BASICS_COMPONENT_DATA_KEY', // 存储自带组件的数据
 }
 
 /**

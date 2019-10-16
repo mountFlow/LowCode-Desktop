@@ -1,8 +1,8 @@
 <template>
-    <button v-bind="propsValue"
+    <button v-bind="propsValueMap"
             :ref="'Ibutton-' + dataIIndex"
             @mouseup="initComponenSizeStyle('Ibutton-' + dataIIndex)"
-    >{{propsValue.value}}</button>
+    >{{propsValueMap.text}}</button>
 </template>
 
 <script>
@@ -12,15 +12,9 @@
         name: 'Ibutton',
         mixins: [commoMethodsByBasicsComponents],
         props:{
-            name:{
-                type: String,
-                default: '按钮'
-            },
             propsValue: {
-                type: Object,
-                default: () => ({
-                    value: '按钮'
-                })
+                type: Array,
+                default: () => ([{key:'text',value:'按钮'}])
             }
         }
     }
@@ -28,6 +22,6 @@
 
 <style >
     button{
-        resize: both;
+        /*resize: both;*/
     }
 </style>

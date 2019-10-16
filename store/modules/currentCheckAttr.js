@@ -184,16 +184,15 @@ const currentCheckAttr = {
         ]
     },
     mutations: {
-        deletePropsValue(state,{key}){
+        deletePropsValue(state,{index}){
             if (state.item){
-                state.item.propsValue[key] = ''
-                vue.delete(state.item.propsValue,key)
+                state.item.propsValue.splice(index, 1)
             }
         },
         addPropsValue(state,obj){
             if (state.item){
-                let {key,defaultValue} = obj
-                vue.set(state.item.propsValue,key,defaultValue)
+                obj.value = obj.defaultValue
+                state.item.propsValue.push({...obj})
             }
         },
         setContextMenuTarget(state,{contextMenuTarget}){

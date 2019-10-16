@@ -11,9 +11,13 @@ let Cswiper =
 
 let Iinput =
     `<input type="text"<%- iClassToString(itemListItem.iClass,'i-input') %> <%- iStyleToString(itemListItem.iStyle) %>placeholder="input" v-bind="propsValue"/>`
+let Iicon =
+    `<icon type="success"<%- iClassToString(itemListItem.iClass) %><%- iStyleToString(itemListItem.iStyle) %>v-bind="propsValue"/>`
 
 let defaultTemplate =
-`<<%- itemListItem.componentName.replace(/^I/,'') -%><%- iClassToString(itemListItem.iClass) %><%- iStyleToString(itemListItem.iStyle) %>><%- itemListItem.name  -%></<%- itemListItem.componentName.replace(/^I/,'') -%>>`
+`<<%- componentName.replace(/^I/,'') -%><%- iClassToString(itemListItem.iClass) %><%- iStyleToString(itemListItem.iStyle) %> <%- propsValueToString(itemListItem,byDataArr) %>><%- text  -%></<%- componentName.replace(/^I/,'') -%>>`
+let defaultTemplate2 =
+    `<<%- componentName.replace(/^I/,'') -%><%- iClassToString(itemListItem.iClass) %><%- iStyleToString(itemListItem.iStyle) %> <%- propsValueToString(itemListItem,byDataArr) %> />`
 
 
 let CswiperByData = `swiperList<%- id -%>: [{
@@ -46,6 +50,6 @@ let CswiperByData = `swiperList<%- id -%>: [{
                     url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
                 }]`
 
-let data = {Cswiper,Iinput,defaultTemplate,CswiperByData}
+let data = {Cswiper,Iinput,defaultTemplate,CswiperByData,Iicon,defaultTemplate2}
 
 export default data

@@ -11,7 +11,7 @@
                             <el-input :value="currentCompentenName" disabled size="mini"></el-input>
                         </el-form-item>
                         <el-divider><span style="color: #DCDFE6">组件传值</span></el-divider>
-                        <props-panel v-model="propsValue" :objKey="propsValueKeys"></props-panel>
+                        <props-panel v-model="propsValue"></props-panel>
                     </el-form>
                 </el-tab-pane>
                 <el-tab-pane label="属性" name="first">
@@ -85,16 +85,6 @@
                     return this.$store.state.currentCheckAttr.item.propsValue
                 }
                 return undefined
-            },
-            propsValueKeys() {
-                if (!this.propsValue){
-                    return []
-                }
-                let propsArr = []
-                Object.keys(this.propsValue).map((key)=>{
-                    propsArr.push(key)
-                })
-                return propsArr
             },
             customClassList(){
                 let customClass = this.$store.state.currentCheckAttr.customClass

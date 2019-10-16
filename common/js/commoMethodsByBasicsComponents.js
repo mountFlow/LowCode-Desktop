@@ -10,6 +10,16 @@ let commoMethodsByBasicsComponents = {
             let {width,height} = this.$refs[ref].$el.style
             this.$emit('handresize',{width,height})
         },
+    },
+    computed:{
+        propsValueMap(){
+            let propsValueMap = {}
+            this.propsValue.forEach(e => {
+                let {key,value} = e
+                propsValueMap[key] = value
+            })
+            return propsValueMap
+        },
     }
 }
 

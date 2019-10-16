@@ -3,14 +3,15 @@
 </template>
 
 <script>
+    import commoMethodsByBasicsComponents from 'common/js/commoMethodsByBasicsComponents'
+
     export default {
         name: 'Itextarea',
+        mixins: [commoMethodsByBasicsComponents],
         props:{
             propsValue: {
-                type: Object,
-                default: () => ({
-                    value: '长文本'
-                })
+                type: Array,
+                default: () => ([{value: '长文本',key: 'value'}])
             }
         }
     }

@@ -5,9 +5,10 @@
                 <el-tooltip class="item" effect="dark" content="把组件托到这里删除" placement="right">
                     <draggable :group="{ name: deleteGroupName}"
                                :options="{
-                       }"
+                                }"
                                :sort="false"
                                class="tool-item-icon"
+                               @change="draggableChange"
                     >
                         <i class="el-icon-delete-solid" style="font-size: 23px;color: white;"></i>
                     </draggable>
@@ -360,7 +361,19 @@
             },
             saveComponenet(){
                 this.saveComponentModel = true
-            }
+            },
+            draggableChange(e){
+                console.log(e)
+                if (e.added){
+                    this.delMyComponentsToFolder(e.added)
+                }
+            },
+            delMyComponentsToFolder(el){
+                let {componentName} = el.element
+                if (componentName === "MyComponentsEntity") {
+                    this.$store.dispatch('delCompentsFile',{componentName:el.element.name})
+                }
+            },
         },
         computed:{
             pattern(){

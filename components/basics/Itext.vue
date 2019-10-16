@@ -1,16 +1,17 @@
 <template>
-    <text>{{ propsValue.text}}</text>
+    <text>{{ propsValueMap.text}}</text>
 </template>
 
 <script>
+    import commoMethodsByBasicsComponents from 'common/js/commoMethodsByBasicsComponents'
+
     export default {
         name: 'Itext',
+        mixins: [commoMethodsByBasicsComponents],
         props:{
             propsValue: {
-                type: Object,
-                default: () => ({
-                    text: '文本'
-                })
+                type: Array,
+                default: () => ([{key:'text',value:'文本'}])
             }
         }
     }

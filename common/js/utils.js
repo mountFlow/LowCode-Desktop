@@ -21,7 +21,7 @@ let iStyleToString = (obj,builtInStyyle = "") => {
 
 let iClassToString = (arr,...builtInClass) => {
 
-    if (arr.length === 0 && builtInClass.length === 0){
+    if ((arr && arr.length === 0) && builtInClass.length === 0){
         return ""
     }
 

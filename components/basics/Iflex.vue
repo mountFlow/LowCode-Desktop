@@ -147,8 +147,17 @@
              * @param e
              */
             draggableChange(e){
+                if (e.added){
+                    this.addMyComponentsToFolder(e.added)
+                }
                 this.$store.dispatch('cachesFolder')
             },
+            addMyComponentsToFolder(el){
+                let {componentName,list} = el.element
+                if (componentName === "MyComponentsEntity") {
+                    this.$store.dispatch('addCompentsFile',{list,componentName:el.element.name})
+                }
+            }
         },
         computed:{
             customClass(){

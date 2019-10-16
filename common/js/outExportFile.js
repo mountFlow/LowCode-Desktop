@@ -18,8 +18,46 @@ let classMapToString = (map) => {
 
 }
 
-let iteratorList = (list,classMap,customClass) => {
+let propsValueToString = (itemListItem,byDataArr) => {
+    let result = ''
+    let {id,componentName,propsValue} = itemListItem
+    for (let i = 0; i < propsValue.length; i++) {
+        let {key,value,defaultValue,toDataOrHtml,type,dataName} = propsValue[i]
+        if (defaultValue === value || key === 'text'){
+            continue
+        }
+        if (toDataOrHtml === 'data'){
+            result += ':'
+            result += key
+            if (dataName && dataName !== ''){
+                result += `="${dataName}" `
+            } else {
+                result += `="${componentName + key + id}" `
+            }
+
+            if (byDataArr.length > 0){
+                id = byDataArr[byDataArr.length - 1 ].id + 1
+            }
+            byDataArr.push({
+                componentsName:componentName,key,value,id,type,dataName
+            })
+        } else if (toDataOrHtml === 'html'){
+            let cacheResult = key
+            if (type === 'boolean'){
+                cacheResult = ':' + cacheResult
+                cacheResult += `="${value}" `
+            } else {
+                cacheResult += `="${value}" `
+            }
+            result += cacheResult
+        }
+    }
+    return result
+}
+
+let iteratorList = (list,classMap,customClass,myComponentsArr) => {
     let classStr = ""
+
     if (Object.prototype.toString.call(list) === '[object Array]'){
         for (let item in list){
             let iClass = list[item].iClass
@@ -31,10 +69,14 @@ let iteratorList = (list,classMap,customClass) => {
                 }
             })
 
+            if (list[item].componentName === 'MyComponentsEntity'){
+                myComponentsArr.push(list[item].name)
+            }
+
             if (list[item].componentName === 'Iflex'){
-                classStr += iteratorList(list[item].num,classMap,customClass)
+                classStr += iteratorList(list[item].num,classMap,customClass,myComponentsArr)
             } else if (list[item].componentName === undefined) {
-                classStr += iteratorList(list[item].itemList,classMap,customClass)
+                classStr += iteratorList(list[item].itemList,classMap,customClass,myComponentsArr)
             }
         }
     }
@@ -44,8 +86,19 @@ let iteratorList = (list,classMap,customClass) => {
 
 let beforDisposeListToClassDataString = (list,customClass) => {
     let classMap = {}
-    let classStr = iteratorList(list,classMap,customClass)
-    return renderComponentsTemplateByStyle(classStr)
+    let myComponentsArr = []
+    let classStr = iteratorList(list,classMap,customClass,myComponentsArr)
+    return {classStr:renderComponentsTemplateByStyle(classStr),myComponentsArr}
+}
+let beforDisposeListToMyCompentsString = (myComponentsArr) => {
+    let importCompentsStr = ""
+    let componentsObjStr = "components:{\n"
+    myComponentsArr.forEach( e=>{
+        importCompentsStr += `import ${e} from '@/components/${e}'\n`
+        componentsObjStr += `            ${e},\n`
+    })
+    componentsObjStr += '        }\n'
+    return {importCompentsStr,componentsObjStr}
 }
 
 /**
@@ -55,15 +108,32 @@ let beforDisposeListToClassDataString = (list,customClass) => {
  * @returns {*}
  */
 let renderComponentsTemplate = (itemListItem,byDataArr) => {
+    // 这是用来查找模板的
     let componentsName = itemListItem.componentName
+    // 这是用来渲染模板的
+    let componentName = itemListItem.componentName
+
+    // 自定义的组件
+    if (componentsName === 'MyComponentsEntity'){
+        componentName = itemListItem.name
+    }
+
+    let text = ''
     if (COMPONENTS_TEMPLATE[componentsName] === undefined){
-        componentsName = 'defaultTemplate'
+        componentsName = 'defaultTemplate2'
+        itemListItem.propsValue.forEach(e=>{
+            if (e.key === 'text'){
+                text = e.value
+                componentsName = 'defaultTemplate'
+                return
+            }
+        })
     } else {
         byDataArr.push({
             componentsName,id:itemListItem.id
         })
     }
-    let x = ejs.render(COMPONENTS_TEMPLATE[componentsName],{itemListItem,iStyleToString,iClassToString},{rmWhitespace:true})
+    let x = ejs.render(COMPONENTS_TEMPLATE[componentsName],{componentName,itemListItem,iStyleToString,iClassToString,propsValueToString,byDataArr,text},{rmWhitespace:true})
     return x
 }
 
@@ -73,19 +143,45 @@ let renderComponentsTemplate = (itemListItem,byDataArr) => {
  */
 let renderComponentsTemplateByData = (byDataArr) => {
     let result = ''
+    let i = 0
     byDataArr.forEach(e=>{
+        i++
         let dataKey = e.componentsName + 'ByData'
         if (COMPONENTS_TEMPLATE[dataKey] !== undefined){
             let x = ejs.render(COMPONENTS_TEMPLATE[dataKey],{id:e.id},{rmWhitespace:false})
             result += x
             result += ','
+        } else {
+            let {key,value,id,type,componentsName,dataName} = e
+            if (i > 1){
+                result += '\n                '
+            }
+            if (dataName && dataName !== ''){
+                result += `${dataName}: `
+            } else {
+                result += `${componentsName + key + id}: `
+            }
+            switch (type) {
+                case 'String':
+                    result += `'${value}'`
+                    result += ','
+                    break
+                case 'boolean':
+                    result += value
+                    result += ','
+                    break
+                case 'select':
+                    result += `'${value}'`
+                    result += ','
+                    break
+            }
         }
     })
     return result
 }
 
-let renderComponentsTemplateByScript = (byDataArr) => {
-    let x = ejs.render(fileTemplatesByScript,{renderComponentsTemplateByData,byDataArr},{rmWhitespace:false})
+let renderComponentsTemplateByScript = (byDataArr,importCompentsStr,componentsObjStr) => {
+    let x = ejs.render(fileTemplatesByScript,{renderComponentsTemplateByData,byDataArr,importCompentsStr,componentsObjStr},{rmWhitespace:false})
     return x
 }
 
@@ -114,8 +210,11 @@ let _outExportItem = (list,fun,byDataArr) => {
  */
 let outExportStr = (list,customClass,fileStyleAndClass) => {
     let byDataArr = [] // 存放模板需要的 data 的值
-    let classData = beforDisposeListToClassDataString(list,customClass)
+    let {classData,myComponentsArr} = beforDisposeListToClassDataString(list,customClass)
+    let {importCompentsStr,componentsObjStr} = beforDisposeListToMyCompentsString(myComponentsArr)
     let x = ejs.render(fileTemplates,{list,
+        importCompentsStr,
+        componentsObjStr,
         fileStyleAndClass,
         fun:_outExportItem,
         humpToLine,
@@ -172,8 +271,8 @@ let _outExportFolder = (fileName,list,customClass,commonFileParam,pointer) => {
         } else {
             let fileText = ""
             if (item.isCanDrag === true){
-                let dragList = item.dragList
-                fileText = outExportStr(dragList,customClass)
+                let {dragList,fileStyleAndClass} = item.dragList
+                fileText = outExportStr(dragList,customClass,fileStyleAndClass)
                 fileText = fileText.replace(VUE_NAME,itemName.replace('.vue',''))
             } else {
                 fileText = outCommonExportFile(item.label,commonFileParam)

@@ -4,6 +4,7 @@ let data = [{
     id: 31,
     label: 'components',
     type: 'folder',
+    children: []
 },{
     id: 1,
     label: 'pages',

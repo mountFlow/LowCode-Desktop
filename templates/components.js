@@ -34,7 +34,7 @@ let fileTemplates =
         <%}) -%>
     </view>
 </template>
-<%- renderComponentsTemplateByScript(byDataArr) %>
+<%- renderComponentsTemplateByScript(byDataArr,importCompentsStr,componentsObjStr) %>
 <%- classData %>`
 
 let fileTemplatesByStyle = `
@@ -50,6 +50,7 @@ let fileTemplatesByStyle = `
 </style>`
 
 let fileTemplatesByScript = `<script>
+    <%- importCompentsStr %>
     export default {
         name: "This#is#fileName",
         data() {
@@ -63,8 +64,7 @@ let fileTemplatesByScript = `<script>
         computed: {
             
         },
-        components:{
-        }
+        <%- componentsObjStr %>
     }
 </script>
 `

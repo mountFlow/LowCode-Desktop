@@ -27,7 +27,7 @@
                 <div style="color: #ccc">
                      <i class="el-icon-upload right-icon" style="margin-right: 5px" @click="updateFile(data)"></i>
                     <!--<i class="el-icon-edit right-icon" style="margin-right: 5px"></i>-->
-                    <i class="el-icon-delete right-icon" style="margin-right: 5px" @click="deleteFolder(node,data)"></i>
+                    <i class="el-icon-delete right-icon" style="margin-right: 5px" @click="deleteFolder(node,data,$even)"></i>
                 </div>
               </template>
          </span>
@@ -54,8 +54,14 @@
                     if (data.isCanDrag !== true ){
                         data.fileText = outCommonExportFile(data.label,{projectName:this.currentProjcetNam})
                     }
-
-                    this.$store.commit('setCheckFile',data)
+                    // 组件模式
+                    if ( data.id >= 10999){
+                        this.$store.commit('setPattern',{pattern: 'component'})
+                        let list = JSON.parse(JSON.stringify(data.dragList).replace(/SimpleIflex/g,'Iflex'))
+                        this.$store.commit('setPatternComponentslList',{list})
+                    }else {
+                        this.$store.commit('setCheckFile',data)
+                    }
                 }
             },
             allowDrop(draggingNode, dropNode, type) {
@@ -95,12 +101,13 @@
                 }
                 outExportFileByStr(data.label,fileText)
             },
-            deleteFolder(node,data){
+            deleteFolder(node,data,e){
                 const parent = node.parent;
                 const children = parent.data.children || parent.data;
                 const index = children.findIndex(d => d.id === data.id);
                 children.splice(index, 1);
                 this.$store.dispatch('cachesFolder')
+                e.preventDefault()
             }
         },
         computed:{
