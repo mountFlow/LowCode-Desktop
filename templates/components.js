@@ -1,36 +1,66 @@
 let itemTemplates = `
-<view<%- iClassToString(list.iClass,'flex') -%><%- iStyleToString(list.iStyle) %>>
-    <% list.num.forEach(num => { -%>
-    <view<%- iClassToString(num.iClass,'margin-0',num.layoutClass) -%><%- iStyleToString(num.iStyle) %>>
-    <% num.itemList.forEach(itemListItem => { -%>
-        <% if(itemListItem.componentName === 'Iflex'){ -%>
-            <%- fun(itemListItem,fun) -%>
-        <% } else { -%>
-            <%- renderComponentsTemplate(itemListItem,byDataArr) -%>
-        <% } -%>
-    <%}) -%>
-    </view>
-    <%}) -%>
-</view>
+<% if(list.num.length === 1){ -%>
+                <% list.num.forEach(num => { -%>
+                     <view<%- iClassToString(num.iClass,'margin-0') -%><%- iStyleToString(num.iStyle) %>>
+                         <% num.itemList.forEach(itemListItem => { -%>
+                             <% if(itemListItem.componentName === 'Iflex'){ -%>
+                             <%- fun(itemListItem,fun) -%>
+                             <% } else { -%>
+                                 <%- renderComponentsTemplate(itemListItem,byDataArr) -%>
+                             <% } -%>
+                         <%}) -%>
+                     </view>
+                 <%}) -%>
+            <% } -%>
+            <% if(list.num.length > 1){ -%>
+                <view<%- iClassToString(list.iClass,'flex') -%><%- iStyleToString(list.iStyle) %>>
+                    <% list.num.forEach(num => { -%>
+                         <view<%- iClassToString(num.iClass,'margin-0',num.layoutClass) -%><%- iStyleToString(num.iStyle) %>>
+                             <% num.itemList.forEach(itemListItem => { -%>
+                                 <% if(itemListItem.componentName === 'Iflex'){ -%>
+                                 <%- fun(itemListItem,fun) -%>
+                                 <% } else { -%>
+                                     <%- renderComponentsTemplate(itemListItem,byDataArr) -%>
+                                 <% } -%>
+                             <%}) -%>
+                         </view>
+                     <%}) -%>
+                </view>    
+            <% } -%>
 `
 
 let fileTemplates =
 `<template>
     <view<%- iClassToString(fileStyleAndClass.iClass,mode === 'page' ? 'phone-content': '') -%><%- iStyleToString(fileStyleAndClass.iStyle) %>>
         <% list.forEach(item => { -%>
-        <view<%- iClassToString(item.iClass,'flex') -%><%- iStyleToString(item.iStyle) %>>
-            <% item.num.forEach(num => { -%>
-                 <view<%- iClassToString(num.iClass,'margin-0',num.layoutClass) -%><%- iStyleToString(num.iStyle) %>>
-                     <% num.itemList.forEach(itemListItem => { -%>
-                         <% if(itemListItem.componentName === 'Iflex'){ -%>
-                         <%- fun(itemListItem,fun) -%>
-                         <% } else { -%>
-                             <%- renderComponentsTemplate(itemListItem,byDataArr) -%>
-                         <% } -%>
+            <% if(item.num.length === 1){ -%>
+                <% item.num.forEach(num => { -%>
+                     <view<%- iClassToString(num.iClass,'margin-0') -%><%- iStyleToString(num.iStyle) %>>
+                         <% num.itemList.forEach(itemListItem => { -%>
+                             <% if(itemListItem.componentName === 'Iflex'){ -%>
+                             <%- fun(itemListItem,fun) -%>
+                             <% } else { -%>
+                                 <%- renderComponentsTemplate(itemListItem,byDataArr) -%>
+                             <% } -%>
+                         <%}) -%>
+                     </view>
+                 <%}) -%>
+            <% } -%>
+            <% if(item.num.length > 1){ -%>
+                <view<%- iClassToString(item.iClass,'flex') -%><%- iStyleToString(item.iStyle) %>>
+                    <% item.num.forEach(num => { -%>
+                         <view<%- iClassToString(num.iClass,'margin-0',num.layoutClass) -%><%- iStyleToString(num.iStyle) %>>
+                             <% num.itemList.forEach(itemListItem => { -%>
+                                 <% if(itemListItem.componentName === 'Iflex'){ -%>
+                                 <%- fun(itemListItem,fun) -%>
+                                 <% } else { -%>
+                                     <%- renderComponentsTemplate(itemListItem,byDataArr) -%>
+                                 <% } -%>
+                             <%}) -%>
+                         </view>
                      <%}) -%>
-                 </view>
-             <%}) -%>
-        </view>    
+                </view>    
+            <% } -%>
         <%}) -%>
     </view>
 </template>
