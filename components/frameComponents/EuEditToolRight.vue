@@ -1,10 +1,10 @@
 <template>
     <div class="tool">
-        <template v-if="(pattern === 'component') || (checkFile && checkFile.isCanDrag === true)">
+        <template v-if="(pattern === 'page') && (checkFile && checkFile.isCanDrag === true)">
             <div class="tool-item" >
                 <el-tooltip class="item" effect="dark" content="选择背景样式" placement="right">
-                    <div class="tool-item-icon" @click="checkBackgrand">
-                        <i class="el-icon-edit" style="font-size: 23px;color: white;"></i>
+                    <div class="tool-item-icon" @click="checkBackgrand" style="color: white;font-size: 14px;">
+                        背景
                     </div>
                 </el-tooltip>
             </div>
@@ -24,6 +24,7 @@
         methods:{
             checkBackgrand(){
                 this.$store.dispatch('setCurrentCheckAttrNameComputedByBackGrand')
+                this.$store.commit('setRightAideTabActiveName',{rightAideTabActiveName:'first'})
             }
         },
         computed:{

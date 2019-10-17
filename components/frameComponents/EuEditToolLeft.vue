@@ -145,6 +145,19 @@
 
     let gloadFolderListId = 999
 
+    let validateComponentName = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入组件名称'));
+            } else {
+                let regx = /^[a-zA-Z]+$/;
+                if (!regx.test(value)){
+                    callback(new Error('名称只能由大小写字母组成'));
+                }else {
+                    callback();
+                }
+            }
+        };
+
     export default {
         name: 'EuEditTool',
         data(){
@@ -154,7 +167,7 @@
                     ComponentName: ''
                 },
                 addComponentsFromRule:{
-                    ComponentName:[  { required: true, message: '请输入组件名称', trigger: 'blur' },]
+                    ComponentName:[{ validator:validateComponentName ,trigger: 'blur' },]
                 },
 
                 form:{
@@ -248,6 +261,7 @@
                 // })
                 let list = []
                 let fileStyleAndClass = {}
+                let mode = 'page'
                 switch (this.$store.state.pattern) {
                     case 'page':
                         list = this.checkFile.dragList
@@ -256,10 +270,11 @@
                         break
                     case 'component':
                         list = this.$store.state.patternComponents.list
+                        mode = 'component'
                         break
                 }
 
-                let showDialogData = outExportStr(list,this.$store.state.currentCheckAttr.customClass,fileStyleAndClass)
+                let showDialogData = outExportStr(list,this.$store.state.currentCheckAttr.customClass,fileStyleAndClass,mode)
                 this.showDialogData = showDialogData.replace(VUE_NAME,this.form.fileName)
                 this.dialogTableVisible = true
                 // outExportFile('a.vue',this.$store.state.list)

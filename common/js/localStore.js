@@ -76,4 +76,26 @@ let getCachesPatternComponents = () => {
     return {}
 }
 
-export {storeKey,cachesFolder,getCachesFolder,getCachesClass,cachesClass,cachesStyle,getCachesStyle,getCachesPatternComponents,cachesPatternComponents}
+let cachesComponentsInfo = (data) => {
+    let dataStr = JSON.stringify(data)
+    _setLocalStore(storeKey.BASICS_COMPONENT_DATA , dataStr)
+}
+let getCachesComponentsInfo = () => {
+    let result = _getLocalStore(storeKey.BASICS_COMPONENT_DATA )
+    if (result && result !== ''){
+        return JSON.parse(result)
+    }
+    return undefined
+}
+
+export {storeKey,
+    cachesFolder,
+    getCachesFolder,
+    getCachesClass,
+    cachesClass,
+    cachesStyle,
+    getCachesStyle,
+    getCachesPatternComponents,
+    cachesPatternComponents,
+    cachesComponentsInfo,
+    getCachesComponentsInfo}

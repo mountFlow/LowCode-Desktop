@@ -31,6 +31,10 @@ let iClassToString = (arr,...builtInClass) => {
         str += (' ' + arr[iClass])
     }
     str += `"`
+
+    if (str === ' class=""'){
+        return ''
+    }
     return str
 }
 

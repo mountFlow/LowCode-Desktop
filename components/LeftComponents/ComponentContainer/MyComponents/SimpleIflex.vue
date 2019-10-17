@@ -6,6 +6,7 @@
         <view class="margin-0  i-flex"
               :class="[item.layoutClass]"
               v-for="(item,index0) in num"
+              :style="[computedClassToStyle(item.iClass),computedStyleToStyle(item.iStyle)]"
         >
             <template v-for="(item2,index) in item.itemList">
                 <component :key="index" :is="item2.componentName"

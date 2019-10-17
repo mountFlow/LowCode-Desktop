@@ -137,6 +137,7 @@
         methods: {
             deleteProps(index){
                 this.$store.commit('deletePropsValue',{index})
+                this.$store.dispatch('updataComponentsInfo')
             },
             addProps() {
                 this.addPropsShow = true
@@ -181,6 +182,8 @@
                             ]
                         }
                         this.$store.commit('addPropsValue',this.addPropsForm)
+                        this.$store.dispatch('updataComponentsInfo')
+
                         this.resetForm(ref)
                     } else {
                         console.log('error submit!!');

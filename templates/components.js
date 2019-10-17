@@ -16,7 +16,7 @@ let itemTemplates = `
 
 let fileTemplates =
 `<template>
-    <view<%- iClassToString(fileStyleAndClass.iClass,'phone-content') -%><%- iStyleToString(fileStyleAndClass.iStyle) %>>
+    <view<%- iClassToString(fileStyleAndClass.iClass,mode === 'page' ? 'phone-content': '') -%><%- iStyleToString(fileStyleAndClass.iStyle) %>>
         <% list.forEach(item => { -%>
         <view<%- iClassToString(item.iClass,'flex') -%><%- iStyleToString(item.iStyle) %>>
             <% item.num.forEach(num => { -%>
@@ -39,14 +39,16 @@ let fileTemplates =
 
 let fileTemplatesByStyle = `
 <style scoped>
-    .phone-content {
+    <% if(mode === 'page'){-%>
+.phone-content {
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
     }
-<%= classStr %>
+<% }-%>
+<%- classStr %>
 </style>`
 
 let fileTemplatesByScript = `<script>

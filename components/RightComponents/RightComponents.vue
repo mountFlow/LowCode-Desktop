@@ -59,15 +59,14 @@
         data(){
             return {
                 editItemClass: '',
-                activeName: 'four',
             }
         },
         watch:{
             centerValue(val){
                 if (val === 'page'){
-                    this.activeName = 'four'
+                    this.$store.commit('setRightAideTabActiveName',{rightAideTabActiveName:'four'})
                 }else {
-                    this.activeName = 'first'
+                    this.$store.commit('setRightAideTabActiveName',{rightAideTabActiveName:'first'})
                 }
             }
         },
@@ -77,6 +76,14 @@
             }
         },
         computed:{
+            activeName:{
+                get(){
+                    return this.$store.state.rightAideTabActiveName
+                },
+                set(val){
+                   this.$store.commit('setRightAideTabActiveName',{rightAideTabActiveName:val})
+                }
+            },
             centerValue(){
                 return this.$store.state.pattern
             },

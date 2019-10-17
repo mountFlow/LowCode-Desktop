@@ -25,9 +25,9 @@
                           <use v-bind:xlink:href="'#icon' + data.type"></use>
                         </svg>{{ node.label }}</span>
                 <div style="color: #ccc">
-                     <i class="el-icon-upload right-icon" style="margin-right: 5px" @click="updateFile(data)"></i>
+                     <i class="el-icon-upload right-icon" style="margin-right: 5px" @click.stop="updateFile(data)"></i>
                     <!--<i class="el-icon-edit right-icon" style="margin-right: 5px"></i>-->
-                    <i class="el-icon-delete right-icon" style="margin-right: 5px" @click="deleteFolder(node,data,$even)"></i>
+                    <i class="el-icon-delete right-icon" style="margin-right: 5px" @click.stop="deleteFolder(node,data,$event)"></i>
                 </div>
               </template>
          </span>
@@ -48,6 +48,7 @@
                 this.$store.dispatch('cachesFolder')
             },
             nodeClick(data, node, component){
+                console.log('nodeClick')
                 if (data.type !== 'folder'){
 
                     // 翻译普通模板文件
@@ -95,19 +96,28 @@
             updateFile(data){
                 let fileText = ''
                 if (data.isCanDrag === true){
-                    fileText = outExportStr(data.dragList)
+                    let {fileStyleAndClass} = data
+                    let mode = 'page'
+                    if (!fileStyleAndClass){
+                        fileStyleAndClass = {}
+                        mode = 'components'
+                    }
+                    let customClass = this.$store.state.currentCheckAttr.customClass
+                    fileText = outExportStr(data.dragList,customClass,fileStyleAndClass,mode)
                 } else {
                     fileText = outCommonExportFile(data.label,{projectName:this.currentProjcetNam})
                 }
                 outExportFileByStr(data.label,fileText)
             },
             deleteFolder(node,data,e){
+                console.log('deleteFolder')
+                e.preventDefault()
                 const parent = node.parent;
                 const children = parent.data.children || parent.data;
                 const index = children.findIndex(d => d.id === data.id);
                 children.splice(index, 1);
                 this.$store.dispatch('cachesFolder')
-                e.preventDefault()
+                return false
             }
         },
         computed:{

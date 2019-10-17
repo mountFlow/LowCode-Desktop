@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="content" v-if="name !== ''" @mouseenter="mouseenter" @mouseleave="mouseleave">
-             <i v-show="showDelete" class="el-icon-error" style="position: absolute;right: 10px;top: 10px;font-size: 85px;color: red;opacity: .5;cursor: pointer" @click="deleteMyComponents"></i>
+             <i v-show="showDelete" class="el-icon-error" style="position: absolute;right: 10px;top: 10px;font-size: 85px;color: red;opacity: .5;cursor: pointer;z-index: 999" @click="deleteMyComponents"></i>
              <my-components-entity :list="list"></my-components-entity>
         </div>
         <view class="title"  v-if="name !== ''">
