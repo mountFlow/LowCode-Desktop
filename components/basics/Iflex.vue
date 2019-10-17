@@ -37,7 +37,6 @@
                                    v-bind="item2"
                                    :propsValue = "item2.componentName !== 'Iflex' ? item2.propsValue: undefined"
                                    :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),computedStyleToStyle(item2.iStyle)]:''"
-                                   @handresize="handresize"
                         >
                         </component>
                     </template>
