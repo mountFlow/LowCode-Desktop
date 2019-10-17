@@ -243,22 +243,6 @@
                 this.$store.commit('setAddProjectModel',{addProjectModel: true})
             },
             outPort(){
-                // let x = ejs.render(xxx,{list:this.$store.state.list})
-                // console.log(x)
-                //
-                // const zip = new JSZip()
-                // let test = zip.folder("test");
-                // const fileName = 'test.vue'
-                // const fileName2 = 'test2.vue'
-                // test.file(fileName, x)
-                // zip.file(fileName2, x)
-                // zip.generateAsync({
-                //     type: "blob"
-                // }).then((blob) => {
-                //     FileSaver.saveAs(blob, `test.zip`)
-                // }, (err) => {
-                //     alert('导出失败')
-                // })
                 let list = []
                 let fileStyleAndClass = {}
                 let mode = 'page'
@@ -277,8 +261,6 @@
                 let showDialogData = outExportStr(list,this.$store.state.currentCheckAttr.customClass,fileStyleAndClass,mode)
                 this.showDialogData = showDialogData.replace(VUE_NAME,this.form.fileName)
                 this.dialogTableVisible = true
-                // outExportFile('a.vue',this.$store.state.list)
-
             },
             onSubmit(formName){
                 this.$refs[formName].validate((valid) => {
@@ -339,11 +321,10 @@
                                 children: []
                             })
                         } else {
-
                             let fileNode = {
                                 id,
                                 type: 'vue-file',
-                                label: this.addFileForm.fileName,
+                                label: this.addFileForm.fileName.replace('.vue','') + '.vue',
                                 isCanDrag: true,  // 是不是可以拖拽编辑不是则就是只提供展示
                                 dragList: [], // 可编辑list
                                 fileStyleAndClass: {

@@ -130,13 +130,12 @@
                 this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
             },
             choosComponents(evt){
-                let index = evt.item.dataset['iIndex']
-                this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
                 if (!evt.item.firstChild || evt.item.firstChild.className !== 'flex-draggalbe-handle'){
+                    let index = evt.item.dataset['iIndex']
+                    this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
                     this.$store.commit('setDeleteGroupName',{deleteGroupName:'components'})
                     this.$store.commit('setIflexGroup',{iflexGroup:'components'})
                 }
-
             },
             flexDraggalbeHandle(flag){
                 this.isDraggalbe = flag
