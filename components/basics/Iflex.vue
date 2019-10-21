@@ -3,8 +3,8 @@
         <view class="flex-draggalbe-handle" v-if="showFlexDraggalbeHandle && preview">
             <view class="flex-draggalbe-handle-top" v-if="num.length > 1" @mousedown="choosLayouts(dataIIndex,$event)"></view>
             <view class="flex-draggalbe-handle-bottom">
-                <view class="flex-draggalbe-handle-bottom-item"
-                      :class="handleItem.layoutClass"
+                <view :class="[handleItem.layoutClass,
+                        num.length > 1 ? 'flex-draggalbe-handle-bottom-item':'flex-draggalbe-handle-bottom-item-single']"
                       v-for="(handleItem,handleIndex) in num"
                       :key="handleIndex"
                       @mousedown="choosLayouts(dataIIndex + '-' + handleIndex,$event)"
@@ -12,9 +12,10 @@
             </view>
         </view>
 
+        <!--这里的重复代码不好处理，因为是嵌套，老是报错-->
         <template v-if="num.length === 1">
-            <view class="margin-0 one-flex i-flex i-flex-border-r" style="position: relative"
-                  :class="[isIFlexClassBorder(num,index0),item.layoutClass]"
+            <view class="margin-0 one-flex i-flex" style="position: relative"
+                  :class="[item.layoutClass]"
                   v-for="(item,index0) in num"
                   :dataIIndex="dataIIndex + '-' +index0"
             >
@@ -23,6 +24,7 @@
                             }"
                            @choose="choosComponents"
                            @change="draggableChange"
+                           :class="[isIFlexClassBorder(num,index0)]"
                            style="min-height:20px ;width: 100%"
                            :style="[computedClassToStyle(item.iClass),computedStyleToStyle(item.iStyle)]"
                 >
@@ -252,10 +254,21 @@
                 border-right: #ead2f7 solid 0.5px;
                 border-top: #ead2f7 solid 0.5px;
                 background-color: #897c94;
+
+                &-single{
+                    border-left: #ead2f7 solid 0.5px;
+                    border-right: #ead2f7 solid 0.5px;
+                    border-top: #ead2f7 solid 0.5px;
+                    background-color: #515894;
+                }
+                &-single:hover{
+                    background-color: #ad9eba;
+                }
             }
             &-item:hover{
                 background-color: #ad9eba;
             }
+
         }
     }
 
