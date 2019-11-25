@@ -237,6 +237,7 @@
         border: 1px solid #eee;
         box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.1);
         border-radius: 1px;
+        flex-direction: column;
     }
     a {
         text-decoration: none;

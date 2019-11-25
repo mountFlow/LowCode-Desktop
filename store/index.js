@@ -31,7 +31,7 @@ const store = new Vuex.Store({
                 {name:'滑动选择',id: 6, componentName: 'Islider',iStyle:{},iClass: [],propsValue: []},
                 {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{},iClass: [],propsValue: []},
                 {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: [{label:'值',key: 'value',value:'这是一段长文本',toDataOrHtml: 'html',type: 'String',defaultValue: ''}]},
-                {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: [],propsValue: [{label:'源',key:'src',value:'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg',toDataOrHtml: 'data',type: 'String'}]},
+                {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: [],propsValue: [{label:'源',key:'src',value:'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg',toDataOrHtml: 'data',type: 'String'},{label:'类型',key:'mode',value:'scaleToFill',toDataOrHtml:'html',type:'select',select:[{label:'不保持纵横比',value:'scaleToFill'},{label:'保持纵横比',value:'aspectFit'},{label:'aspectFill',value:'aspectFill'},{label:'顶部区域',value:'top'},{label:'底部区域',value:'bottom'},{label:'中间区域',value:'center'},{label:'左边区域',value:'left'},{label:'右边区域',value:'right'}]}]},
                 // {name:'webView',id: 3, componentName: 'IwebView'},
             ],
             // id 1000 -1999

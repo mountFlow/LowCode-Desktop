@@ -1,6 +1,7 @@
 <template>
-    <image class="i-images-style" style="" :mode="array[0].mode" :src="src"
+    <image class="i-images-style" style=""
            :ref="'Iimage-' + dataIIndex"
+           v-bind="propsValueMap"
            @mouseup="initComponenSizeStyle('Iimage-' + dataIIndex)"
     ></image>
 </template>
