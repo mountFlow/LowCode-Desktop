@@ -18,4 +18,7 @@
 </script>
 
 <style scoped>
+    .i-input{
+
+    }
 </style>

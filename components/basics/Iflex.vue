@@ -173,6 +173,7 @@
              * @param e
              */
             draggableChange(e){
+                console.log('draggableChange')
                 if (e.added){
                     this.addMyComponentsToFolder(e.added)
                 }
