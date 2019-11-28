@@ -35,6 +35,7 @@
                   v-model="iStyle[ikey]"
                   type="text"
                   size="mini"
+                  @input="inputBoder"
                   @focus="choose"
         >
         </el-input>
@@ -66,6 +67,11 @@
             }
         },
         methods: {
+            inputBoder(e){
+                if (e === ''){
+                    delete this.iStyle[this.ikey]
+                }
+            },
             computeValue(item,key){
                 return item[key] ? item[key].replace(eval('/'+ this.unit +'/g'),'') : ''
             },
@@ -76,7 +82,7 @@
                 this.$emit('input',{...value})
             },
             borderSizeInput (val) {
-                this.value.size = val + 'upx'
+                this.value.size = val + this.unit
                 this.emitInput(this.value)
                 this.setBoderByIndex(0,this.value.size)
             },

@@ -24,3 +24,10 @@ $onePx: $windowsWidth / 750 * 0.2;
 uni-scroll-view{
   zoom: .19;
 }
+
+uni-radio::before, uni-checkbox::before{
+  font-size: 1em !important;
+}
+uni-switch::after, uni-switch::before{
+  font-size: 1em !important;
+}

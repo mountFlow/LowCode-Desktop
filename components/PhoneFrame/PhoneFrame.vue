@@ -1,5 +1,10 @@
 <template>
     <view class="phone" :style="phoneSize" ref="contextMenuTarget" >
+        <view v-show="showComponentPreview" class="tip-content-show">
+            <view class="tip-content-show-content">
+                <component :is="componentPreviewName"></component>
+            </view>
+        </view>
         <view class="phone-top">
             <view style="flex: 1"><i class="el-icon-more"></i>&nbsp;无服务</view>
             <view style="flex: 1;text-align: center">{{time}}</view>
@@ -97,6 +102,12 @@
             }
         },
         computed:{
+            componentPreviewName(){
+                return this.$store.state.componentPreviewName
+            },
+            showComponentPreview(){
+                return this.$store.state.showComponentPreview
+            },
             customClass(){
                 return  this.$store.state.currentCheckAttr.customClass
             },
@@ -250,5 +261,24 @@
     }
     path {
         fill: black;
+    }
+
+
+
+    .tip-content-show{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 375px;
+        box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.1);
+        z-index: 9999;
+        background-color: white;
+        border: rgba(169, 169, 173, 0.96) solid 2px;
+    }
+    .tip-content-show-content{
+        width: 100%;
+        position: relative;
+        overflow: hidden;
     }
 </style>

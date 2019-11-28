@@ -11,6 +11,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 
     state: {
+        showComponentPreview: false, // 组件预览
+        componentPreviewName: '', // 组件预览的名字
         pattern: 'page',
         list: [],
         deleteGroupName: 'layouts',
@@ -99,6 +101,12 @@ const store = new Vuex.Store({
         },
         setDeleteGroupName(state,data){
             state.deleteGroupName = data.deleteGroupName
+        },
+        setShowComponentPreview(state,{showComponentPreview}){
+            state.showComponentPreview = showComponentPreview
+        },
+        setComponentPreviewName(state,{componentPreviewName}){
+            state.componentPreviewName = componentPreviewName
         }
     },
 

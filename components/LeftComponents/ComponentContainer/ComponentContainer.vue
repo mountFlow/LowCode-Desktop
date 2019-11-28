@@ -1,9 +1,12 @@
 <template>
-    <view>
-        <view  v-if="type === 'basics'" class="content">
+    <view style="position: relative;">
+        <view style="position: absolute;left:0;top: 0;right: 0;bottom: 0;z-index: 10"
+              @mouseover="onfocusTip" @mouseout="offfocusTip"  @mousedown="onmousedown"
+        ></view>
+        <view  v-if="type === 'basics' && componentName.startsWith('I')" class="content">
             <component :is="componentName" :name="name">{{name}}</component>
         </view>
-        <view class="title"  v-if="type === 'basics'">
+        <view class="title" :class="[componentName.startsWith('I') ? '':'simple-component-name']" v-if="type === 'basics'">
             {{name}}
         </view>
         <view  v-if="type === 'layout'" >
@@ -40,6 +43,27 @@
         },
         data(){
             return {
+            }
+        },
+        methods:{
+            onmousedown(){
+                // 非基础组件
+                if (!this.componentName.startsWith('I')){
+                    this.$store.commit('setShowComponentPreview',{showComponentPreview: false})
+                }
+            },
+            offfocusTip(){
+                // 非基础组件
+                if (!this.componentName.startsWith('I')) {
+                    this.$store.commit('setShowComponentPreview', {showComponentPreview: false})
+                }
+            },
+            onfocusTip(){
+                // 非基础组件
+                if (!this.componentName.startsWith('I')) {
+                    this.$store.commit('setComponentPreviewName', {componentPreviewName: this.componentName})
+                    this.$store.commit('setShowComponentPreview', {showComponentPreview: true})
+                }
             }
         },
         components:{
@@ -87,5 +111,30 @@
         border-top: none;
         color: #cccccc;
         line-height: 20px;
+    }
+
+    .tip-content-show{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 225px;
+        height: 385px;
+        box-shadow: 0px 0px 1px 1px #1a1a1a;
+        z-index: 9999;
+        background-color: white;
+        border: blue solid 2px;
+    }
+    .tip-content-show-content{
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .simple-component-name{
+        width: 75px;
+        padding: 10px 0;
+        height: auto;
+        border-top: 2px solid #f7f9fa;
     }
 </style>

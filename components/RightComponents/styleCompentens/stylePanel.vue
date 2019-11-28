@@ -10,7 +10,24 @@
                               size="mini"
                               @focus="item.haveDirection === true ? paddingMarginDirectionFun(true,index) : null"
                     >
-                        <div slot="suffix" v-if="item.unit !== undefined">{{item.unit}}</div>
+                        <div slot="suffix" v-if="item.unit !== undefined" >
+                            <el-popover
+                                    placement="bottom"
+                                    width="100"
+                                    trigger="click">
+                                <div style="display: flex;align-items: center;justify-content: space-around">
+                                    <div>单位：</div>
+                                    <el-input type="text"
+                                              size="mini"
+                                              @input="inputChangeUnit($event,item,index)"
+                                              :value="item.unit"
+                                              style="width: 75px"
+                                    >
+                                    </el-input>
+                                </div>
+                                <div slot="reference" style="cursor: pointer">{{item.unit}}</div>
+                            </el-popover>
+                        </div>
                     </el-input>
                     <div v-if="item.type === 'color'" style="display: inline-block;width: 120px;text-align: left;">
                         <el-color-picker v-model="value[item.key]" :show-alpha="true"></el-color-picker>
@@ -38,7 +55,7 @@
                 <template v-if="item.type === 'border'">
                     <div style="display: flex; flex-wrap: wrap" class="form-line" v-show="borderListShow">
                         <el-form-item :label="item2.label" class="i-form-item" v-for="item2 in borderList">
-                            <border :ikey="item2.key" v-model="item2.data" ></border>
+                            <border :ikey="item2.key" v-model="item2.data" :unit="item.unit"></border>
                         </el-form-item>
                     </div>
                     <el-divider v-if="borderListShow"><div style="cursor: pointer;" @click="borderListShow=false" ><span style="font-size: 14px;color: #ccc">收起</span><i class="el-icon-arrow-up" style="color: #ccc" ></i></div></el-divider>
@@ -141,14 +158,24 @@
             paddingChange(val,index){
                 this.computedMarginOrPadding(val,index)
             },
+            inputChangeUnit(e,{key,unit},index){
+                this.formList[index].unit = e
+                this.$store.commit('editFromStyleList',{index,value: this.formList[index]})
+                if (this.value[key]!==undefined){
+                    this.value[key] = this.value[key].replace(unit,e)
+                }
+                this.$emit('input',{...this.value})
+            },
             inputChange(e,{key,haveDirection,unit}){
-                this.value[key] = e
                 if (e !== ''){
+                    this.value[key] = e
                     if (haveDirection === true){
                         let arrE = e.split(' ')
                         this.value[key] = arrE.join(unit + ' ')
                     }
                     this.value[key] += unit
+                }else{
+                    delete this.value[key]
                 }
                 this.$emit('input',{...this.value})
             },

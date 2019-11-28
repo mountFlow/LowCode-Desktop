@@ -25,7 +25,7 @@
                            @choose="choosComponents"
                            @change="draggableChange"
                            :class="[isIFlexClassBorder(num,index0)]"
-                           style="min-height:20px ;width: 100%"
+                           style="min-height:20px;"
                            :style="[computedClassToStyle(item.iClass),computedStyleToStyle(item.iStyle)]"
                 >
                     <template v-for="(item2,index) in item.itemList">
@@ -57,7 +57,7 @@
                             }"
                                @choose="choosComponents"
                                @change="draggableChange"
-                               style="height: 100%;width: 100%"
+                               style="height: 100%;"
                                :style="[computedClassToStyle(item.iClass),computedStyleToStyle(item.iStyle)]"
                     >
                         <template v-for="(item2,index) in item.itemList">
