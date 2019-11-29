@@ -258,6 +258,39 @@ const currentCheckAttr = {
     getters: {
     },
     actions: {
+        /**
+         * 刪除當前節點
+         */
+        deleteCurrentCheckeAttr({commit,state,rootState}){
+            let currentCheckIndex = state.currentCheckIndex
+            let arrIndex = currentCheckIndex.split('-')
+            let list = []
+            switch (rootState.pattern) {
+                case 'page':
+                    list = rootState.project.checkFile.dragList
+                    break
+                case 'component':
+                    list = rootState.patternComponents.list
+                    break
+                default:
+                    return
+            }
+
+            let currentObj = list
+            for (let i = 0; i < arrIndex.length; i++) {
+                let index = parseInt(arrIndex[i])
+                if (Object.prototype.toString.call(currentObj) === '[object Array]'){
+                    currentObj = currentObj[index]
+                } else {
+                    if (i === arrIndex.length - 1){
+                        currentObj = currentObj.num[index]
+                    }else {
+                        currentObj = currentObj.num[index].itemList
+                    }
+                }
+            }
+            currentObj.splice(0,1)
+        },
         initFromStyleList({commit}){
             let data = getCachesStyle()
             if (data){

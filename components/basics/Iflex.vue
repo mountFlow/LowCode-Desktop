@@ -135,7 +135,7 @@
             },
             computedStyleToStyle(styleObje){
                 let item = this.$store.state.currentCheckAttr.item
-                if (item && item.upxSwitch === false){
+                if (item && item.upxSwitch === false) {
                     return styleObje
                 }
                 let styleObjeStr = JSON.stringify(styleObje)

@@ -82,7 +82,8 @@
             },
             deleteDataIndex(){
                 // do delete action
-                console.log('deleteDataIndex')
+                // console.log('deleteDataIndex')
+                this.$store.dispatch('deleteCurrentCheckeAttr')
             },
             getTime(){
                 let now = new Date()
