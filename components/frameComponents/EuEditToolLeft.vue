@@ -34,7 +34,7 @@
                 <el-slider
                         v-model="phoneSize"
                         vertical
-                        :min="50"
+                        :min="100"
                         :step="5"
                         :max="150"
                         input-size="mini"

@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     state: {
         showComponentPreview: false, // 组件预览
         componentPreviewName: '', // 组件预览的名字
+        myComponentPreviewData: {}, // 自定义组件的数据
         pattern: 'page',
         list: [],
         deleteGroupName: 'layouts',
@@ -25,14 +26,14 @@ const store = new Vuex.Store({
             // id 0- 999  （约定）会根据id来判断是哪个list
             list: [
                 {name:'按钮',id: 0, componentName: 'Ibutton',iStyle:{},iClass: [],propsValue: [{label:'值',key:'text',value:'按钮',toDataOrHtml: 'html',type: 'String'},{label:'类型',key:'type',value:'default',toDataOrHtml: 'html',type:'select',select: [{label: '红色',value: 'warn'},{label: '蓝色',value: 'primary'},{label: '白色',value: 'default'}]}]},
-                {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{},iClass: [],propsValue: [{label:'值',key:'value',value:'hello',toDataOrHtml: 'html',type: 'String',defaultValue: ''},{label:'密码',key:'password',value:'false',toDataOrHtml: 'html',type:'boolean',defaultValue: 'false'}]},
+                {name:'输入框',id: 1, componentName: 'Iinput',iStyle:{},iClass: [],propsValue: [{label:'值',key:'value',value:'hello',toDataOrHtml: 'html',type: 'String',defaultValue: ''},{label:'类型',key:'type',value:'text',toDataOrHtml: 'html',type:'select',select:[{label:'文本',value:'text'},{label:'数字',value:'number'},{label:'密码(拖动有bug)',value:'password'}],defaultValue: 'text'}]},
                 {name:'选项',id: 2, componentName: 'Iradio',iStyle:{},iClass: [],propsValue: []},
                 {name:'图标',id: 3, componentName: 'Iicon',iStyle:{},iClass: [],propsValue: [{label:'类型',key:'type',value:'success',toDataOrHtml: 'html',type: 'String'}]},
                 {name:'文本',id: 4, componentName: 'Itext',iStyle:{},iClass: [],propsValue: [{label:'值',key:'text',value:'文本',toDataOrHtml: 'html',type: 'String',defaultValue: ''},{label:'是否可选',key:'selectable',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue:'false'},{label:'是否解码',key:'decode',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue: 'false'}]},
                 {name:'进度条',id: 5, componentName: 'Iprogress',iStyle:{},iClass: [],propsValue: []},
                 {name:'滑动选择',id: 6, componentName: 'Islider',iStyle:{},iClass: [],propsValue: []},
                 {name:'开关选择',id: 7, componentName: 'Iswitch',iStyle:{},iClass: [],propsValue: []},
-                {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: [{label:'值',key: 'value',value:'这是一段长文本',toDataOrHtml: 'html',type: 'String',defaultValue: ''}]},
+                {name:'多行输入',id: 8, componentName: 'Itextarea',iStyle:{},iClass: [],propsValue: [{label:'值',key: 'value',value:'长文本这玩意有bug，无法对文字拖动，只能拖空白处',toDataOrHtml: 'html',type: 'String',defaultValue: ''}]},
                 {name:'图像',id: 9, componentName: 'Iimage',iStyle:{},iClass: [],propsValue: [{label:'源',key:'src',value:'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg',toDataOrHtml: 'data',type: 'String'},{label:'类型',key:'mode',value:'scaleToFill',toDataOrHtml:'html',type:'select',select:[{label:'不保持纵横比',value:'scaleToFill'},{label:'保持纵横比',value:'aspectFit'},{label:'aspectFill',value:'aspectFill'},{label:'顶部区域',value:'top'},{label:'底部区域',value:'bottom'},{label:'中间区域',value:'center'},{label:'左边区域',value:'left'},{label:'右边区域',value:'right'}]}]},
                 // {name:'webView',id: 3, componentName: 'IwebView'},
             ],
@@ -107,6 +108,9 @@ const store = new Vuex.Store({
         },
         setComponentPreviewName(state,{componentPreviewName}){
             state.componentPreviewName = componentPreviewName
+        },
+        setMyComponentPreviewData(state,{myComponentPreviewData}){
+            state.myComponentPreviewData = myComponentPreviewData
         }
     },
 

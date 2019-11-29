@@ -37,9 +37,13 @@
         },
         methods:{
             mouseenter(){
+                this.$store.commit('setComponentPreviewName', {componentPreviewName: 'myComponent'})
+                this.$store.commit('setShowComponentPreview', {showComponentPreview: true})
+                this.$store.commit('setMyComponentPreviewData', {myComponentPreviewData: this.list})
                 this.showDelete = true
             },
             mouseleave(){
+                this.$store.commit('setShowComponentPreview', {showComponentPreview: false})
                 this.showDelete = false
             },
             deleteMyComponents(){

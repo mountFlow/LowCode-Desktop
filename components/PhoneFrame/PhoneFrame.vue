@@ -1,33 +1,41 @@
 <template>
-    <view class="phone" :style="phoneSize" ref="contextMenuTarget" >
-        <view v-show="showComponentPreview" class="tip-content-show">
-            <view class="tip-content-show-content">
-                <component :is="componentPreviewName"></component>
+    <view class="phone-s">
+        <view class="phone" :style="phoneSize" ref="contextMenuTarget" >
+            <view v-show="showComponentPreview" class="tip-content-show">
+                <view class="tip-content-show-content">
+                    <template v-if="componentPreviewName !== 'myComponent'">
+                        <component :is="componentPreviewName"></component>
+                    </template>
+                    <template v-if="componentPreviewName === 'myComponent'">
+                        <my-components-entity :list="myComponentPreviewData"></my-components-entity>
+                    </template>
+                </view>
             </view>
-        </view>
-        <view class="phone-top">
-            <view style="flex: 1"><i class="el-icon-more"></i>&nbsp;无服务</view>
-            <view style="flex: 1;text-align: center">{{time}}</view>
-            <view style="flex: 1;text-align: right"><i class="el-icon-chat-round"></i></view>
-        </view>
-        <view class="phone-top-blok">
-        </view>
-        <draggable group="layouts" :list="list"
-                   :options="{
+            <view class="phone-top">
+                <view style="flex: 1"><i class="el-icon-more"></i>&nbsp;无服务</view>
+                <view style="flex: 1;text-align: center">{{time}}</view>
+                <view style="flex: 1;text-align: right"><i class="el-icon-chat-round"></i></view>
+            </view>
+            <view class="phone-top-blok">
+            </view>
+            <draggable group="layouts" :list="list"
+                       :options="{
                    }"
-                   @change="draggableChange"
-                   :style="[computedClassToStyle(phoneClass),phoneStyle]"
-                   style="position: absolute;top: 25px;bottom: 0;left: 0;right: 0"
-                   handle=".flex-draggalbe-handle"
-        >
-            <template v-for="(item,index) in list">
-                <component :key="index" :is="item.componentName"
-                           :dataIIndex="index + ''"
-                           v-bind="item"
-                ></component>
-            </template>
-        </draggable>
+                       @change="draggableChange"
+                       :style="[computedClassToStyle(phoneClass),phoneStyle]"
+                       style="position: absolute;top: 25px;bottom: 0;left: 0;right: 0"
+                       handle=".flex-draggalbe-handle"
+            >
+                <template v-for="(item,index) in list">
+                    <component :key="index" :is="item.componentName"
+                               :dataIIndex="index + ''"
+                               v-bind="item"
+                    ></component>
+                </template>
+            </draggable>
 
+
+        </view>
         <vue-context-menu class="right-menu"
                           :target="contextMenuTarget"
                           :show="contextMenuVisible"
@@ -42,6 +50,7 @@
     import basicsMixin from '@/common/js/importBasics'
     import Iflex from '@/components/basics/Iflex'
     import { component as VueContextMenu } from '@xunlei/vue-context-menu'
+    import MyComponentsEntity from '../LeftComponents/ComponentContainer/MyComponents/MyComponentsEntity'
 
     export default {
         mixins: [basicsMixin],
@@ -51,12 +60,12 @@
         watch: {
         },
         data(){
-          return {
-              contextMenuTarget: undefined,
-              contextMenuVisible: false,
-              dragging: false,
-              time: ''
-          }
+            return {
+                contextMenuTarget: undefined,
+                contextMenuVisible: false,
+                dragging: false,
+                time: ''
+            }
         },
         mounted(){
             this.contextMenuTarget = this.$refs.contextMenuTarget.$el
@@ -73,6 +82,7 @@
             },
             deleteDataIndex(){
                 // do delete action
+                console.log('deleteDataIndex')
             },
             getTime(){
                 let now = new Date()
@@ -102,6 +112,9 @@
             }
         },
         computed:{
+            myComponentPreviewData(){
+                return this.$store.state.myComponentPreviewData
+            },
             componentPreviewName(){
                 return this.$store.state.componentPreviewName
             },
@@ -122,7 +135,9 @@
             phoneSize(){
                 let rote = this.$store.state.phoneSize / 100
                 return {
-                    zoom: rote,
+                    // zoom: rote,
+                    transform: `scale(${rote})`,
+                    top: `${this.$store.state.phoneSize - 100}%`
                 }
             },
             phoneStyle(){
@@ -133,14 +148,14 @@
                         return {}
                 }
             },
-          /*list:{
-            get() {
-                return this.$store.state.list
-            },
-            set(value){
-                this.$store.commit('setGlobalList',{list:value})
-            }
-          }*/
+            /*list:{
+              get() {
+                  return this.$store.state.list
+              },
+              set(value){
+                  this.$store.commit('setGlobalList',{list:value})
+              }
+            }*/
             list:{
                 get() {
                     switch (this.$store.state.pattern) {
@@ -165,7 +180,8 @@
         components:{
             draggable,
             Iflex,
-            VueContextMenu
+            VueContextMenu,
+            MyComponentsEntity
         }
     }
 </script>
@@ -179,6 +195,14 @@
     $windowsWidth: $phoneWidth / 0.2;
 
     $onePx: $windowsWidth / 750 * 0.2;
+
+    .phone-s{
+        width: $phoneWidth;
+        height: $phoneHeight;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     .phone{
         width: $phoneWidth;

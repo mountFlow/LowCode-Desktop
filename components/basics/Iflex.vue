@@ -54,7 +54,7 @@
                 >
                     <draggable :group="iflexGroup" :list="item.itemList"
                                :options="{
-                            }"
+                                }"
                                @choose="choosComponents"
                                @change="draggableChange"
                                style="height: 100%;"
@@ -161,12 +161,16 @@
                 this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
             },
             choosComponents(evt){
+                console.log('choosComponents2')
                 if (!evt.item.firstChild || evt.item.firstChild.className !== 'flex-draggalbe-handle'){
                     let index = evt.item.dataset['iIndex']
                     this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
                     this.$store.commit('setDeleteGroupName',{deleteGroupName:'components'})
                     this.$store.commit('setIflexGroup',{iflexGroup:'components'})
                 }
+            },
+            Unchoose(){
+                console.log('Unchoose')
             },
             /**
              * 会和另一个重复执行2遍，TODO 暂时没想到什么好的解决方法

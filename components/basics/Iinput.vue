@@ -1,5 +1,5 @@
 <template>
-    <input type="text" class="i-input" placeholder="input" v-bind="propsValueMap"/>
+    <input class="i-input" placeholder="input" v-bind="propsValueMap" />
 </template>
 
 <script>

@@ -4,6 +4,7 @@ import {getCachesClass,cachesClass,cachesStyle,getCachesStyle} from 'common/js/l
 const currentCheckAttr = {
     state: {
         contextMenuTarget: undefined,
+        currentCheckIndex: '', //当前选中对应的下标
         item: undefined,
         customClass: {},
         formList: [
@@ -225,6 +226,9 @@ const currentCheckAttr = {
             state.formList.splice(index,1)
             cachesStyle(state.formList)
         },
+        setCurrentCheckIndex(state,{index}){
+            state.currentCheckIndex = index
+        },
         setCurrentCheckItem(state,obj){
             state.item = obj
         },
@@ -303,6 +307,7 @@ const currentCheckAttr = {
                 }
             }
             if (currentObj){
+                commit('setCurrentCheckIndex',{index})
                 commit('setCurrentCheckItem',currentObj)
             }
         }
