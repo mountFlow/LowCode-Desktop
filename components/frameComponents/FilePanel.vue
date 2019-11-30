@@ -15,7 +15,7 @@
 
                    <div style="color: #ccc" >
                      <i class="el-icon-upload right-icon" style="margin-right: 5px" @click="updateFolder(data)"></i>
-                        <i class="el-icon-plus right-icon" @click="addFile(data)" style="margin-right: 5px"></i>
+                        <i class="el-icon-plus right-icon" @click="addFile(data,node)" style="margin-right: 5px"></i>
                        <!--<i class="el-icon-edit right-icon" style="margin-right: 5px"></i>-->
                     <i class="el-icon-delete right-icon" style="margin-right: 5px" @click="deleteFolder(node,data)"></i>
                 </div>
@@ -53,7 +53,8 @@
 
                     // 翻译普通模板文件
                     if (data.isCanDrag !== true ){
-                        data.fileText = outCommonExportFile(data.label,{projectName:this.currentProjcetNam})
+                        let params = data.params
+                        data.fileText = outCommonExportFile(data.label,{projectName:this.currentProjcetNam, ...params})
                     }
                     // 组件模式
                     if ( data.id >= 10999){
@@ -75,8 +76,9 @@
             allowDrag(draggingNode) {
                 return draggingNode.data.label.indexOf('三级 3-2-2') === -1;
             },
-            addFile(data){
+            addFile(data,node){
                 // 这里data是个指针，所以打算直接传出去。
+                console.log(data,node)
                 this.$store.commit('setCheckFolder',data)
                 this.$store.commit('setAddFileModel',{addFileModel: true})
             },
