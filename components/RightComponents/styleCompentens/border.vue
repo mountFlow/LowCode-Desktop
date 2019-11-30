@@ -1,7 +1,7 @@
 <template>
     <el-popover
             placement="left"
-            width="400"
+            width="450"
             trigger="focus">
         <div style="display: flex;align-items: center;justify-content: space-around">
             <div>大小</div>
@@ -9,9 +9,31 @@
                       :value="computeValue(value,'size')"
                       type="text"
                       size="mini"
-                      style="width: 75px"
+                      style="width: 95px"
                       @input="borderSizeInput"
             >
+                <div slot="prefix" >
+                    <el-popover
+                            popper-class="my-none-el-popover"
+                            placement="left"
+                            @show="showElSliderFun(true)"
+                            @hide="showElSliderFun(false)"
+                            trigger="click">
+                        <el-slider
+                                :show-tooltip="false"
+                                vertical
+                                :value="showElSlider ? computeValueNumber(value,'size') : null"
+                                @input="showElSlider ? borderSizeInput($event) : null"
+                                :min="0"
+                                :step="1"
+                                :max="50"
+                                input-size="mini"
+                                height="250px">
+                        </el-slider>
+                        <i slot="reference" style="cursor: pointer"
+                           class="el-icon-d-caret el-input__icon "></i>
+                    </el-popover>
+                </div>
                 <div slot="suffix" v-if="unit !== undefined">{{unit}}</div>
             </el-input>
             <div>类型</div>
@@ -49,6 +71,7 @@
         name: 'border',
         data(){
             return {
+                showElSlider: false,
                 borderSelect:borderSelect
             }
         },
@@ -67,6 +90,12 @@
             }
         },
         methods: {
+            clearValue(){
+                this.borderSizeInput('')
+            },
+            showElSliderFun(showElSlider){
+                this.showElSlider = showElSlider
+            },
             inputBoder(e){
                 if (e === ''){
                     delete this.iStyle[this.ikey]
@@ -75,6 +104,11 @@
             computeValue(item,key){
                 return item[key] ? item[key].replace(eval('/'+ this.unit +'/g'),'') : ''
             },
+            computeValueNumber(item,key){
+                if (item[key]){
+                    return parseFloat(item[key].replace(eval('/'+ this.unit +'/g'),''))
+                }
+            },
             choose(){
               this.$emit('choose')
             },
@@ -82,7 +116,11 @@
                 this.$emit('input',{...value})
             },
             borderSizeInput (val) {
-                this.value.size = val + this.unit
+                if (val === ''){
+                    this.value.size = ''
+                }else {
+                    this.value.size = val + this.unit
+                }
                 this.emitInput(this.value)
                 this.setBoderByIndex(0,this.value.size)
             },
@@ -124,4 +162,10 @@
 
 <style scoped>
 
+    .adjust-size{
+        line-height: normal;
+        margin-top: 10px;
+        width: 38px;
+        font-size: 1.3em;
+    }
 </style>

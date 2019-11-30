@@ -1,11 +1,17 @@
 <template>
     <view>
         <view class="flex-draggalbe-handle" v-if="showFlexDraggalbeHandle && preview">
-            <view class="flex-draggalbe-handle-top" v-if="num.length > 1" @mousedown="choosLayouts(dataIIndex,$event)"></view>
+            <!-- 这里的:data-i-index="dataIIndex"用于右键删除-->
+            <view class="flex-draggalbe-handle-top"
+                  v-if="num.length > 1"
+                  :data-i-index="dataIIndex"
+                  @mousedown="choosLayouts(dataIIndex,$event)"></view>
             <view class="flex-draggalbe-handle-bottom">
+                <!-- 这里的:data-i-index="dataIIndex"用于右键删除-->
                 <view :class="[handleItem.layoutClass,
                         num.length > 1 ? 'flex-draggalbe-handle-bottom-item':'flex-draggalbe-handle-bottom-item-single']"
                       v-for="(handleItem,handleIndex) in num"
+                      :data-i-index="dataIIndex + '-' +handleIndex"
                       :key="handleIndex"
                       @mousedown="choosLayouts(dataIIndex + '-' + handleIndex,$event)"
                 ></view>
@@ -14,9 +20,11 @@
 
         <!--这里的重复代码不好处理，因为是嵌套，老是报错-->
         <template v-if="num.length === 1">
+            <!-- 这里的:data-i-index="dataIIndex"用于右键删除-->
             <view class="margin-0 one-flex i-flex" style="position: relative"
                   :class="[item.layoutClass]"
                   v-for="(item,index0) in num"
+                  :data-i-index="dataIIndex + '-' +index0"
                   :dataIIndex="dataIIndex + '-' +index0"
             >
                 <draggable :group="iflexGroup" :list="item.itemList"
@@ -46,6 +54,7 @@
             <view class="flex i-flex-r" style="position: relative"
                   :style="[computedClassToStyle(iClass),computedStyleToStyle(iStyle)]"
                   :class="iClass"
+                  :data-i-index="dataIIndex"
             >
                 <view class="margin-0 i-flex"
                       :class="[isIFlexClassBorder(num,index0),item.layoutClass]"
@@ -155,13 +164,11 @@
                 return style
             },
             choosLayouts(index,evt){
-                console.log('choosLayouts')
                 this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
                 this.$store.commit('setDeleteGroupName',{deleteGroupName:'layouts'})
                 this.$store.commit('setIflexGroup',{iflexGroup:'layouts'})
             },
             choosComponents(evt){
-                console.log('choosComponents2')
                 if (!evt.item.firstChild || evt.item.firstChild.className !== 'flex-draggalbe-handle'){
                     let index = evt.item.dataset['iIndex']
                     this.$store.dispatch('setCurrentCheckAttrNameComputed',{index})
@@ -169,15 +176,11 @@
                     this.$store.commit('setIflexGroup',{iflexGroup:'components'})
                 }
             },
-            Unchoose(){
-                console.log('Unchoose')
-            },
             /**
              * 会和另一个重复执行2遍，TODO 暂时没想到什么好的解决方法
              * @param e
              */
             draggableChange(e){
-                console.log('draggableChange')
                 if (e.added){
                     this.addMyComponentsToFolder(e.added)
                 }

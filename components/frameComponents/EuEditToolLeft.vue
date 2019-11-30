@@ -311,6 +311,7 @@
                         }
                         let item = this.$store.state.project.checkFolder.children
                         let id = this.$store.state.project.checkFolder.children.length > 0 ? item[item.length - 1].id + 1 : 1
+                        // 文件夹类型
                         if (this.addFileForm.fileType === '0'){
                             // 卧槽，我居然直接push ，（值得一提的是，这里因为checkFolder是指针，改变这里会同步改变project的list，省事了）
                             this.$store.state.project.checkFolder.children.push({
@@ -321,6 +322,7 @@
                                 children: []
                             })
                         } else {
+                            // 拖拽文件类型
                             let fileNode = {
                                 id,
                                 type: 'vue-file',
@@ -342,6 +344,7 @@
                                     let item = currentProjectListData[i]
                                     if (item.label === 'pages.json'){
                                         // TODO 我累了
+                                        console.log(currenetProject)
                                         return
                                     }
                                 }

@@ -9,7 +9,7 @@ const currentCheckAttr = {
         customClass: {},
         formList: [
             {
-                label: '长度',
+                label: '高度',
                 key: 'height',
                 type:'text',
                 unit: 'rpx'
@@ -264,6 +264,9 @@ const currentCheckAttr = {
         deleteCurrentCheckeAttr({commit,state,rootState}){
             let currentCheckIndex = state.currentCheckIndex
             let arrIndex = currentCheckIndex.split('-')
+            if(arrIndex.length % 2 === 0 ){
+                arrIndex.pop()
+            }
             let list = []
             switch (rootState.pattern) {
                 case 'page':
@@ -275,9 +278,11 @@ const currentCheckAttr = {
                 default:
                     return
             }
-
             let currentObj = list
-            for (let i = 0; i < arrIndex.length; i++) {
+            let oldCurrentObj = currentObj
+            let i = 0
+            for (i = 0; i < arrIndex.length; i++) {
+                oldCurrentObj = currentObj
                 let index = parseInt(arrIndex[i])
                 if (Object.prototype.toString.call(currentObj) === '[object Array]'){
                     currentObj = currentObj[index]
@@ -289,7 +294,9 @@ const currentCheckAttr = {
                     }
                 }
             }
-            currentObj.splice(0,1)
+            oldCurrentObj.splice(parseInt(arrIndex[i - 1]),1)
+            commit('setCurrentCheckIndex',{index:''})
+            commit('setCurrentCheckItem',undefined)
         },
         initFromStyleList({commit}){
             let data = getCachesStyle()
@@ -340,7 +347,6 @@ const currentCheckAttr = {
                 }
             }
             if (currentObj){
-                commit('setCurrentCheckIndex',{index})
                 commit('setCurrentCheckItem',currentObj)
             }
         }

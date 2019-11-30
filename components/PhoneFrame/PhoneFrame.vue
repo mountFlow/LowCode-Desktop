@@ -49,7 +49,8 @@
     import draggable from '@/common/js/vuedraggable'
     import basicsMixin from '@/common/js/importBasics'
     import Iflex from '@/components/basics/Iflex'
-    import { component as VueContextMenu } from '@xunlei/vue-context-menu'
+    //TODO 本地引用了vue-context-menu，添加一项鼠标右键时顶层元素点输出。解决在拖拽区域内右键删除非布局元素时无法定位到具体的元素问题
+    import { component as VueContextMenu } from '@/common/js/vue-context-menu'
     import MyComponentsEntity from '../LeftComponents/ComponentContainer/MyComponents/MyComponentsEntity'
 
     export default {
@@ -77,13 +78,27 @@
             checkBackground(){
                 alert(1)
             },
-            contextMenuVisibleFun(show){
+            contextMenuVisibleFun({show,dataset}){
+                if (dataset && dataset['iIndex'] !== undefined){
+                    this.$store.commit('setCurrentCheckIndex',{index:dataset['iIndex']})
+                }else {
+                    // 避免点击布局元素高亮处后，鼠标又移至背景面板而右键删除的不合理
+                    this.$store.commit('setCurrentCheckIndex',{index:''})
+                }
                 this.contextMenuVisible = show
             },
             deleteDataIndex(){
                 // do delete action
-                // console.log('deleteDataIndex')
-                this.$store.dispatch('deleteCurrentCheckeAttr')
+                if (this.$store.state.currentCheckAttr.currentCheckIndex === ''){
+                    this.$notify({
+                        title: '请先选取元素!',
+                        message: '右键删除请将鼠标移至元素，布局内若有元素，优先删除布局内元素。若要删除布局元素，请将鼠标移至布局元素上方高亮处再右键。',
+                        type: 'warning'
+                    });
+                }else {
+                    this.$store.dispatch('deleteCurrentCheckeAttr')
+                }
+                this.contextMenuVisibleFun(false)
             },
             getTime(){
                 let now = new Date()
@@ -258,11 +273,12 @@
         display: none;
     }
     .right-menu a {
-        width: 75px;
+        width: 100px;
         height: 28px;
         line-height: 28px;
         text-align: center;
         display: block;
+        padding: 0 10px;
         color: #1a1a1a;
     }
     .right-menu a:hover {

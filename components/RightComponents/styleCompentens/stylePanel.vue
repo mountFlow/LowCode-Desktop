@@ -10,6 +10,31 @@
                               size="mini"
                               @focus="item.haveDirection === true ? paddingMarginDirectionFun(true,index) : null"
                     >
+                        <div slot="prefix" v-if="item.unit !== undefined" >
+                            <el-popover
+                                    popper-class="my-none-el-popover"
+                                    placement="left"
+                                    @show="showElSliderFun(true)"
+                                    @hide="showElSliderFun(false)"
+                                    trigger="click">
+                                <el-slider
+                                        :show-tooltip="false"
+                                        vertical
+                                        :value="showElSlider? computeValueNumber(value,item.key,'/'+ item.unit +'/g') : null"
+                                        @input="showElSlider ? changeInputSizeBySlider($event,item) : null"
+                                        :min="-1"
+                                        :step="1"
+                                        :max="750"
+                                        input-size="mini"
+                                        height="450px">
+                                </el-slider>
+                                <i style="cursor: pointer"
+                                   @tap="clearValue(item)"
+                                   class="el-icon-circle-close el-input__icon adjust-size"></i>
+                                <i slot="reference" style="cursor: pointer"
+                                   class="el-icon-d-caret el-input__icon "></i>
+                            </el-popover>
+                        </div>
                         <div slot="suffix" v-if="item.unit !== undefined" >
                             <el-popover
                                     placement="bottom"
@@ -30,7 +55,7 @@
                         </div>
                     </el-input>
                     <div v-if="item.type === 'color'" style="display: inline-block;width: 120px;text-align: left;">
-                        <el-color-picker v-model="value[item.key]" :show-alpha="true"></el-color-picker>
+                        <el-color-picker v-model="value[item.key]" @change="changeColor($event,item.key)" :show-alpha="true"></el-color-picker>
                     </div>
 
                     <template v-if="item.type === 'border'">
@@ -63,9 +88,36 @@
 
                 <template v-if="item.haveDirection === true">
                     <div style="display: flex; flex-wrap: wrap" class="form-line" v-show="item.showDirection">
-                        <el-form-item :label="item.key + item2.label" class="i-form-item" v-for="item2 in arrIndex">
-                            <el-input :value="computeValue(item.padingOrMargin,item2.name,'/[('+ item.unit +') ]/g')"
+                        <el-form-item :label="item.key + item2.label" class="i-form-item" v-for="(item2,index2) in arrIndex" :key="index2">
+                            <el-input :value="computeValue(item.padingOrMargin,item2.name,'/[('+ item.unit +') ]/g','1')"
                                       @input="directionFun(item,item2.name,$event,index)"  size="mini">
+                                <!---->
+                                <div slot="prefix" >
+                                    <el-popover
+                                            popper-class="my-none-el-popover"
+                                            placement="left"
+                                            @show="showElSlider2Fun(true)"
+                                            @hide="showElSlider2Fun(false)"
+                                            trigger="click">
+                                        <el-slider
+                                                :show-tooltip="false"
+                                                vertical
+                                                :value="showElSlider2 ? computeValueNumber(item.padingOrMargin,item2.name,'/[('+ item.unit +') ]/g') : null"
+                                                @input="showElSlider2 ? directionFun(item,item2.name,$event,index) : null"
+                                                :min="-1"
+                                                :step="1"
+                                                :max="750"
+                                                input-size="mini"
+                                                height="450px">
+                                        </el-slider>
+                                        <i style="cursor: pointer"
+                                           @tap="clearValue(item)"
+                                           class="el-icon-circle-close el-input__icon adjust-size"></i>
+                                        <i slot="reference" style="cursor: pointer"
+                                           class="el-icon-d-caret el-input__icon "></i>
+                                    </el-popover>
+                                </div>
+                                <!---->
                                 <div slot="suffix" v-if="item.unit !== undefined">{{item.unit}}</div>
                             </el-input>
                         </el-form-item>
@@ -94,6 +146,8 @@
         },
         data(){
             return {
+                showElSlider: false,
+                showElSlider2: false,
                 paddingMarginDirection: false,
                 checkMOrP: '',
                 arrIndex:arrIndex,
@@ -102,8 +156,28 @@
             }
         },
         methods:{
-            computeValue(item,key,unit){
+            changeColor(val,key){
+                if (val === null){
+                    delete this.value[key]
+                }
+            },
+            showElSlider2Fun(showElSlider2){
+                this.showElSlider2 = showElSlider2
+            },
+            showElSliderFun(showElSlider){
+                this.showElSlider = showElSlider
+            },
+            clearValue({key}){
+                this.value[key] = ''
+                this.$emit('input',{...this.value})
+            },
+            computeValue(item,key,unit,tt = '0'){
                 return item[key] ? item[key].replace(eval(unit),'') : ''
+            },
+            computeValueNumber(item,key,unit){
+                if (item[key] ){
+                    return parseFloat(item[key].replace(eval(unit),''))
+                }
             },
             /**
              * 校验样式依赖关系
@@ -136,6 +210,7 @@
                 return newArr
             },
             directionFun(item,d,val,index){
+                val = val.toString()
                 this.$set(item.padingOrMargin,d,val)
 
                 let mp = this.formList[index].key
@@ -145,9 +220,11 @@
                     arrStyle = this.computeValue(style,mp,'/'+ item.unit +'/g').split(" ")
                 }
                 arrStyle = this.arr2four(arrStyle.length,arrStyle)
-                arrStyle[dIndex[d]] = val.replace(/ /g,'')
-                style[mp] = arrStyle.join(item.unit + ' ')
-                style[mp] += item.unit
+                if (typeof val === 'string'){
+                    arrStyle[dIndex[d]] = val.replace(/ /g,'')
+                }
+                let styleMp = arrStyle.join(item.unit + ' ')
+                style[mp] = styleMp + item.unit
                 this.$emit('input',{...style})
             },
             paddingMarginDirectionFun(flag,index){
@@ -163,6 +240,15 @@
                 this.$store.commit('editFromStyleList',{index,value: this.formList[index]})
                 if (this.value[key]!==undefined){
                     this.value[key] = this.value[key].replace(unit,e)
+                }
+                this.$emit('input',{...this.value})
+            },
+            changeInputSizeBySlider(e,{key,unit}){
+                if (e === ''){
+                    return
+                }
+                if (e !== 0){
+                    this.value[key] = e + unit
                 }
                 this.$emit('input',{...this.value})
             },
@@ -245,5 +331,12 @@
     }
 
     .style-json{
+    }
+
+    .adjust-size{
+        line-height: normal;
+        margin-top: 10px;
+        width: 38px;
+        font-size: 1.3em;
     }
 </style>
