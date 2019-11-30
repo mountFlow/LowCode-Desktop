@@ -377,7 +377,6 @@
                 this.saveComponentModel = true
             },
             draggableChange(e){
-                console.log(e)
                 if (e.added){
                     this.delMyComponentsToFolder(e.added)
                 }

@@ -155,7 +155,6 @@
                     if (scrollTop > this.list[i].top && scrollTop < this.list[i].bottom) {
                         this.verticalNavTop = (this.list[i].id - 1) * 50
                         this.tabCur = this.list[i].id
-                        console.log(scrollTop)
                         return false
                     }
                 }

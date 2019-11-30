@@ -173,7 +173,6 @@ let renderComponentsTemplate = (itemListItem,byDataArr) => {
  * @param byDataArr
  */
 let renderComponentsTemplateByData = (byDataArr) => {
-    console.log(byDataArr)
     let result = ''
     let lineFeed = false
     byDataArr.forEach(e=>{

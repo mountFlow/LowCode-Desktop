@@ -306,7 +306,6 @@
                         this.resetForm('ruleForm')
 
                     } else {
-                        console.log('error submit!!');
                         return false;
                     }
                 });

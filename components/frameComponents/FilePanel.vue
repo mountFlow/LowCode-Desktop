@@ -48,7 +48,6 @@
                 this.$store.dispatch('cachesFolder')
             },
             nodeClick(data, node, component){
-                console.log('nodeClick')
                 if (data.type !== 'folder'){
 
                     // 翻译普通模板文件
@@ -78,7 +77,6 @@
             },
             addFile(data,node){
                 // 这里data是个指针，所以打算直接传出去。
-                console.log(data,node)
                 this.$store.commit('setCheckFolder',data)
                 this.$store.commit('setAddFileModel',{addFileModel: true})
             },

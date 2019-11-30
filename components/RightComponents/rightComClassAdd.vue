@@ -189,7 +189,6 @@
                         this.openSussese('成功',this.editOrAdd === 'add' ? '创建类成功' : '编辑类成功')
 
                     } else {
-                        console.log('error submit!!');
                         return false;
                     }
                 });

@@ -204,7 +204,6 @@
                 return this.$store.state.showFlexDraggalbeHandle
             },
             iflexGroup(){
-                console.log(this.$store.state.iflexGroup)
                 return this.$store.state.iflexGroup
             }
         },
