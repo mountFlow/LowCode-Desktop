@@ -40,7 +40,7 @@ const store = new Vuex.Store({
             // id 1000 -1999
             colorUiList: [
                 {name:'轮播图',id: 1000, componentName: 'Cswiper',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-                {name:'图标',id: 1001, componentName: 'Cicon',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
+                {name:'图标',id: 1001, componentName: 'Cicon',iStyle:{},iClass: [],propsValue: [{label:'类型',key:'class',value:'cuIcon-appreciate',toDataOrHtml: 'data',type:'select',select: [{label: '点赞',value: 'cuIcon-appreciate'},{label: '点击',value: 'cuIcon-check'},{label: '关闭',value: 'cuIcon-close'}]}],upxSwitch: false},
                 {name:'按钮',id: 1002, componentName: 'Cbutton',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
                 {name:'标签',id: 1003, componentName: 'Ctag',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
                 {name:'头像',id: 1004, componentName: 'Cavatar',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},

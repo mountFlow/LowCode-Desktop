@@ -1,14 +1,12 @@
 <template>
-    <view>
-        <view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
-            <view class="cu-item" v-for="(item,index) in cuIconList" :key="index" v-if="index<gridCol*2">
-                <view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
-                    <view class="cu-tag badge" v-if="item.badge!=0">
-                        <block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
-                    </view>
+    <view class="cu-list grid" :class="['col-' + gridCol,gridBorder?'':'no-border']">
+        <view class="cu-item" v-for="(item,index) in cuIconList" :key="index" v-if="index<gridCol*2">
+            <view :class="['cuIcon-' + item.cuIcon,'text-' + item.color]">
+                <view class="cu-tag badge" v-if="item.badge!=0">
+                    <block v-if="item.badge!=1">{{item.badge>99?'99+':item.badge}}</block>
                 </view>
-                <text>{{item.name}}</text>
             </view>
+            <text>{{item.name}}</text>
         </view>
     </view>
 </template>

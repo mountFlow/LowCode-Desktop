@@ -2,7 +2,7 @@
     <el-row>
         <el-col :span="6">
             <view style="display: flex;justify-content: flex-start;align-items: center;color: #675e6f">
-                <h2>easyUnI</h2>
+                <h2>DragUI</h2>
             </view>
         </el-col>
         <el-col :span="12">

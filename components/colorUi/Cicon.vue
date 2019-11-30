@@ -1,13 +1,20 @@
 <template>
     <view class="inline-flex">
-        <text class="lg text-gray" :class="'cuIcon-appreciate'"></text>
+        <text class="lg text-gray" v-bind="propsValueMap"></text>
     </view>
 </template>
 
 <script>
+    import commoMethodsByBasicsComponents from 'common/js/commoMethodsByBasicsComponents'
+
     export default {
         name: "Cicon",
+        mixins: [commoMethodsByBasicsComponents],
         props:{
+            propsValue: {
+                type: Array,
+                default: () => [{key:'class',value:`cuIcon-appreciate`}]
+            },
             item: {
                 type: Array,
                 default: () => ([{

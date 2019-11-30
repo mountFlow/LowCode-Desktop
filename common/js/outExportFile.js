@@ -24,6 +24,12 @@ let classMapToString = (map) => {
 
 }
 
+/**
+ * 将props（指的是标签中的自定义数据） 中的数据转化为字符串
+ * @param itemListItem
+ * @param byDataArr
+ * @returns {string}
+ */
 let propsValueToString = (itemListItem,byDataArr) => {
     let result = ''
     let {id,componentName,propsValue} = itemListItem
@@ -62,6 +68,14 @@ let propsValueToString = (itemListItem,byDataArr) => {
     return result
 }
 
+/**
+ * 从数据里面提取出引用到的类，用于在style标签生成，并找出自定义生成的组件
+ * @param list 数据
+ * @param classMap 存放class的键值对
+ * @param customClass 全局保存的class
+ * @param myComponentsMap 存放找到的组件是，用户自定义生成的组件
+ * @returns {string}
+ */
 let iteratorList = (list,classMap,customClass,myComponentsMap) => {
     let classStr = ""
 
@@ -97,6 +111,12 @@ let beforDisposeListToClassDataString = (list,customClass,mode) => {
     let classStr = iteratorList(list,classMap,customClass,myComponentsMap)
     return {classData:renderComponentsTemplateByStyle(classStr,mode),myComponentsMap}
 }
+
+/**
+ * 用于生成 在vue中components 需要的数据。自定义组件的引入数据
+ * @param myComponentsMap 用户自定义生成组件的名字
+ * @returns {{importCompentsStr: string, componentsObjStr: string}}
+ */
 let beforDisposeListToMyCompentsString = (myComponentsMap) => {
     let importCompentsStr = ""
     let componentsObjStr = "components:{\n"
@@ -111,7 +131,7 @@ let beforDisposeListToMyCompentsString = (myComponentsMap) => {
 /**
  * 渲染html部分
  * @param itemListItem
- * @param byDataArr
+ * @param byDataArr // 存储 vue 中data部分 的数据
  * @returns {*}
  */
 let renderComponentsTemplate = (itemListItem,byDataArr) => {
@@ -122,13 +142,16 @@ let renderComponentsTemplate = (itemListItem,byDataArr) => {
 
     // 自定义的组件
     if (componentsName === 'MyComponentsEntity'){
+        // .name 是组件中文名。但如果是自定义组件（MyComponentsEntity）。则是组件名
         componentName = humpToLine(itemListItem.name)
     }
 
     let text = ''
     if (COMPONENTS_TEMPLATE[componentsName] === undefined){
+        // 一般的基础组件。则使用默认模板
         componentsName = 'defaultTemplate2'
         itemListItem.propsValue.forEach(e=>{
+            // 用是否在标签数据项里面包含‘text’来定义是不是用闭合标签。因为一般text 表示如：<button>text</button>
             if (e.key === 'text'){
                 text = e.value
                 componentsName = 'defaultTemplate'
@@ -136,6 +159,7 @@ let renderComponentsTemplate = (itemListItem,byDataArr) => {
             }
         })
     } else {
+        // 组件的内容是否是被提前定义了的，如果是的话，直接引用已定义的模板数据，一般用于第三方组件。如ColorUI的组件
         byDataArr.push({
             componentsName,id:itemListItem.id
         })
@@ -149,24 +173,30 @@ let renderComponentsTemplate = (itemListItem,byDataArr) => {
  * @param byDataArr
  */
 let renderComponentsTemplateByData = (byDataArr) => {
+    console.log(byDataArr)
     let result = ''
-    let i = 0
+    let lineFeed = false
     byDataArr.forEach(e=>{
-        i++
+        if (lineFeed){
+            result += '\n                '
+        }
         let dataKey = e.componentsName + 'ByData'
+        // 如果有提前定义
         if (COMPONENTS_TEMPLATE[dataKey] !== undefined){
             let x = ejs.render(COMPONENTS_TEMPLATE[dataKey],{id:e.id},{rmWhitespace:false})
-            result += x
-            result += ','
+            if(x !== ''){
+                result += x
+                result += ','
+                lineFeed = true
+            }
         } else {
             let {key,value,id,type,componentsName,dataName} = e
-            if (i > 1){
-                result += '\n                '
-            }
             if (dataName && dataName !== ''){
                 result += `${dataName}: `
-            } else {
+                lineFeed = true
+            } else if (key){
                 result += `${componentsName + key + id}: `
+                lineFeed = true
             }
             switch (type) {
                 case 'String':
@@ -192,6 +222,12 @@ let renderComponentsTemplateByScript = (byDataArr,importCompentsStr,componentsOb
     return x
 }
 
+/**
+ * 生成style标签的内容，元素中需要的类
+ * @param classStr
+ * @param mode 模式：页面，组件
+ * @returns {*}
+ */
 let renderComponentsTemplateByStyle = (classStr,mode) => {
     let x = ejs.render(fileTemplatesByStyle,{classStr,mode},{rmWhitespace:false})
     return x
@@ -222,18 +258,19 @@ let outExportStr = (list,customClass,fileStyleAndClass,mode = 'page') => {
     let {classData,myComponentsMap} = beforDisposeListToClassDataString(list,customClass,mode)
     let {importCompentsStr,componentsObjStr} = beforDisposeListToMyCompentsString(myComponentsMap)
     let x = ejs.render(fileTemplates,{list,
-        mode,
-        importCompentsStr,
-        componentsObjStr,
-        fileStyleAndClass,
-        fun:_outExportItem,
-        humpToLine,
-        iStyleToString,
-        iClassToString,
-        classData,
-        renderComponentsTemplate,
-        byDataArr,
-        renderComponentsTemplateByScript},{rmWhitespace:true},)
+        mode, // 页面模式 or 组件模式
+        importCompentsStr, // import的内容
+        componentsObjStr, // components的内容
+        fileStyleAndClass, // 一个对象，存储iClass和iStyle
+        fun:_outExportItem, // 递归操作的方法，用于被模板调用
+        humpToLine, // 名字驼峰转加横杆
+        iStyleToString, // iStyle转化为字符串方法
+        iClassToString, // Class转化为字符串方法
+        classData, // <style>标签内的内容
+        renderComponentsTemplate, // 用于渲染处组件部分的方法
+        byDataArr, // 存放模板需要的 data 的值
+        renderComponentsTemplateByScript // 渲染<script>标签的内容
+    },{rmWhitespace:true},)
 
     x = formatStrByHtml(x)
     return x

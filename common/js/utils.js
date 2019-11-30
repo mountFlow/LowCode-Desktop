@@ -19,6 +19,12 @@ let iStyleToString = (obj,builtInStyyle = "") => {
     return str
 }
 
+/**
+ * 存放样式类的数据转字符串
+ * @param arr
+ * @param builtInClass 默认手动添加的类名
+ * @returns {string}
+ */
 let iClassToString = (arr,...builtInClass) => {
 
     if ((arr && arr.length === 0) && builtInClass.length === 0){

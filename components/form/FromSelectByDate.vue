@@ -1,13 +1,11 @@
 <template>
-    <view>
-        <view class="cu-form-group">
-            <view class="title">日期选择</view>
-            <picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
-                <view class="picker">
-                    {{date}}
-                </view>
-            </picker>
-        </view>
+    <view class="cu-form-group">
+        <view class="title">日期选择</view>
+        <picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+            <view class="picker">
+                {{date}}
+            </view>
+        </picker>
     </view>
 </template>
 

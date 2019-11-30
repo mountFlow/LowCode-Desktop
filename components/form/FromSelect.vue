@@ -1,13 +1,11 @@
 <template>
-    <view>
-        <view class="cu-form-group">
-            <view class="title">普通选择</view>
-            <picker @change="PickerChange" :value="index" :range="picker">
-                <view class="picker">
-                    {{index>-1?picker[index]:'禁止换行，超出容器部分会以 ... 方式截断'}}
-                </view>
-            </picker>
-        </view>
+    <view class="cu-form-group">
+        <view class="title">普通选择</view>
+        <picker @change="PickerChange" :value="index" :range="picker">
+            <view class="picker">
+                {{index>-1?picker[index]:'禁止换行，超出容器部分会以 ... 方式截断'}}
+            </view>
+        </picker>
     </view>
 </template>
 
