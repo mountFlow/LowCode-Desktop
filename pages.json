@@ -6,14 +6,6 @@
 				"titleNView": false
 			}
 		}
-        ,{
-            "path" : "test/test",
-            "style" : {}
-        }
-        ,{
-            "path" : "test2/test2",
-            "style" : {}
-        }
     ],
 	"globalStyle": {
 		"titleNView": false
