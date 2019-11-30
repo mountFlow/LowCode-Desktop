@@ -93,7 +93,11 @@ let pagesjson =
 			"style": {
 				"titleNView": false
 			}
-		}
+		}<% if(typeof paramByPages!="undefined"){paramByPages.forEach(val => { -%>, {
+			"path": "<%=val%>",
+			"style": {}
+		}<%})} -%>
+		
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

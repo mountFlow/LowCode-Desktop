@@ -91,7 +91,7 @@
                 title="增加文件"
                 :visible="addFileModel"
                 width="30%"
-                @close="closeAddFileModel"
+                @close="closeAddFileModel('addFileForm')"
                 center>
             <el-form ref="addFileForm" :model="addFileForm" :rules="addFileRule" label-width="80px">
                 <el-form-item  label="文件名称" prop="fileName">
@@ -111,7 +111,7 @@
                 </el-form-item>
                 <el-checkbox v-show="addFileForm.fileType === '1'" style="margin-bottom: 20px" v-model="addFileForm.isAddPagePath" label="自动在pages.json中注册" name="type"></el-checkbox>
                 <el-form-item>
-                    <el-button @click="closeAddFileModel">取 消</el-button>
+                    <el-button @click="closeAddFileModel('addFileForm')">取 消</el-button>
                     <el-button type="primary" @click="yesAddFile('addFileForm')">确 定</el-button>
                 </el-form-item>
             </el-form>
@@ -274,10 +274,14 @@
             closeProjectModel(){
                 this.$store.commit('setAddProjectModel',{addProjectModel: false})
             },
-            closeAddFileModel(){
+            closeAddFileModel(formName = undefined){
                 this.addFileForm.fileName = ''
                 this.addFileForm.fileType = '0'
+                this.addFileForm.isAddPagePath = false
                 this.$store.commit('setAddFileModel',{addFileModel: false})
+                if (formName){
+                    this.$refs[formName].clearValidate()
+                }
             },
             yesAddProject(formName){
                 this.$refs[formName].validate((valid) => {
@@ -309,6 +313,7 @@
                         }else {
                             return false
                         }
+                        let checkFolder = this.$store.state.project.checkFolder
                         let item = this.$store.state.project.checkFolder.children
                         let id = this.$store.state.project.checkFolder.children.length > 0 ? item[item.length - 1].id + 1 : 1
                         // 文件夹类型
@@ -317,16 +322,19 @@
                             this.$store.state.project.checkFolder.children.push({
                                 id,
                                 type: 'folder',
+                                path: checkFolder.path + '/' + this.addFileForm.fileName,
                                 label: this.addFileForm.fileName,
                                 isCanDrag: false,  // 是不是可以拖拽编辑不是则就是只提供展示
                                 children: []
                             })
                         } else {
                             // 拖拽文件类型
+                            let label = this.addFileForm.fileName.replace('.vue','') + '.vue'
                             let fileNode = {
                                 id,
                                 type: 'vue-file',
-                                label: this.addFileForm.fileName.replace('.vue','') + '.vue',
+                                path: checkFolder.path + '/' + label,
+                                label: label,
                                 isCanDrag: true,  // 是不是可以拖拽编辑不是则就是只提供展示
                                 dragList: [], // 可编辑list
                                 fileStyleAndClass: {
@@ -343,16 +351,19 @@
                                 for (let i = 0; i <currentProjectListData.length; i++) {
                                     let item = currentProjectListData[i]
                                     if (item.label === 'pages.json'){
-                                        // TODO 我累了
-                                        console.log(currenetProject)
-                                        return
+
+                                        if (!item.params['paramByPages']){
+                                            item.params['paramByPages'] = [fileNode.path.replace('.vue','')]
+                                        }else{
+                                            item.params['paramByPages'].push(fileNode.path.replace('.vue',''))
+                                        }
                                     }
                                 }
                             }
                             this.$store.state.project.checkFolder.children.push(fileNode)
                         }
                         this.$store.dispatch('cachesFolder')
-                        this.closeAddFileModel()
+                        this.closeAddFileModel(formName)
                     } else {
                         return false;
                     }
