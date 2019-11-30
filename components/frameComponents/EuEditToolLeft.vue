@@ -208,6 +208,13 @@
         created(){
 
         },
+        watch:{
+            addFileModel(val){
+                if(val){
+                    this.$refs['addFileForm'].clearValidate()
+                }
+            }
+        },
         methods:{
             yesAddComponents(ref){
                 this.$refs[ref].validate((valid) => {
@@ -279,9 +286,6 @@
                 this.addFileForm.fileType = '0'
                 this.addFileForm.isAddPagePath = false
                 this.$store.commit('setAddFileModel',{addFileModel: false})
-                if (formName){
-                    this.$refs[formName].clearValidate()
-                }
             },
             yesAddProject(formName){
                 this.$refs[formName].validate((valid) => {
