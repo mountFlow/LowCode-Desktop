@@ -1,5 +1,5 @@
 {
-    "name" : "draggable-admin",
+    "name" : "dragUI",
     "appid" : "__UNI__B9C013B",
     "description" : "",
     "versionName" : "1.0.0",
@@ -65,6 +65,9 @@
         "devServer" : {
             "https" : false
         },
-        "title" : "拖拽UI"
+        "title" : "拖拽UI",
+        "router" : {
+            "base" : "/dragUI/unpackage/dist/build/h5/"
+        }
     }
 }
