@@ -10,8 +10,9 @@
 - [ejs](https://github.com/mde/ejs)
 - [uniApp](https://github.com/dcloudio/uni-app)
 - [vue-context-menu](https://github.com/xunleif2e/vue-context-menu)
-### 安装
- 参考uni官网安装普通uni项目([运行uni-app](https://uniapp.dcloud.io/quickstart?id=%e8%bf%90%e8%a1%8cuni-app))运行到浏览器，另需要手动下载包`npm install`
+### 快速开始
+ 参考uni官网安装普通uni项目([运行uni-app](https://uniapp.dcloud.io/quickstart?id=%e8%bf%90%e8%a1%8cuni-app))运行到浏览器<br/>
+ 另需要手动下载包`npm install`
 ### 项目目录
 - colorui
 - common -----------------------_公共方法_
@@ -160,3 +161,11 @@ componentsInfo: { // 组件的基本信息
 }
 ```
 
+### say
+一开始有这个想法，是因为在编写前端的时候对于我来讲，挺痛苦的，特别是制作小程序或uni时，由于我的电脑很烂，而手又贱，习惯调整一下高度啊啥的就保存一下看效果，结果很多时间都浪费在等上面，于是就想这说希望可以马上看到效果，最好是拖拽，又可以自动生成代码的工具，但看了下基本都是有这个没那个，与自己想法不符。后来找到了了Vue.Draggable 看了下。觉得符合我的效果。
+###
+是的，于是就开始了。
+期间最头疼的就是upx转换问题。upx根据手机屏幕计算，而电脑计算出来的upx太大，就需要手动缩小。会带来很多局限性。但不管怎样，还算马马虎虎。
+### hope
+如果感兴趣，很高兴一起来让本项目变得更好。<br/>
+因为我觉得还有很多地方蛮狗屎的。但有点累，有点改不动了...
