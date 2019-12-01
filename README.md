@@ -15,6 +15,12 @@
 ### 项目目录
 - colorui
 - common -----------------------_公共方法_
+    - js
+        - localStore.js --------_本地存储方法_
+        - outExportFile.js -----_项目导出成代码的方法_
+        - vue-context-menu.js --_提供右键点击，添加了项目需要的事件反馈数据_
+        - vuedraggable.js ------_vue拖拽js_
+    - style
 - components 
     - basics -------------------_基础拖拽组件_
     - colorUi ------------------_第三方colorUI组件_
