@@ -34,6 +34,13 @@
                         active-color="#13ce66"
                         inactive-color="#ff4949">
                 </el-switch>
+                <a href="https://github.com/wozhishilaonanhai/dragUI" target="_blank"
+                   style="position: relative;width: 50px;display: flex;justify-content: center;align-items: center;margin-left: 20px">
+                    <el-image
+                            style="width: 40px; height: 40px;border-radius: 40px;cursor: pointer"
+                            src="https://github.com/fluidicon.png"
+                            fit="fill"></el-image>
+                </a>
             </view>
         </el-col>
     </el-row>
