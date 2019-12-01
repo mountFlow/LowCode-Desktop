@@ -27,7 +27,8 @@
 - static  ----------------------_静态文件_
 - templates --------------------_渲染模板文件_
 - store ------------------------_vuex_
-###主要数据结构
+
+### 主要数据结构
 `stroe.project.list`存放整个项目数据：<br>
 ```
 list:[
@@ -55,8 +56,11 @@ list:[
                         dragList: [
                             {
                                 componentName: 'Iflex', //组件名
-                                iClass: [] //组件样式类,
-                                iStyle: {} //组件样式,
+                                iClass: ['my-class-name'...] //组件样式类,
+                                iStyle: {
+                                    width: '1px',
+                                    ...
+                                } //组件样式,
                                 id: '组件标识',
                                 name: '组件名称',
                                 num: [
@@ -78,12 +82,8 @@ list:[
                                                     value: 'value', //props 中变量具体值
                                                 },
                                                 {
-                                                    key: 'value', //props 中变量名
-                                                    label: '值', //props 中变量中文名
-                                                    toDataOrHtml: 'html' or 'data', //props 中变量名放置的位置，直接内联还是变量放在data里
-                                                    type: 'select', //props 中变量类型
-                                                    value: 'value', //props 中变量具体值
-                                                    select: [
+                                                   ...
+                                                   select: [
                                                         {label: '名称',value: '值'},
                                                         ...
                                                     ], //选项
@@ -113,5 +113,44 @@ list:[
         projectType: 'uni-app'
     }
 ]
+```
+
+store.index 中 ·componentsInfo· 组件的基本信息 对应上方的数据
+```
+componentsInfo: { // 组件的基本信息
+    // id 0- 999  （约定）会根据id来判断是哪个list
+    list: [
+        {
+            name:'按钮',
+            id: 0,
+            componentName: 'Ibutton',
+            iStyle:{},
+            iClass: [],
+            propsValue: [
+                {   
+                    label:'值',
+                    key:'text',
+                    value:'按钮',
+                    toDataOrHtml: 'html',
+                    type: 'String'
+                },
+                {
+                    label:'类型',
+                    key:'type',
+                    value:'default',
+                    toDataOrHtml: 'html',
+                    type:'select',
+                    select: [
+                        {label: '红色',value: 'warn'},
+                        {label: '蓝色',value: 'primary'},
+                        {label: '白色',value: 'default'}
+                    ]
+                },
+            ...
+            ]
+        },
+        ...
+    ]
+}
 ```
 
