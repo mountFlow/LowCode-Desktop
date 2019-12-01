@@ -1,7 +1,7 @@
 # dragUI
 ### 用于UNI可拖拽可视化编程
 ### 效果图
-
+![](https://github.com/wozhishilaonanhai/dragUI/blob/master/static/demo/demo1.png)
 ### 基于
 - [sortablejs](https://github.com/SortableJS/Vue.Draggable)
 - [jszip](https://github.com/Stuk/jszip)
