@@ -1,1 +1,12 @@
 # dragUI
+### 用于UNI可拖拽可视化编程
+### 基于
+- [sortablejs](https://github.com/SortableJS/Vue.Draggable)
+- [jszip](https://github.com/Stuk/jszip)
+- [file-saver](https://github.com/eligrey/FileSaver.js)
+- [element-ui](https://github.com/ElemeFE/element)
+- [ejs](https://github.com/mde/ejs)
+- [uniApp](https://github.com/dcloudio/uni-app)
+- [vue-context-menu](https://github.com/xunleif2e/vue-context-menu)
+### 安装
+ 参考uni官网安装普通uni项目([运行uni-app](https://uniapp.dcloud.io/quickstart?id=%e8%bf%90%e8%a1%8cuni-app))运行到浏览器，另需要手动下载包`npm install`
