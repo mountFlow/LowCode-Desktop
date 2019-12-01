@@ -1,3 +1,8 @@
+/**
+ * 辅助数据
+ * @type {{buttom: number, top: number, left: number, right: number}}
+ */
+
 let dIndex = {
     'top': 0,
     'right': 1,

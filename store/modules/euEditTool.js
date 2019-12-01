@@ -1,6 +1,6 @@
 const euEditTool = {
     state: {
-        addProjectModel: false,
+        addProjectModel: false, // 模态框开关
         addFileModel: false
     },
     mutations: {

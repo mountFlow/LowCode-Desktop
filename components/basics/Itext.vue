@@ -1,5 +1,5 @@
 <template>
-    <text>{{ propsValueMap.text}}</text>
+    <text  v-bind="propsValueMap">{{ propsValueMap.text}}</text>
 </template>
 
 <script>

@@ -1,50 +1,20 @@
 <template>
-    <radio :value="'USA'" :checked="true"/>
+    <radio v-bind="propsValueMap"/>
 </template>
 
 <script>
+    import commoMethodsByBasicsComponents from 'common/js/commoMethodsByBasicsComponents'
+
     export default {
         name: 'Iradio',
-        data() {
-            return {
-                items: [{
-                    value: 'USA',
-                    name: '美国'
-                },
-                    {
-                        value: 'CHN',
-                        name: '中国',
-                        checked: 'true'
-                    },
-                    {
-                        value: 'BRA',
-                        name: '巴西'
-                    },
-                    {
-                        value: 'JPN',
-                        name: '日本'
-                    },
-                    {
-                        value: 'ENG',
-                        name: '英国'
-                    },
-                    {
-                        value: 'FRA',
-                        name: '法国'
-                    },
-                ],
-                current: 0
+        mixins: [commoMethodsByBasicsComponents],
+        props:{
+            propsValue: {
+                type: Array,
+                default: () => [{key:'checked',value:'true'},]
             }
         },
         methods: {
-            radioChange: function(evt) {
-                for (let i = 0; i < this.items.length; i++) {
-                    if (this.items[i].value === evt.target.value) {
-                        this.current = i;
-                        break;
-                    }
-                }
-            }
         }
     }
 </script>

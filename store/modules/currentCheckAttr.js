@@ -3,10 +3,11 @@ import {getCachesClass,cachesClass,cachesStyle,getCachesStyle} from 'common/js/l
 
 const currentCheckAttr = {
     state: {
-        contextMenuTarget: undefined,
+        contextMenuTarget: undefined, // 控制鼠標右鍵
         currentCheckIndex: '', //当前选中对应的下标
-        item: undefined,
-        customClass: {},
+        item: undefined, // 當前选中的组件信息
+        customClass: {}, // 存放全局创建的样式类
+        // 保存样式的基本信息，可在页面修改
         formList: [
             {
                 label: '高度',
@@ -298,15 +299,21 @@ const currentCheckAttr = {
             commit('setCurrentCheckIndex',{index:''})
             commit('setCurrentCheckItem',undefined)
         },
+        /**
+         * 从本地读取样式的基本信息
+         * @param commit
+         */
         initFromStyleList({commit}){
             let data = getCachesStyle()
             if (data){
                 commit('initFromStyleList',getCachesStyle())
             }
         },
+        // 从本地读取全局的样式
         initCustomClass({commit}){
             commit('initCustomClass',getCachesClass())
         },
+        // 设置背景样式
         setCurrentCheckAttrNameComputedByBackGrand({ state, commit, rootState }){
             if (rootState.project.checkFile){
                 let currentObj = rootState.project.checkFile.fileStyleAndClass
@@ -316,6 +323,7 @@ const currentCheckAttr = {
                 }
             }
         },
+        // 根据鼠标点击事件，遍历出点击的相应节点组件信息
         setCurrentCheckAttrNameComputed({ state, commit, rootState },content){
             let {index} = content
             let arrIndex = index.split('-')

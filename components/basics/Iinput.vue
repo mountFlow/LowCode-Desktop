@@ -1,5 +1,5 @@
 <template>
-    <input class="i-input" placeholder="input" v-bind="propsValueMap" />
+    <input class="i-input" v-bind="propsValueMap" />
 </template>
 
 <script>
@@ -11,7 +11,7 @@
         props:{
             propsValue: {
                 type: Array,
-                default: () => []
+                default: () => [{key:'placeholder',value:'input'},]
             }
         }
     }

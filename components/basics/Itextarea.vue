@@ -1,5 +1,5 @@
 <template>
-    <textarea auto-height v-bind="propsValue" style="" disabled/>
+    <textarea v-bind="propsValueMap" />
 </template>
 
 <script>
@@ -11,7 +11,7 @@
         props:{
             propsValue: {
                 type: Array,
-                default: () => ([{value: '长文本',key: 'value'}])
+                default: () => ([{value: '长文本',key: 'value'},{value: 'true',key:'auto-height'}])
             }
         }
     }

@@ -1,3 +1,8 @@
+/**
+ * 存放组件需要的模板数据，采用嵌套方式渲染模板
+ */
+
+
 let itemTemplates = `
 <% if(list.num.length === 1){ -%>
                 <% list.num.forEach(num => { -%>

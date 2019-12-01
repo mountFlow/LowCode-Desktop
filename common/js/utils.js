@@ -1,7 +1,12 @@
 let humpToLine = (str) =>{
     return str.replace(/([A-Z])/g,"-$1").toLowerCase();
 }
-
+/**
+ * 样式数据转字符串
+ * @param obj
+ * @param builtInStyyle
+ * @returns {string}
+ */
 let iStyleToString = (obj,builtInStyyle = "") => {
     let str = ' style="'
     let styleContent = ""

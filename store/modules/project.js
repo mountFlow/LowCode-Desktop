@@ -4,7 +4,7 @@ import vue from 'vue'
 
 const project = {
     state: {
-        currentProjcetIndex: '',
+        currentProjcetIndex: '', // 当前项目数据的下标
         list: [], // 项目的总数据。
         checkFile:undefined, // 选中的文件
         checkFolder: undefined // 选中的文件夹
@@ -62,6 +62,12 @@ const project = {
     getters: {
     },
     actions: {
+        /**
+         * 删除文件
+         * @param commit
+         * @param state
+         * @param componentName
+         */
         delCompentsFile({commit,state},{componentName}){
             let index = -1
             let folderIndexByCurrentProjcetIndex = -1
@@ -85,6 +91,13 @@ const project = {
                 commit('deleteFile',{currentProjcetIndex,folderIndexByCurrentProjcetIndex,index})
             }
         },
+        /**
+         * 增加文件
+         * @param commit
+         * @param state
+         * @param list
+         * @param componentName
+         */
         addCompentsFile({commit,state},{list,componentName}){
             // 当前项目
             let {currentProjcetIndex} = state
@@ -141,6 +154,10 @@ const project = {
                 commit('addNewFile',{data:fileNode,index:folderIndexByCurrentProjcetIndex,currentProjcetIndex})
             }
         },
+        /**
+         * 删除项目
+         * @param commit
+         */
         deleteProject({commit}){
             commit('setCheckFile',undefined)
             commit('deleteProject')

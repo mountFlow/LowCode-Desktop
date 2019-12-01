@@ -1,4 +1,9 @@
+/**
+ * 存放生成的项目的固定模板
+ */
+
 // manifest.json
+
 let manifestjson =
 `{
 	"name" : "<%= projectName -%>",

@@ -51,8 +51,6 @@
                     ]
                 },
                 editOrAdd: 'add',
-
-
                 oldKey: '',
                 editItemIndex: '',
                 showTipAdd: false,
