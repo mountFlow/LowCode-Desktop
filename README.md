@@ -16,22 +16,12 @@
 [地址](https://wozhishilaonanhai.github.io/dragUI/unpackage/dist/build/h5/index.html#/)
 ## 效果图
 ![](https://github.com/wozhishilaonanhai/dragUI/blob/master/static/demo/demo1.png)
-## 基于
-- [sortablejs](https://github.com/SortableJS/Vue.Draggable)
-- [jszip](https://github.com/Stuk/jszip)
-- [file-saver](https://github.com/eligrey/FileSaver.js)
-- [element-ui](https://github.com/ElemeFE/element)
-- [ejs](https://github.com/mde/ejs)
-- [uniApp](https://github.com/dcloudio/uni-app)
-- [vue-context-menu](https://github.com/xunleif2e/vue-context-menu)
 ## 快速开始
  参考uni官网安装普通uni项目([运行uni-app](https://uniapp.dcloud.io/quickstart?id=%e8%bf%90%e8%a1%8cuni-app))运行到浏览器<br/>
  另需要手动下载包`npm install`
-
 ## 致使用者 
-一个简单创建hello world 界面的视频<br>
-![](https://www.bilibili.com/video/av77837279/)
-
+一个简单创建hello world 界面的视频,github不会放视频，放在bilibli了<br>
+[dragUI 演示](https://www.bilibili.com/video/av77837279/)
 ## 致开发者 
 #### 项目目录
 - colorui
@@ -180,7 +170,14 @@ componentsInfo: { // 组件的基本信息
     ]
 }
 ```
-
+## 基于
+- [sortablejs](https://github.com/SortableJS/Vue.Draggable)
+- [jszip](https://github.com/Stuk/jszip)
+- [file-saver](https://github.com/eligrey/FileSaver.js)
+- [element-ui](https://github.com/ElemeFE/element)
+- [ejs](https://github.com/mde/ejs)
+- [uniApp](https://github.com/dcloudio/uni-app)
+- [vue-context-menu](https://github.com/xunleif2e/vue-context-menu)
 ## say
 一开始有这个想法，是因为在编写前端的时候对于我来讲，挺痛苦的，特别是制作小程序或uni时，由于我的电脑很烂，而手又贱，习惯调整一下高度啊啥的就保存一下看效果，结果很多时间都浪费在等上面，于是就想这说希望可以马上看到效果，最好是拖拽，又可以自动生成代码的工具，但看了下基本都是有这个没那个，与自己想法不符。后来找到了了Vue.Draggable 看了下。觉得符合我的效果。
 ##
