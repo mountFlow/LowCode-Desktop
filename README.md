@@ -30,7 +30,7 @@
 
 ## 致使用者 
 一个简单创建hello world 界面的视频<br>
-<iframe src="//player.bilibili.com/player.html?aid=77837279&cid=133165562&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+![](https://www.bilibili.com/video/av77837279/)
 
 ## 致开发者 
 #### 项目目录
