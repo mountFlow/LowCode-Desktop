@@ -4,7 +4,6 @@
 - [效果图](#效果图)
 - [基于](#效果图)
 - [快速开始](#快速开始)
-- [致使用者](#致使用者)
 - [致开发者](#致开发者)
     - [项目目录](#项目目录)
     - [主要数据结构](#主要数据结构)
@@ -13,15 +12,15 @@
 - [hope](#hope)
 ## 用于UNI可拖拽可视化编程
 ## 在线演示
-[地址](https://wozhishilaonanhai.github.io/dragUI/unpackage/dist/build/h5/index.html#/)
+[demo地址](https://wozhishilaonanhai.github.io/dragUI/unpackage/dist/build/h5/index.html#/)
+一个简单创建hello world 界面的视频,github不会放视频，放在bilibli了<br>
+[dragUI 演示视频](https://www.bilibili.com/video/av77837279/)
 ## 效果图
 ![](https://github.com/wozhishilaonanhai/dragUI/blob/master/static/demo/demo1.png)
 ## 快速开始
  参考uni官网安装普通uni项目([运行uni-app](https://uniapp.dcloud.io/quickstart?id=%e8%bf%90%e8%a1%8cuni-app))运行到浏览器<br/>
  另需要手动下载包`npm install`
-## 致使用者 
-一个简单创建hello world 界面的视频,github不会放视频，放在bilibli了<br>
-[dragUI 演示](https://www.bilibili.com/video/av77837279/)
+
 ## 致开发者 
 #### 项目目录
 - colorui
