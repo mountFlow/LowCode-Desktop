@@ -61,11 +61,11 @@ const store = new Vuex.Store({
                 {name:'文本',id: 4, componentName: 'Itext',iStyle:{},iClass: [],propsValue: [{label:'值',key:'text',value:'文本',toDataOrHtml: 'html',type: 'String',defaultValue: ''},{label:'是否可选',key:'selectable',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue:'false'},{label:'是否解码',key:'decode',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue: 'false'}]},
                 {name:'进度条',id: 5, componentName: 'Iprogress',iStyle:{},iClass: [],propsValue: [
                         {label:'百分比',key:'percent',value:'23',toDataOrHtml: 'html',type: 'String',defaultValue: '23'},
-                        {label:'右侧百分比',key:'show-info',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue: 'false'},
+                        {label:'右侧百分比',key:'show-info',value:'true',toDataOrHtml: 'html',type: 'boolean',defaultValue: 'true'},
                         {label:'宽度',key:'stroke-width',value:'6',toDataOrHtml: 'html',type: 'String',defaultValue: '6'},
                         {label:'已选颜色',key:'activeColor',value:'#09BB07',toDataOrHtml: 'html',type: 'String',defaultValue: '#09BB07'},
                         {label:'未选颜色',key:'backgroundColor',value:'#EBEBEB',toDataOrHtml: 'html',type: 'String',defaultValue: '#EBEBEB'},
-                        {label:'动画',key:'active',value:'#EBEBEB',toDataOrHtml: 'html',type: 'boolean',defaultValue: 'false'},
+                        {label:'动画',key:'active',value:'#EBEBEB',toDataOrHtml: 'html',type: 'String',defaultValue: '#EBEBEB'},
                         {label:'动画类型',key:'active-mode',value:'backwards',toDataOrHtml: 'html',type: 'select',defaultValue: 'backwards',select: [
                                 {label:'动画从头播',value:'backwards'},
                                 {label:'上次结束播',value:'forwards'},

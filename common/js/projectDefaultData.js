@@ -1,6 +1,58 @@
 // 默认项目结构
 
 let data = [{
+	id: 32,
+	label: 'colorui',
+	path: '/colorui',
+	type: 'folder',
+	children: [{
+		id: 33,
+		type: 'folder',
+		label: 'components',
+		path: '/colorui/components',
+		children: []
+	},{
+		id: 36,
+		type: 'css',
+		params: {},
+		path: '/colorui/animation.css',
+		label: 'animation.css',
+		isCanDrag: false
+	},{
+		id: 37,
+		type: 'css',
+		params: {},
+		path: '/colorui/icon.css',
+		label: 'icon.css',
+		isCanDrag: false
+	},{
+		id: 38,
+		type: 'css',
+		params: {},
+		path: '/colorui/main.css',
+		label: 'main.css',
+		isCanDrag: false
+	}]
+},{
+	id: 39,
+	label: 'common',
+	path: '/common',
+	type: 'folder',
+	children: [{
+		id: 40,
+		label: 'style',
+		path: '/common/style',
+		type: 'folder',
+		children: [{
+			id: 41,
+			type: 'css',
+			params: {},
+			path: '/common/style/myStyle.scss',
+			label: 'myStyle.scss',
+			isCanDrag: false
+		}]
+	}]
+},{
     id: 31,
     label: 'components',
     type: 'folder',

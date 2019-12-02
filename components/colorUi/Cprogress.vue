@@ -20,5 +20,6 @@
 <style scoped>
     .cu-progress{
         zoom: .2;
+        flex-direction: column;
     }
 </style>
