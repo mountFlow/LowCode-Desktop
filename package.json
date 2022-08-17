@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "element-plus": "^2.2.13"
+    "element-plus": "^2.2.13",
+    "sortablejs": "^1.15.0",
+    "vue-draggable-next": "^2.1.1"
   }
 }

@@ -27,7 +27,7 @@
             </el-header>
             <el-container>
                 <el-aside width="25%">
-                    <!-- <LeftComponents></LeftComponents> -->
+                    <LeftComponents></LeftComponents>
                 </el-aside>
                 <el-main style="position: relative">
                     <!-- 					<eu-edit-tool-left></eu-edit-tool-left>
