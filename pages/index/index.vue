@@ -16,7 +16,7 @@
                             style="display: flex;align-items: center;font-size: 14px;color: #5f5e5e;justify-content: flex-end">
                             <div style="width: 20px;"></div>
                             <span style="margin-right: 5px">预览</span>
-                            <a href="https://github.com/mountFlow/LowCode-desktop" target="_blank" class="headPortrait">
+                            <a href="https://github.com/mountFlow/LowCode-Desktop" target="_blank" class="headPortrait">
                                 <el-image style="width: 40px; height: 40px;border-radius: 40px;cursor: pointer"
                                     src="https://github.com/fluidicon.png" fit="fill"></el-image>
                             </a>
