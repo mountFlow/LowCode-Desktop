@@ -4,8 +4,8 @@
             <el-header>
                 <el-row>
                     <el-col :span="6">
-                        <view style="display: flex;justify-content: flex-start;align-items: center;color: #675e6f">
-                            <h2>DragUI</h2>
+                        <view style="display: flex;justify-content: flex-start;align-items: center;color: #409eff">
+                            <h2>LowCode-Desktop</h2>
                         </view>
                     </el-col>
                     <el-col :span="12">
@@ -15,7 +15,8 @@
                         <view
                             style="display: flex;align-items: center;font-size: 14px;color: #5f5e5e;justify-content: flex-end">
                             <div style="width: 20px;"></div>
-                            <span style="margin-right: 5px">预览</span>
+                            <el-button type="primary" style="margin-top: 12px" round>预览</el-button>
+                            <span ></span>
                             <a href="https://github.com/mountFlow/LowCode-Desktop" target="_blank" class="headPortrait">
                                 <el-image style="width: 40px; height: 40px;border-radius: 40px;cursor: pointer"
                                     src="https://github.com/fluidicon.png" fit="fill"></el-image>
@@ -100,7 +101,8 @@
        display: flex;
        justify-content: center;
        align-items: center;
-       margin-left: 20px
+       margin-left: 20px;
+       margin-top: 12px;
     }
     
     .el-header,
