@@ -1,0 +1,31 @@
+.flex-four{
+  flex: 4;
+}
+
+.flex-five{
+  flex: 5;
+}
+
+.inline-flex{
+  display: inline-flex;
+}
+
+.phone-width{
+  width: 375px;
+}
+
+.tool {
+  .el-color-picker__trigger{
+    border: none !important;
+  }
+}
+
+.box-card{
+  .el-select{
+    width: 150px;
+  }
+}
+
+.my-none-el-popover{
+  min-width: 0 !important;
+}

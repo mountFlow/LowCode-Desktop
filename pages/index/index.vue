@@ -49,7 +49,7 @@
 
 <script>
     //    import PhoneFrame from '@/components/PhoneFrame/PhoneFrame'
-    //    import LeftComponents from '@/components/LeftComponents/LeftComponents'
+       import LeftComponents from '@/components/LeftComponents/LeftComponents'
     //    import EuEditToolRight from '@/components/frameComponents/EuEditToolRight'
     //    import EuHeader from '@/components/frameComponents/EuHeader'
     // import EuEditToolLeft from '@/components/frameComponents/EuEditToolLeft'
@@ -84,7 +84,7 @@
         },
         components: {
             //          PhoneFrame,
-            //          LeftComponents,
+                     LeftComponents,
             //          EuHeader,
             //          EuEditToolLeft,
             //          RightComponents,

@@ -1,9 +1,9 @@
 import App from './App'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import store from './store'
 // #ifndef VUE3
 import Vue from 'vue'
-import store from './store'
 Vue.config.productionTip = false
 App.mpType = 'app'
 Vue.prototype.$store = store
