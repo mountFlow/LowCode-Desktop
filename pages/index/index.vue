@@ -45,7 +45,7 @@
 					</template> -->
                 </el-main>
                 <el-aside width="25%" style="padding-top: 10px">
-                    <!-- 				<RightComponents></RightComponents> -->
+                    				<RightComponents></RightComponents>
                 </el-aside>
             </el-container>
         </el-container>
@@ -58,7 +58,7 @@
     //    import EuEditToolRight from '@/components/frameComponents/EuEditToolRight'
     //    import EuHeader from '@/components/frameComponents/EuHeader'
     // import EuEditToolLeft from '@/components/frameComponents/EuEditToolLeft'
-    // import RightComponents from '@/components/RightComponents/RightComponents'
+    import RightComponents from '@/components/RightComponents/RightComponents'
     // import commonFileFrame from '@/components/PhoneFrame/commonFileFrame'
 
     export default {
