@@ -4,12 +4,16 @@ import 'element-plus/dist/index.css'
 // #ifndef VUE3
 import Vue from 'vue'
 import store from './store'
+
+import './static/font/iconfont.css'
+
 Vue.config.productionTip = false
 App.mpType = 'app'
 Vue.prototype.$store = store
 const app = new Vue({
     ...App
 })
+app.use(store)
 app.$mount()
 // #endif
 

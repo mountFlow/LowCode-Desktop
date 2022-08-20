@@ -1,10 +1,11 @@
 <template>
     <view class="home">
         <el-container>
+			
             <el-header>
                 <el-row>
                     <el-col :span="6">
-                        <view style="display: flex;justify-content: flex-start;align-items: center;color: #409eff">
+                        <view style="display: flex;justify-content: flex-start;align-items: center;color: #409eff;">
                             <h2>LowCode-Desktop</h2>
                         </view>
                     </el-col>
@@ -25,9 +26,13 @@
                     </el-col>
                 </el-row>
             </el-header>
+			
+			
             <el-container>
+				<!-- 左边组件栏 -->
                 <el-aside width="25%">
-                    <LeftComponents></LeftComponents>
+                    <LeftComponents>
+					</LeftComponents>
                 </el-aside>
                 <el-main style="position: relative">
                     <!-- 					<eu-edit-tool-left></eu-edit-tool-left>
@@ -49,7 +54,7 @@
 
 <script>
     //    import PhoneFrame from '@/components/PhoneFrame/PhoneFrame'
-    //    import LeftComponents from '@/components/LeftComponents/LeftComponents'
+    import LeftComponents from '@/components/LeftComponents/LeftComponents'
     //    import EuEditToolRight from '@/components/frameComponents/EuEditToolRight'
     //    import EuHeader from '@/components/frameComponents/EuHeader'
     // import EuEditToolLeft from '@/components/frameComponents/EuEditToolLeft'
@@ -70,21 +75,21 @@
         },
         computed: {
             pattern() {
-                // return this.$store.state.pattern
+                return this.$store.state.pattern
             },
             checkFile() {
-                // if (this.$store.state.project.checkFile){
-                //     return this.$store.state.project.checkFile
-                // }
-                // return {}
+                if (this.$store.state.project.checkFile){
+                    return this.$store.state.project.checkFile
+                }
+                return {}
             },
             name() {
-                // return this.$store.state.iflexGroup
+                 return this.$store.state.iflexGroup
             },
         },
         components: {
             //          PhoneFrame,
-            //          LeftComponents,
+                    LeftComponents,
             //          EuHeader,
             //          EuEditToolLeft,
             //          RightComponents,
