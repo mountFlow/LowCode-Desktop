@@ -27,6 +27,7 @@
                     <view class="module_name">{{ item.mName }}</view>
                   </div>
                 </el-col>
+                
               </draggable>
             </el-row>
           </el-collapse-item>
