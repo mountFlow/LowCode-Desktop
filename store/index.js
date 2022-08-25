@@ -126,17 +126,6 @@ const store = new Vuex.Store({
                 {name:'进度条',id: 1012, componentName: 'Cprogress',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
                 {name:'导航栏',id: 1013, componentName: 'Cnav',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
             ],
-            // id 2000 - 2999
-            formList: [
-                {name:'输入框',id: 2001, componentName: 'FormInput',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-                {name:'输入框2',id: 2002, componentName: 'FormInput2',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-                {name:'选择框',id: 2003, componentName: 'FromSelect',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-                {name:'时间选择',id: 2004, componentName: 'FromSelectByTime',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-                {name:'日期选择',id: 2005, componentName: 'FromSelectByDate',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-                {name:'开关',id: 2006, componentName: 'FromSwitch',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-                {name:'单选操作',id: 2007, componentName: 'FormRadio',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-                {name:'图片上传',id: 2008, componentName: 'FormUpdataImage',iStyle:{},iClass: [],propsValue: [],upxSwitch: false},
-            ]
         }
     },
     mutations: {
@@ -199,9 +188,6 @@ const store = new Vuex.Store({
             let key = 'list'
             if (id > 999){
                 key = 'colorUiList'
-            }
-            if (id > 1999){
-                key = 'formList'
             }
             commit('updataComponentsInfo',{
                 key,
