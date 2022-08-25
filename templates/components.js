@@ -35,7 +35,7 @@ let itemTemplates = `
 `
 
 let fileTemplates =
-`<template>
+`<template>  <
     <view<%- iClassToString(fileStyleAndClass.iClass,mode === 'page' ? 'phone-content': '') -%><%- iStyleToString(fileStyleAndClass.iStyle) %>>
         <% list.forEach(item => { -%>
             <% if(item.num.length === 1){ -%>
