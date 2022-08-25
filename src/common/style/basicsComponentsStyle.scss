@@ -1,0 +1,38 @@
+$windowWidth: 100vw;
+$windowHeight: 100vw;
+$zoom: 0.2;
+
+$rote: 0.2;
+
+$phoneWidth: 750upx;
+$phoneHeight: 1334upx;
+
+$windowsWidth: $phoneWidth / 0.2;
+
+$onePx: $windowsWidth / 750 * 0.2;
+
+.phone{
+
+}
+
+.components-class{
+  uni-image{
+    zoom: .2 !important;
+  }
+}
+
+uni-scroll-view{
+  zoom: .19;
+}
+/*
+  这里解决的是： 在uni基础元素里，高度宽度单位是px。 而字体是upx。导致在最外层的块中，如果为了upx而整体缩小。
+  会导致高度宽度变得很小。就需要在基础元素中再放大相应倍数。
+  但由于字体又是upx 。导致字体在原本最外层块中缩小后正常，基础元素又放大，使得字体变得很大。
+  所以只能手工全局调整字体为px格式。
+  */
+uni-radio::before, uni-checkbox::before{
+  font-size: 1em !important;
+}
+uni-switch::after, uni-switch::before{
+  font-size: 1em !important;
+}
