@@ -287,8 +287,8 @@
     }
     .right-menu {
         border: 1px solid #eee;
-        box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.1);
-        border-radius: 1px;
+        box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.05);
+        border-radius: 5px;
         flex-direction: column;
     }
     a {
@@ -298,7 +298,8 @@
         padding: 2px;
     }
     .right-menu a:hover {
-        background: #42b983;
+        background: #409eff;
+        border-radius: 5px;
     }
     path {
         fill: black;

@@ -11,6 +11,7 @@
 </script>
 
 <style lang="scss">
+    @import url('./static/font/iconfont.css');
     @import "colorui/main.css";
     @import "colorui/icon.css";
 	/*每个页面公共css */

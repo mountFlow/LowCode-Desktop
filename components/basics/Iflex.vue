@@ -1,57 +1,21 @@
-<template>
-    <view>
+<template style="height: 100%;"    
+            >
+    <view style="height: 100%; border: #409eff solid 0.5px;  border-radius:5px;">
         <view class="flex-draggalbe-handle" v-if="showFlexDraggalbeHandle && preview">
             <!-- 这里的:data-i-index="dataIIndex"用于右键删除-->
-            <view class="flex-draggalbe-handle-top"
-                  v-if="num.length > 1"
+            
+            <view class="handle-text"
+                  v-if="num.length = 1"
                   :data-i-index="dataIIndex"
-                  @mousedown="choosLayouts(dataIIndex,$event)"></view>
-            <view class="flex-draggalbe-handle-bottom">
-                <!-- 这里的:data-i-index="dataIIndex"用于右键删除-->
-                <view :class="[handleItem.layoutClass,
-                        num.length > 1 ? 'flex-draggalbe-handle-bottom-item':'flex-draggalbe-handle-bottom-item-single']"
-                      v-for="(handleItem,handleIndex) in num"
-                      :data-i-index="dataIIndex + '-' +handleIndex"
-                      :key="handleIndex"
-                      @mousedown="choosLayouts(dataIIndex + '-' + handleIndex,$event)"
-                ></view>
-            </view>
+                  @mousedown="choosLayouts(dataIIndex,$event)">
+                  <view  >表单容器</view></view>
+            
         </view>
 
         <!--这里的重复代码不好处理，因为是嵌套，老是报错-->
-        <template v-if="num.length === 1">
-            <!-- 这里的:data-i-index="dataIIndex"用于右键删除-->
-            <view class="margin-0 one-flex i-flex" style="position: relative"
-                  :class="[item.layoutClass]"
-                  v-for="(item,index0) in num"
-                  :data-i-index="dataIIndex + '-' +index0"
-                  :dataIIndex="dataIIndex + '-' +index0"
-            >
-                <draggable :group="iflexGroup" :list="item.itemList"
-                           :options="{
-                            }"
-                           @choose="choosComponents"
-                           @change="draggableChange"
-                           :class="[isIFlexClassBorder(num,index0)]"
-                           style="min-height:20px;"
-                           :style="[computedClassToStyle(item.iClass),computedStyleToStyle(item.iStyle)]"
-                >
-                    <template v-for="(item2,index) in item.itemList">
-                        <component :key="index" :is="item2.componentName"
-                                   :dataIIndex="dataIIndex + '-' + index0 + '-' +index"
-                                   :data-i-index="dataIIndex + '-' + index0 + '-' +index"
-                                   v-bind="item2"
-                                   :propsValue = "item2.componentName !== 'Iflex' ? item2.propsValue: undefined"
-                                   :style="item2.componentName !== 'Iflex'? [computedClassToStyle(item2.iClass),computedStyleToStyle(item2.iStyle)]:''"
-                        >
-                        </component>
-                    </template>
-                </draggable>
-            </view>
-        </template>
 
-        <template v-else>
-            <view class="flex i-flex-r" style="position: relative"
+        <template style="height: 100%;">
+            <view class="flex i-flex-r" style="position: relative;height: 100%;"
                   :style="[computedClassToStyle(iClass),computedStyleToStyle(iStyle)]"
                   :class="iClass"
                   :data-i-index="dataIIndex"
@@ -105,7 +69,7 @@
             },
             iStyle: {
                 type: Object,
-                default: ()=>{}
+                default: ()=>{style="height: 100%;"}
             },
             iClass: {
                 type: Array,
@@ -224,31 +188,34 @@
     .i-flex{
         min-height: 20px;
 
-        &-border {
-            border-left: #675e6f solid 0.5px;
-            border-bottom: #675e6f solid 0.5px;
-        }
-
         &-border-r {
-            border-left: #675e6f solid 0.5px;
-            border-right: #675e6f solid 0.5px;
-            border-bottom: #675e6f solid 0.5px;
         }
     }
-
+    .handle-text{
+        height:20px;
+        text-align: center;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        background-color: transparent;
+    }
     .flex-draggalbe-handle {
-        $handleHeight: 8px;
+        $handleHeight: 10px;
 
         cursor: pointer;
-        background-color: #675e6f;
-        width: 100%;
-
+        background-color: rgba(64, 158, 255, 100);
+        width: 20%;
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px;
+        
         &-top{
             height: $handleHeight;
             width: 100%;
         }
         &-top:hover{
-            background-color: #ad9eba;
+            background-color: #98a8ff;
+            border-bottom-left-radius:5px;
+            border-bottom-right-radius:5px;
         }
 
         &-bottom{
@@ -277,6 +244,11 @@
             }
 
         }
+    }
+    .flex-draggalbe-handle:hover{
+        background-color: #98a8ff;
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px;
     }
 
     .sortable-fallback{

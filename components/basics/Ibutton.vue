@@ -1,8 +1,10 @@
 <template>
-    <button v-bind="propsValueMap"
+    <div style="width: 100%;display: flex;justify-content: center;margin-top: 15px;">
+    <el-button v-bind="propsValueMap"
             :ref="'Ibutton-' + dataIIndex"
             @mouseup="initComponenSizeStyle('Ibutton-' + dataIIndex)"
-    >{{propsValueMap.text}}</button>
+    >{{propsValueMap.text}}</el-button>
+    </div>
 </template>
 
 <script>
