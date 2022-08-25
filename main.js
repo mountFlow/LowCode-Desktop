@@ -4,13 +4,14 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import store from './store'
 import './static/font/iconfont.css'
+import Clipboard from 'clipboard'
 
-Vue.config.productionTip = false
 
 Vue.use(ElementUI)
 App.mpType = 'app'
 Vue.prototype.$store = store
-
+Vue.prototype.Clipboard = Clipboard
+Vue.config.productionTip = false
 const app = new Vue({
     ...App
 })

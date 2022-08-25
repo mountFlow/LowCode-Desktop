@@ -12,9 +12,9 @@
                 </view>
             </view>
             <view class="phone-top">
-                <view style="flex: 1"><i class="el-icon-more"></i>&nbsp;无服务</view>
+                <view style="flex: 1"><i class="el-icon-close"></i>&nbsp;无服务</view>
                 <view style="flex: 1;text-align: center">{{time}}</view>
-                <view style="flex: 1;text-align: right"><i class="el-icon-chat-round"></i></view>
+                <view style="flex: 1;text-align: right"><i class="el-icon-chat-round" style="margin-right: 5px;"></i><i class="el-icon-s-promotion"></i></view>
             </view>
             <view class="phone-top-blok">
             </view>

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <el-tabs type="border-card" value="tab1">
+    <div style="height: 100%;">
+        <el-tabs type="border-card" value="tab1" style="height: 100%;">
             <el-tab-pane name="tab1" label="组件库" style="">
                 <el-row>
                     <el-col :span="24">

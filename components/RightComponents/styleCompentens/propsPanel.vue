@@ -25,7 +25,6 @@
                                v-for="item2 in [{label: 'true', value: 'true'},
                                 {label: 'false', value: 'false'}]"></el-option>
                 </el-select>
-                <i @click="deleteProps(index)" class="el-icon-remove" style="font-size: 16px;color: #a8a8a8"></i>
                 <!--<el-tooltip class="item" effect="dark" :content="'以 - 作为分割符，比例最大为'" placement="top-start">-->
                 <!--<div style="display: inline-block;vertical-align: top;margin-right: 10px">-->
                 <!--<i class="el-icon-question" style="font-size: 16px"></i>-->
@@ -45,52 +44,6 @@
             </div>
         </template>
 
-        <el-card class="box-card" v-if="addPropsShow" style="margin-bottom: 20px;">
-            <el-form :rules="addPropsFormRules"  :model="addPropsForm"  ref="addPropsForm" label-width="80px" :inline="true">
-                <el-form-item label="名称" prop="label">
-                    <el-input v-model="addPropsForm.label"
-                              size="mini"></el-input>
-                </el-form-item>
-                <el-form-item label="props-key" prop="key">
-                    <el-input v-model="addPropsForm.key"
-                              size="mini"></el-input>
-                </el-form-item>
-                <el-form-item label="值类型" prop="type">
-                    <el-select v-model="addPropsForm.type"  size="mini" placeholder="请选择值的输入类型"
-                               @change="selectCheck"
-                    >
-                        <el-option :label="item.label" :value="item.value" v-for="item in selectType"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="默认值" prop="defaultValue" v-if="addPropsForm.type !== 'boolean'">
-                    <el-input v-model="addPropsForm.defaultValue"
-                              size="mini"></el-input>
-                </el-form-item>
-                <el-form-item label="默认值" prop="defaultValue" v-if="addPropsForm.type === 'boolean'">
-                    <el-select v-model="addPropsForm.defaultValue"  size="mini" placeholder="请选择默认值">
-                        <el-option :label="item + ''" :value="item" v-for="item in [true,false]"></el-option>
-                    </el-select>
-                </el-form-item>
-                <key-value-select v-if="typeIsSelect"
-                                  :selectKeyValue="selectKeyValue"
-                                  @addSelectKeyValue="addSelectKeyValue"
-                                  @deleteKeyValue="deleteKeyValue"></key-value-select>
-                <el-form-item label="模板位置" prop="toDataOrHtml">
-                    <el-select v-model="addPropsForm.toDataOrHtml"  size="mini" placeholder="请选择值类型">
-                        <el-option :label="item.label" :value="item.value" v-for="item in selectToDataOrHtml"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="submitForm('addPropsForm')">添加</el-button>
-                    <el-button @click="resetForm('addPropsForm')">重置</el-button>
-                    <el-button @click="closeForm">关闭</el-button>
-                </el-form-item>
-            </el-form>
-        </el-card>
-
-        <div style="display: flex;justify-content: center">
-            <i class="el-icon-circle-plus-outline" style="font-size: 25px;font-weight: 600;color: #a8a8a8;cursor: pointer" @click="addProps"></i>
-        </div>
     </div>
 </template>
 
@@ -135,13 +88,6 @@
             }
         },
         methods: {
-            deleteProps(index){
-                this.$store.commit('deletePropsValue',{index})
-                this.$store.dispatch('updataComponentsInfo')
-            },
-            addProps() {
-                this.addPropsShow = true
-            },
             selectCheck(val){
                 this.addPropsForm.defaultValue = ''
                 if (val === 'select'){

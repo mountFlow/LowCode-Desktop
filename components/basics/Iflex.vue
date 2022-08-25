@@ -1,7 +1,7 @@
 <template style="height: 100%;"    
             >
     <view style="height: 100%; border: #409eff solid 0.5px;  border-radius:5px;">
-        <view class="flex-draggalbe-handle" v-if="showFlexDraggalbeHandle && preview">
+        <view class="flex-draggalbe-handle" v-if="showFlexDraggalbeHandle && preview" >
             <!-- 这里的:data-i-index="dataIIndex"用于右键删除-->
             
             <view class="handle-text"
