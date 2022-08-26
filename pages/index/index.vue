@@ -10,7 +10,7 @@
                 color: #409eff;
               "
             >
-              <h2 >LowCode-Desktop</h2>
+              <h2 @click="goToIndex()">LowCode-Desktop</h2>
             </view>
             <view
               style="
@@ -129,6 +129,16 @@ export default {
   methods: {
     goToGithub() {
       window.open("https://github.com/mountFlow/LowCode-Desktop", "_blank");
+    },
+    goToIndex() {
+        uni.navigateTo({
+    
+            // url: 'test?id=1&name=uniapp'  c传递参数
+    
+            url: "../welcome/welcome"
+    
+        })
+    
     },
     yesAddComponents(ref){
         // this.$refs[ref].validate((valid) => {
