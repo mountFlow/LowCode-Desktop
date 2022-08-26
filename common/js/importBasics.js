@@ -9,7 +9,7 @@ import Iswitch from '@/components/basics/Iswitch'
 import Itextarea from '@/components/basics/Itextarea'
 import Iimage from '@/components/basics/Iimage'
 import IwebView from '@/components/basics/IwebView'
-
+import Iuploadpic from '@/components/basics/Iuploadpic'
 let basics = {
     components:{
         Iinput,
@@ -23,6 +23,7 @@ let basics = {
         Itextarea,
         Iimage,
         IwebView,
+        Iuploadpic
 
     }
 }
