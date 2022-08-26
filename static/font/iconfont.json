@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10792632",
+      "name": "新增表单_新增新建操作_jurassic",
+      "font_class": "add-form",
+      "unicode": "e6ec",
+      "unicode_decimal": 59116
+    },
+    {
+      "icon_id": "16364337",
+      "name": "小程序",
+      "font_class": "xiaochengxu1",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
       "icon_id": "1766471",
       "name": "符号-步骤条",
       "font_class": "buzhoutiao",
