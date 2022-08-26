@@ -5,17 +5,11 @@
 - 优化布局，增加新功能的对应板块
 - 
 ### 2.leftcomponents.vue
-- 更名为ComponentsPicker.vue
 - 基础组件更改为6个一行
 - 对字体和文字大小进行了微调
 
 ### 3.phoneFrame.vue
-- 更名为DrawBoardPhone.vue
 - 实现拖动之后克隆生成基于element-ui的新组件
-
-
-### 3.rightcomponents.vue
-- 更名为ComponentsMessage.vue
 
 ##TODO：
 ### 1.李文翰
