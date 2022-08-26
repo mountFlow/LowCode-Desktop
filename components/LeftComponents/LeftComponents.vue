@@ -22,6 +22,7 @@
                                         普通组件
                                     </view>
                                 </template>
+								<view>
                                 <draggable :list="list" :clone="cloneComponent" :options="{
                                 sort:false
                                 }" :group="{ name: 'components', pull: 'clone', put: false}" @choose="choosComponents"
@@ -31,6 +32,7 @@
                                                :componentName="item.componentName">
                                            </ComponentContainer>
                                        </draggable>
+								</view>
                             </el-collapse-item>
                             
                             <el-collapse-item name="3"
@@ -40,7 +42,17 @@
                                         高级组件
                                     </view>
                                 </template>
-                                
+					
+								<draggable :list="colorUiList" :clone="cloneComponent" :options="{
+								sort:false
+								}" :group="{ name: 'components', pull: 'clone', put: false}" @choose="choosComponents"
+										   class="components-class"
+										   style="position: relative;display: flex;justify-content: center;flex-wrap: wrap;">
+										   <ComponentContainer v-for="item in colorUiList" :key="item.id" :name="item.name" :Icon="item.Icon"
+											   :componentName="item.componentName">
+										   </ComponentContainer>
+									   </draggable>
+									
                             </el-collapse-item>
                         </el-collapse>
 

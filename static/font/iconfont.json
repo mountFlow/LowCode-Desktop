@@ -6,6 +6,97 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1766471",
+      "name": "符号-步骤条",
+      "font_class": "buzhoutiao",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
+      "icon_id": "19234637",
+      "name": "时间线",
+      "font_class": "shijianxian",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
+      "icon_id": "11134480",
+      "name": "单选框",
+      "font_class": "danxuankuang",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "1274",
+      "name": "小缩略图",
+      "font_class": "xiaosuolvetu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "82756",
+      "name": "回到顶部",
+      "font_class": "huidaodingbu",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "996190",
+      "name": "上传图片",
+      "font_class": "icons01",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    },
+    {
+      "icon_id": "1305451",
+      "name": "标签",
+      "font_class": "biaoqian",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "7131910",
+      "name": "导航栏",
+      "font_class": "daohanglan",
+      "unicode": "e742",
+      "unicode_decimal": 59202
+    },
+    {
+      "icon_id": "8084544",
+      "name": "菜单/列表",
+      "font_class": "caidan",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "12290495",
+      "name": "上传文件",
+      "font_class": "shangchuanwenjian",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "13547745",
+      "name": "轮播图",
+      "font_class": "lunbotu",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "18211052",
+      "name": "卡片",
+      "font_class": "kapian",
+      "unicode": "e7a1",
+      "unicode_decimal": 59297
+    },
+    {
+      "icon_id": "19463397",
+      "name": "链接 网址 网站",
+      "font_class": "lianjiewangzhiwangzhan",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
       "icon_id": "1766470",
       "name": "符号-按钮",
       "font_class": "anniu",
