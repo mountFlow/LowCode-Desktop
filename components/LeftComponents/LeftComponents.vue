@@ -23,11 +23,13 @@
                                     </view>
                                 </template>
 								<view>
+                                    <!-- cloneComponent是关键的克隆组件到画布上的方法 -->
                                 <draggable :list="list" :clone="cloneComponent" :options="{
                                 sort:false
                                 }" :group="{ name: 'components', pull: 'clone', put: false}" @choose="choosComponents"
                                            class="components-class"
                                            style="position: relative;display: flex;justify-content: center;flex-wrap: wrap;">
+                                           <!-- 循环store的list来渲染组件面板 -->
                                            <ComponentContainer v-for="item in list" :key="item.id" :name="item.name" :Icon="item.Icon"
                                                :componentName="item.componentName">
                                            </ComponentContainer>

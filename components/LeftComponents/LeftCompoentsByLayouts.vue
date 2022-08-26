@@ -1,4 +1,5 @@
 <template>
+    
     <div style="width: 95%;padding: 0 2.5%">
         <view style="display: flex;justify-content: center;width: 100%">
             <draggable :list="layout" :options="{sort:false}" :group="{ name: 'layouts', pull: 'clone', put: false}"

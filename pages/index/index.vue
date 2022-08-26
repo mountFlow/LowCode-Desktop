@@ -32,7 +32,7 @@
               >
               <el-avatar
                 class="headPortrait"
-                @click="goToGithub"
+                @click="goToGithub()"
                 :size="37"
                 :src="'https://github.com/fluidicon.png'"
               ></el-avatar>

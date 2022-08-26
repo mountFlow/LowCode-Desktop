@@ -33,6 +33,7 @@
                     ></component>
                 </template>
             </draggable>
+           
 
 
         </view>

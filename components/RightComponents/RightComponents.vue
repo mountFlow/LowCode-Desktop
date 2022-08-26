@@ -5,12 +5,14 @@
                 <el-card class="box-card">
                     <el-form ref="form" label-width="80px" label-position="right">
                         <el-form-item label="当前选中:">
+                            <!-- 直接从store中读到当前单击选中的元素 -->
                             <el-tag size="large">{{currentCompentenName}}</el-tag>
                         </el-form-item>
                     </el-form>
                 </el-card>
                 <el-card class="box-card" style="margin-top: 30px;">
                     <el-form ref="form" label-width="80px" label-position="right">
+                        <!-- 对单击选中的元素进行属性的修改 -->
                         <props-panel v-model="propsValue"></props-panel>
                     </el-form>
                 </el-card>

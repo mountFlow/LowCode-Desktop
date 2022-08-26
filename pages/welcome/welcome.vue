@@ -97,6 +97,7 @@
         },
         methods: {
             goNextone() {
+                this.dialogVisible=false
                 uni.navigateTo({
 
                     // url: 'test?id=1&name=uniapp'  c传递参数
