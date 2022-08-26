@@ -1,12 +1,14 @@
 <template>
+    <el-tooltip class="item" :value="showTutorial" offset="150" effect="dark" content="③ 在右侧修改选中组件的属性" placement="right" manual>
     <div style="height: 100%;">
         <el-tabs type="border-card" value="tab1" style="height: 100%;">
+            
             <el-tab-pane name="tab1" label="组件属性" >
                 <el-card class="box-card">
                     <el-form ref="form" label-width="80px" label-position="right">
                         <el-form-item label="当前选中:">
                             <!-- 直接从store中读到当前单击选中的元素 -->
-                            <el-tag size="large">{{currentCompentenName}}</el-tag>
+                            <el-tag size="large" >{{currentCompentenName}}</el-tag>
                         </el-form-item>
                     </el-form>
                 </el-card>
@@ -17,6 +19,7 @@
                     </el-form>
                 </el-card>
             </el-tab-pane>
+            
             <el-tab-pane label="通用属性" name="first">
                 <el-card class="box-card">
                     <el-form ref="form" label-width="80px" label-position="right">
@@ -34,6 +37,7 @@
             </el-tab-pane>
         </el-tabs>
     </div>
+    </el-tooltip>
 </template>
 
 <script>
@@ -55,6 +59,7 @@
                 editItemClass: '',
             }
         },
+        
         watch: {
             centerValue(val) {
                 if (val === 'page') {
@@ -71,7 +76,8 @@
         methods: {
             handleClick() {
 
-            }
+            },
+
         },
         computed: {
             activeName: {
@@ -83,6 +89,9 @@
                         rightAideTabActiveName: val
                     })
                 }
+            },
+            showTutorial() {
+                return this.$store.state.showTutorial
             },
             centerValue() {
                 return this.$store.state.pattern
@@ -107,6 +116,7 @@
             currentCompentenName() {
                 if (this.$store.state.currentCheckAttr.item) {
                     return this.$store.state.currentCheckAttr.item.name
+                    
                 }
                 return ''
             },

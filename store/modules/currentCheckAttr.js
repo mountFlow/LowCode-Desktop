@@ -5,7 +5,9 @@ const currentCheckAttr = {
     state: {
         contextMenuTarget: undefined, // 控制鼠標右鍵
         currentCheckIndex: '', //当前选中对应的下标
-        item: undefined, // 當前选中的组件信息
+        item: {
+            name:'请添加并选择一个组件'
+        }, // 當前选中的组件信息
         customClass: {}, // 存放全局创建的样式类
         // 保存样式的基本信息，可在页面修改
         formList: [

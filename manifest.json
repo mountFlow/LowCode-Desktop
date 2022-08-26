@@ -67,7 +67,7 @@
         },
         "title" : "拖拽UI",
         "router" : {
-            "base" : "/dragUI/unpackage/dist/build/h5/"
+            "base" : "/h5/"
         }
     }
 }

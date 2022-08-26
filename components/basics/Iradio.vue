@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 80%;display: flex;justify-content: center;margin-top: 10px;">
+    <div style="width: 80%;display: flex;justify-content: center;margin-top: 10px;margin-left: -5px;">
     
     <div style="width: 40%;">
     {{propsValueMap.test}}

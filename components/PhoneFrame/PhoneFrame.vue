@@ -1,4 +1,5 @@
 <template>
+    
     <view class="phone-s">
         <view class="phone" :style="phoneSize" ref="contextMenuTarget" >
             <view v-show="showComponentPreview" class="tip-content-show">
@@ -11,11 +12,14 @@
                     </template>
                 </view>
             </view>
+            <el-tooltip class="item" :value="showTutorial"  effect="dark"  placement="top" manual>
+            <div slot="content">❗ 画布空白时拖动元素要尽量靠近顶部<br/>(❗ 判定范围一开始只有上面)</div>
             <view class="phone-top">
                 <view style="flex: 1"><i class="el-icon-close"></i>&nbsp;无服务</view>
                 <view style="flex: 1;text-align: center">{{time}}</view>
                 <view style="flex: 1;text-align: right"><i class="el-icon-chat-round" style="margin-right: 5px;"></i><i class="el-icon-s-promotion"></i></view>
             </view>
+              </el-tooltip>
             <view class="phone-top-blok">
             </view>
             <draggable group="layouts" :list="list"
@@ -44,6 +48,7 @@
             <a href="javascript:" @click="deleteDataIndex">删除</a>
         </vue-context-menu>
     </view>
+  
 </template>
 
 <script>
@@ -131,6 +136,9 @@
         computed:{
             myComponentPreviewData(){
                 return this.$store.state.myComponentPreviewData
+            },
+            showTutorial() {
+                return this.$store.state.showTutorial
             },
             componentPreviewName(){
                 return this.$store.state.componentPreviewName

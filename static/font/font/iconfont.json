@@ -1,0 +1,184 @@
+{
+  "id": "3597856",
+  "name": "lowcode2",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10792632",
+      "name": "新增表单_新增新建操作_jurassic",
+      "font_class": "add-form",
+      "unicode": "e6ec",
+      "unicode_decimal": 59116
+    },
+    {
+      "icon_id": "16364337",
+      "name": "小程序",
+      "font_class": "xiaochengxu1",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "1766471",
+      "name": "符号-步骤条",
+      "font_class": "buzhoutiao",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
+      "icon_id": "19234637",
+      "name": "时间线",
+      "font_class": "shijianxian",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
+      "icon_id": "11134480",
+      "name": "单选框",
+      "font_class": "danxuankuang",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "1274",
+      "name": "小缩略图",
+      "font_class": "xiaosuolvetu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "82756",
+      "name": "回到顶部",
+      "font_class": "huidaodingbu",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "996190",
+      "name": "上传图片",
+      "font_class": "icons01",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    },
+    {
+      "icon_id": "1305451",
+      "name": "标签",
+      "font_class": "biaoqian",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "7131910",
+      "name": "导航栏",
+      "font_class": "daohanglan",
+      "unicode": "e742",
+      "unicode_decimal": 59202
+    },
+    {
+      "icon_id": "8084544",
+      "name": "菜单/列表",
+      "font_class": "caidan",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "12290495",
+      "name": "上传文件",
+      "font_class": "shangchuanwenjian",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "13547745",
+      "name": "轮播图",
+      "font_class": "lunbotu",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "18211052",
+      "name": "卡片",
+      "font_class": "kapian",
+      "unicode": "e7a1",
+      "unicode_decimal": 59297
+    },
+    {
+      "icon_id": "19463397",
+      "name": "链接 网址 网站",
+      "font_class": "lianjiewangzhiwangzhan",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "1766470",
+      "name": "符号-按钮",
+      "font_class": "anniu",
+      "unicode": "e690",
+      "unicode_decimal": 59024
+    },
+    {
+      "icon_id": "1766474",
+      "name": "符号-单行输入框",
+      "font_class": "danhangshurukuang",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "1766478",
+      "name": "符号-多行输入框",
+      "font_class": "duohangshurukuang",
+      "unicode": "e693",
+      "unicode_decimal": 59027
+    },
+    {
+      "icon_id": "1766485",
+      "name": "符号-开关",
+      "font_class": "kaiguan",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "1766505",
+      "name": "符号-文本",
+      "font_class": "wenben",
+      "unicode": "e69e",
+      "unicode_decimal": 59038
+    },
+    {
+      "icon_id": "5303381",
+      "name": "图标",
+      "font_class": "tubiao",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "16063300",
+      "name": "选项",
+      "font_class": "xuanxiang",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "21585944",
+      "name": "图像",
+      "font_class": "tuxiang",
+      "unicode": "e6d1",
+      "unicode_decimal": 59089
+    },
+    {
+      "icon_id": "23626703",
+      "name": "滑动输入",
+      "font_class": "huadongshuru",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "27963839",
+      "name": "进度条_复制",
+      "font_class": "jindutiao_fuzhi",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    }
+  ]
+}

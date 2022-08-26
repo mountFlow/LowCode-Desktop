@@ -5,6 +5,7 @@
                 <el-row>
                     <el-col :span="24">
                         <el-collapse :value="['1','2','3','4']" style="margin-right: -20px;">
+                                    <el-tooltip class="item" :value="showTutorial" effect="dark" content="① 拖动【布局组件】到右侧画布中" placement="right" manual>
                             <el-collapse-item name="1"
                                 style="margin-left: -20px; margin-top: -20px; margin-right: -40px;width: 100%">
                                 <template slot="title">
@@ -15,6 +16,8 @@
                                 <left-compoents-by-layouts :layout="layout" :clone="cloneLayout" :choose="choosLayouts">
                                 </left-compoents-by-layouts>
                             </el-collapse-item>
+                                    </el-tooltip>
+                                    <el-tooltip class="item" :value="showTutorial" effect="dark" content="② 拖动【普通组件】到右侧画布中的【布局组件】中" placement="right" manual>
                             <el-collapse-item name="2"
                                 style="margin-left: -20px;  margin-right: -40px;width: 100%">
                                 <template slot="title">
@@ -36,7 +39,7 @@
                                        </draggable>
 								</view>
                             </el-collapse-item>
-                            
+                            </el-tooltip>
                             <el-collapse-item name="3"
                                 style="margin-left: -20px;  margin-right: -40px;width: 100%">
                                 <template slot="title">
@@ -179,6 +182,9 @@
         computed: {
             list() {
                 return this.$store.state.componentsInfo.list
+            },
+            showTutorial() {
+                return this.$store.state.showTutorial
             },
             colorUiList() {
                 return this.$store.state.componentsInfo.colorUiList

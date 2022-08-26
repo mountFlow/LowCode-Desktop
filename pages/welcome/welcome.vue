@@ -65,15 +65,19 @@
                   :before-close="handleClose">
                   <h1 style="color: black;">您想设计哪一种类型？</h1>
                   <div class="select">
-                      <div>
-                          <img src="@/static/index/表单.webp" alt="" class="img" >
-                          <el-button type="primary" round @click="goNextone" style="margin-left: 50px;">简单表单</el-button>
-                      </div>
-                      <div>
-                          <img src="@/static/index/程序.webp" alt="" class="img" >
-                          <el-button type="primary" @click="goNextone" style="margin-left: 50px;" round>简单程序</el-button>
-                      </div>
-                  </div>
+					  
+					  <el-button  round @click="goNextone" class="option">
+						  <div class="icon iconfont icon-add-form"></div>
+						  简单表单
+						  </el-button>
+					 
+					  
+					  <el-button  @click="goNextone" class="option" round>
+						  <div class="icon iconfont icon-xiaochengxu1"></div>
+						  简单程序
+						  </el-button>
+					
+				  </div>
                   <span slot="footer" class="dialog-footer">
                   </span>
                 </el-dialog>
@@ -183,10 +187,12 @@
 
     .select {
         display: flex;
-        height: 300px;
-        width: 300px;
-        margin-left: 0px;
+        height: 100px;
+        width: 500px;
+        /* margin-left: 20px; */
         margin-top: 50px;
+		text-align: center;
+		padding-left: 20px;
     }
 
     .btn {
@@ -198,8 +204,8 @@
     .img {
         display: block;
         margin: auto;
-        width: 180px;
-        height: 180px;
+        width: 140px;
+        height: 140px;
         padding: 10px;
         border-radius: 30px;
     }
@@ -208,4 +214,18 @@
         margin-top: 10px;
         margin-left: 20px;
     }
+	
+	.option{
+		margin-top: -15px;
+		text-align: center;
+		padding-top: 15px;
+		font-size: 13px;
+		margin-left: 30px;
+		padding: 25px;
+	}
+	
+	.iconfont{
+		margin-bottom: 15px;
+		font-size: 50px;
+	}
 </style>

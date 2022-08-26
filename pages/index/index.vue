@@ -11,6 +11,9 @@
               "
             >
               <h2 @click="goToIndex()">LowCode-Desktop</h2>
+              <el-button type="primary"  round @click="showTutorial()" style="margin-left: 20px;" size="small"
+                >？有任何疑问，请点这里</el-button
+              >
             </view>
             <view
               style="
@@ -27,7 +30,7 @@
             <el-button type="primary" icon="el-icon-download" size="small" round @click="outPort"
               >导出代码</el-button
             >
-              <el-button type="primary" icon="el-icon-search" size="small" round
+              <el-button type="primary" icon="el-icon-search" size="small" round @click="zoomInPhoneFrame"
                 >预览</el-button
               >
               <el-avatar
@@ -41,9 +44,13 @@
 
       <el-container>
         <!-- 左边组件栏 -->
-        <el-aside width="25%" style="overflow: hidden">
+        <el-aside width="25%" >
+            
           <LeftComponents> </LeftComponents>
+          
         </el-aside>
+        </el-tooltip>
+        
 			<el-main style="position: relative; overflow: hidden">
 					<template v-if="pattern==='component' || checkFile.isCanDrag === true">
 						<PhoneFrame></PhoneFrame>
@@ -77,7 +84,7 @@
     </el-dialog>
     <el-dialog
             title="保存组件"
-            :visible="saveComponentModel"
+            :visible.sync="saveComponentModel"
             width="30%"
             center>
            <!-- <el-form ref="addComponentsFrom" :model="addComponentsFrom" :rules="addComponentsFromRule" label-width="80px"> -->
@@ -90,6 +97,17 @@
                 <el-button type="primary" @click="yesAddComponents('addComponentsFrom')">确 定</el-button>
             </el-form-item>
         </el-form>
+    </el-dialog>
+    <el-dialog
+            title="预览"
+            :visible.sync="zoomInPhoneFrameVisable"
+            width="50%"
+            height="auto"
+            :close="zoomOutPhoneFrame()"
+            destroy-on-close = "true"
+            center>
+           <!-- <el-form ref="addComponentsFrom" :model="addComponentsFrom" :rules="addComponentsFromRule" label-width="80px"> -->
+       <phone-frame></phone-frame>
     </el-dialog>
   </view>
   
@@ -119,6 +137,7 @@ export default {
         addComponentsFrom:{
             ComponentName: ''
         },
+        zoomInPhoneFrameVisable:false,
         dialogTableVisible: false,
         saveComponentModel: false,
         showDialogData: '',
@@ -139,6 +158,16 @@ export default {
     
         })
     
+    },
+    showTutorial(){
+        this.$store.commit('showTutorial')
+    },
+    zoomInPhoneFrame(){
+        this.zoomInPhoneFrameVisable = true
+        this.$store.commit('zoomInPhoneFrame')
+    },
+    zoomOutPhoneFrame(){
+        this.$store.commit('zoomOutPhoneFrame')
     },
     yesAddComponents(ref){
         // this.$refs[ref].validate((valid) => {
@@ -162,6 +191,9 @@ export default {
     },
     saveComponenet(){
         this.saveComponentModel = true
+    },
+    closeSaveComponentModel(){
+        this.saveComponentModel = false
     },
     copy (data) {
           let input = document.createElement('input')
@@ -309,5 +341,5 @@ outPort(){
 body > .el-container {
   margin-bottom: 40px;
 }
-
+.element::-webkit-scrollbar { width: 0 !important }
 </style>

@@ -12,6 +12,7 @@ const store = new Vuex.Store({
 
     state: {
         showComponentPreview: false, // 组件预览
+        showTutorial: false,  //是否展示教程
         componentPreviewName: '', // 组件预览的名字
         myComponentPreviewData: {}, // 自定义组件的数据
         pattern: 'component', // 编辑的模式，页面模式和组件模式 [page,component]
@@ -172,6 +173,15 @@ const store = new Vuex.Store({
                     return
                 }
             }
+        },
+        showTutorial(state){
+          state.showTutorial = !state.showTutorial  
+        },
+        zoomInPhoneFrame(state){
+          state.phoneSize = 150  
+        },
+        zoomOutPhoneFrame(state){
+          state.phoneSize = 100  
         },
         initComponentsInfo(state,data){
             state.componentsInfo = data
