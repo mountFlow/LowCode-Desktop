@@ -227,7 +227,7 @@
         position: relative;
         margin-left: auto;
         margin-right: auto;
-        overflow: scroll;
+        overflow: hidden;
     }
 
     .sortable-fallback{

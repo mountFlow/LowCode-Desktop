@@ -58,26 +58,29 @@
                         </view>
                     </div>
                 </div>
-                <div class="mask" v-if="showModal" @click="showModal=false"></div>
-                <div class="pop" v-if="showModal">
-                    <!-- <button @click="showModal=false" class="btn">点击出现弹框</button> -->
-                    <h1 style="color: black;">您想设计哪一中类型？</h1>
-                    <div class="select">
-                        <div>
-                            <img src="@/static/index/表单.webp" alt="" class="img">
-                            <el-button type="primary" round @click="goNextone">简单表单</el-button>
-                        </div>
-                        <div>
-                            <img src="@/static/index/程序.webp" alt="" class="img">
-                            <el-button type="primary" round>简单程序</el-button>
-                        </div>
-                    </div>
-                </div>
-
+                <el-dialog
+                  title="提示"
+                  :visible.sync="dialogVisible"
+                  width="30%"
+                  :before-close="handleClose">
+                  <h1 style="color: black;">您想设计哪一种类型？</h1>
+                  <div class="select">
+                      <div>
+                          <img src="@/static/index/表单.webp" alt="" class="img" >
+                          <el-button type="primary" round @click="goNextone" style="margin-left: 50px;">简单表单</el-button>
+                      </div>
+                      <div>
+                          <img src="@/static/index/程序.webp" alt="" class="img" >
+                          <el-button type="primary" @click="goNextone" style="margin-left: 50px;" round>简单程序</el-button>
+                      </div>
+                  </div>
+                  <span slot="footer" class="dialog-footer">
+                  </span>
+                </el-dialog>
             </div>
         </div>
         <div class="btn">
-            <el-button type="primary" size="large" @click="showModal=true" style="height: 60px;width: 150px;;">快速开始 <i
+            <el-button type="primary" size="large" @click="dialogVisible=true" style="height: 60px;width: 150px;;">快速开始 <i
                     class="el-icon-right" style="color: #fff;"></i><i class="el-icon-edit-outline"
                     style="color: grey;"></i></el-button>
         </div>
@@ -89,7 +92,7 @@
         name: 'Home',
         data() {
             return {
-                showModal: false
+                dialogVisible: false
             }
         },
         methods: {
@@ -179,10 +182,10 @@
 
     .select {
         display: flex;
-        height: 800px;
+        height: 300px;
         width: 300px;
-        margin-left: 350px;
-        margin-top: 100px;
+        margin-left: 0px;
+        margin-top: 50px;
     }
 
     .btn {
@@ -194,9 +197,10 @@
     .img {
         display: block;
         margin: auto;
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
         padding: 10px;
+        border-radius: 30px;
     }
 
     .headPortrait {

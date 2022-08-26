@@ -41,10 +41,10 @@
 
       <el-container>
         <!-- 左边组件栏 -->
-        <el-aside width="25%">
+        <el-aside width="25%" style="overflow: hidden">
           <LeftComponents> </LeftComponents>
         </el-aside>
-			<el-main style="position: relative">
+			<el-main style="position: relative; overflow: hidden">
 					<template v-if="pattern==='component' || checkFile.isCanDrag === true">
 						<PhoneFrame></PhoneFrame>
 					</template>

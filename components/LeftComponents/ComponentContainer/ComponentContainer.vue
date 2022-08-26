@@ -11,7 +11,10 @@
         </view>
         <view  v-if="type === 'layout'" >
             <view class="flex content-layout">
-                <view class="  margin-0 content-layout-item" v-for="(item,index) in num" :class="item.layoutClass">1</view>
+                <i class="el-icon-tickets" style="height: 50px;font-size: 40px;"></i>
+                <view class="title" style="margin-left: 0px;">
+                    表单容器
+                </view>
             </view>
         </view>
     </view>
