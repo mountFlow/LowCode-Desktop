@@ -49,12 +49,12 @@ const store = new Vuex.Store({
     
                         
                     ]},
-                {name:'单选',id: 2, componentName: 'Iradio',iStyle:{},iClass: [],Icon:"icon iconfont icon-danxuankuang",
-                    propsValue: [{label:'值',key:'value',value:'??',toDataOrHtml: 'html',type: 'String',defaultValue: ''},
-                        {label:'是否选中',key:'checked',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue: 'false'},
-                        {label:'是否禁用',key:'disabled',value:'false',toDataOrHtml: 'html',type: 'boolean',defaultValue: 'false'},
-                        {label:'颜色',key:'color',value:'blue',toDataOrHtml: 'html',type: 'String',defaultValue: 'blue'},
-                    ]},
+                {name:'选项',id: 2, componentName: 'Iradio',iStyle:{},iClass: [],Icon:"icon iconfont icon-xuanxiang",
+                                    propsValue: [{label:'输入提示',key:'test',value:'性别：',toDataOrHtml: 'html',type: 'String',defaultValue: ''},
+                                    {label:'第一选项',key:'label1',value:'男',toDataOrHtml: 'html',type: 'String',defaultValue: ''},
+                                    {label:'第二选项',key:'label2',value:'女',toDataOrHtml: 'html',type: 'String',defaultValue: ''},
+                                    {label:'绑定值',key:'v-model',value:'radius',toDataOrHtml: 'html',type: 'String',defaultValue: ''},
+                                    ]},
                 {name:'图标',id: 3, componentName: 'Iicon',iStyle:{},iClass: [],Icon:"icon iconfont icon-tubiao",
                     propsValue: [{label:'类型',key:'type',value:'success',toDataOrHtml: 'html',type: 'select',select: [
                         {label:'success',value:'success'},

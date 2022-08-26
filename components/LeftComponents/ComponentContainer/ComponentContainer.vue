@@ -93,7 +93,7 @@
         margin-left: 20px;
         
     }
-    .icon :visited{
+    .content-layout-item :hover{
         color: #409eff;
     }
     .title{
