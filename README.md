@@ -6,7 +6,7 @@
 
 - Lowcode-Desktop是一个基于element-ui的h5端低代码手机应用设计平台，为用户提供拖拉拽方式构建应用页面的服务。
 
-- 项目服务地址：http://43.143.38.24/#/ ***如果原来的项目地址失效，请使用现在这个！***
+- 项目服务地址：http://119.23.238.155:8080/dist/build/h5/index.html ***如果原来的项目地址失效，请使用现在这个！***
 
 - Github  地址：https://github.com/mountFlow/LowCode-Desktop
 
