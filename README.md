@@ -46,7 +46,8 @@
 
 ### 3.2 架构设计
 
-> 
+![Snipaste_2022-09-30_12-22-58](https://user-images.githubusercontent.com/84088980/193189928-caf5f034-98fc-4e3e-beef-5863b16f846b.png)
+
 
 #### 3.2.1 定义我们的组件
 
@@ -56,6 +57,9 @@
 
 - 不拘泥于原始的css参数，增加了许多自定义参数，形成类似**组件库**的形式
 
+![Snipaste_2022-09-30_12-22-07](https://user-images.githubusercontent.com/84088980/193189845-cfc7f740-20ea-4fdc-932c-79d6cdbe61d5.png)
+
+
 #### 3.2.2 组件拖拽的实现
 
 - 采用`vuegraggable`的实现自定义组件拖拽
@@ -64,11 +68,17 @@
 
 - 在组件复制过程中，全局为组件递增地赋予唯一id和画布`index`
 
+![Snipaste_2022-09-30_12-21-00](https://user-images.githubusercontent.com/84088980/193189730-e8a328d1-c8b1-4fce-8261-282eebbdeb9d.png)
+
+
 #### 3.2.3 画布的实现
 
 - 画布的底层数据结构是一个**数组****`componentList`**，通过将组件放置在数组中，实现画布的渲染
 
 - 组件的**嵌套**通过数组的嵌套和画布的循环渲染来实现
+
+![1664511435628](https://user-images.githubusercontent.com/84088980/193189637-00b1e9be-51c3-4520-b1be-4d7a03371c17.jpg)
+
 
 #### 3.2.4 组件属性编辑的实现
 
@@ -85,6 +95,7 @@
 - 提供list导出组件的渲染后的递归模板，以此生成自定义代码
 
 ### 3.3 项目代码介绍
+
 
 #### 3.3.1 底层自定义组件（根据element填写props，以el-button为例）
 
@@ -219,7 +230,7 @@ let beforDisposeListToMyCompentsString = (myComponentsMap) => {
 - - 链接测试
     1.   本网站的链接都能成功跳转到正确页面，如下图所示：
 
-    2. ![img](https://lunxz0nhbn.feishu.cn/space/api/box/stream/download/asynccode/?code=YTBmNTc0MjNmNDQ3OTEwNWI1M2UwYTUzMWZlMTZhMjhfUXpVcUxQbDVheFVxanZQbFNGeEJWaUl6bmVxVTJLSTRfVG9rZW46Ym94Y252dENURFVjTXl3QVZBdnAySjJsRjBiXzE2NjE1ODY5Nzk6MTY2MTU5MDU3OV9WNA)
+![1280X1280 (2)](https://user-images.githubusercontent.com/84088980/193190137-ca87487b-648d-41ca-837a-c2d3ccee3dbe.PNG)
 
     3.   此“简单表单”按钮可成功跳转至创建表单页面。
   - 增删改功能测试
@@ -227,15 +238,13 @@ let beforDisposeListToMyCompentsString = (myComponentsMap) => {
 
   -  下图测试了本网站可通过拖拽成功**添加**按钮组件
 
-  - ![img](https://lunxz0nhbn.feishu.cn/space/api/box/stream/download/asynccode/?code=MWFjNWNiMTA5OGJkZTU3ODM3ZGQzYzBiZGNhZmFkNzRfUzVFMGhNbkNUcWg0RDhPVUd3dDJhQ2o3QzhwWU1OdjZfVG9rZW46Ym94Y25HbjhwbGlRRzZoaWdVbjVwZnFUbFRnXzE2NjE1ODY5Nzk6MTY2MTU5MDU3OV9WNA)
+![1280X1280](https://user-images.githubusercontent.com/84088980/193190110-de404450-a837-44aa-87fc-0fad205a6622.PNG)
 
-  -  下图测试了本网站可通过右键成功**删除**按钮组件
-
-  - ![img](https://lunxz0nhbn.feishu.cn/space/api/box/stream/download/asynccode/?code=ODI4ZmFhOTRlZGE4MDEyMDQwZGI5NGQ4MTg4ZGY4NjJfUXVSSktxRFJWZjRkRVVsZ1hqdjBKcnM4bVpyOFVsYU9fVG9rZW46Ym94Y25ESGdENkg4QzR4YnJRZm9BMUkycXVjXzE2NjE1ODY5Nzk6MTY2MTU5MDU3OV9WNA)
 
   -  下图测试了本网站可通过**修改**属性表单内容修改按钮组件
 
-  - ![img](https://lunxz0nhbn.feishu.cn/space/api/box/stream/download/asynccode/?code=Yjk5MjQ0YTAzZjJiZDliNDlmYzc3ODM0Yjg2ZWQzZGRfMHpnUVg1akwzSlFBV29nbDYzNUFSRlF2WnlocnZYNG9fVG9rZW46Ym94Y25wYkt5Y05QMnlQaVpyUXpOS2t1NzljXzE2NjE1ODY5Nzk6MTY2MTU5MDU3OV9WNA)
+![1280X1280 (1)](https://user-images.githubusercontent.com/84088980/193190053-26c3e94b-f613-49f4-97f5-e900414ca086.PNG)
+
 
   - 输入测试
   -  输入各字符时，本网站不会出现乱码、信息重复等错误。
@@ -251,7 +260,8 @@ let beforDisposeListToMyCompentsString = (myComponentsMap) => {
   - 页面性能
   -  如下图所示：
 
-  - ![img](https://lunxz0nhbn.feishu.cn/space/api/box/stream/download/asynccode/?code=MGQwNWIyNzM4NWNjNzAzNGI0ZDczNWRiOThlMzk1ZjZfMDg0MlRZcU5XYlRHQUd3OXFYVkx2S0hzOEpJVHdiYWxfVG9rZW46Ym94Y245Yk10SUZGRFlvbWF0a2ZHaGV2UjJnXzE2NjE1ODY5Nzk6MTY2MTU5MDU3OV9WNA)
+![1280X1280 (3)](https://user-images.githubusercontent.com/84088980/193190019-4d73f2d9-8b50-478e-89dc-1477c57b7151.PNG)
+
 
   -  本网站页面性能良好，负载不高，基本都是js
 
